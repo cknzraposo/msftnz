@@ -191,18 +191,16 @@
                 d.textContent = 'This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.';
             }
 
-            // Rewrite internal /slug links to article.html?dir=…&doc=… before rendering
-            const renderer = new marked.Renderer();
-            const _link = renderer.link.bind(renderer);
-            renderer.link = function({ href, title, text }) {
-                const m = href && href.match(/^\/([^/#?]+)$/);
-                if (m && globalSlugMap[m[1]]) {
-                    href = `article.html?dir=${globalSlugMap[m[1]]}&doc=${m[1]}`;
+            // Rewrite internal /slug links to article.html?dir=…&doc=… after rendering
+            marked.use({ gfm: true, breaks: false });
+            let html = marked.parse(content);
+            html = html.replace(/href="\/([^"/#?]+)"/g, (match, slug) => {
+                if (globalSlugMap[slug]) {
+                    return `href="article.html?dir=${globalSlugMap[slug]}&doc=${slug}"`;
                 }
-                return _link({ href, title, text });
-            };
-            marked.use({ renderer, gfm: true, breaks: false });
-            document.getElementById('article-body').innerHTML = marked.parse(content);
+                return match;
+            });
+            document.getElementById('article-body').innerHTML = html;
 
             // Related articles
             if (data.related?.length > 0) {
