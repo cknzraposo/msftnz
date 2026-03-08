@@ -98,6 +98,10 @@ Fetches `./{dir}/{slug}.md`, strips YAML frontmatter, renders the body with **ma
 
 3. Add `related` slugs (no leading `/`) to the article's frontmatter to wire up the related-articles panel.
 
+### Internal links in markdown
+
+Use root-relative slug paths in markdown body text — e.g. `[Data Residency Detail](/data-residency-detail)`. `article.html` has a custom marked.js renderer that automatically rewrites any `/slug` link to `article.html?dir={dir}&doc={slug}` at render time using the `collections.json` registry. No changes to markdown source files are needed when articles move between collections.
+
 ### Adding a new collection (new topic directory)
 
 1. Create `docs/{topic}/` and place `.md` files inside it

@@ -141,11 +141,15 @@
                 return;
             }
 
-            // Load registry for metadata and back-link label
-            let registry, col, slugMap = {};
+            // Load registry for metadata, back-link label, and internal link resolution
+            let registry, col, slugMap = {}, globalSlugMap = {};
             try {
                 const res = await fetch('./collections.json');
                 registry = await res.json();
+                // Build cross-collection slug→dir map for link rewriting
+                registry.collections.forEach(c => {
+                    c.articles.forEach(a => { globalSlugMap[a.slug] = c.dir; });
+                });
                 col = registry.collections.find(c => c.dir === dir);
                 if (col) {
                     slugMap = Object.fromEntries(col.articles.map(a => [a.slug, a]));
@@ -187,7 +191,17 @@
                 d.textContent = 'This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.';
             }
 
-            marked.use({ gfm: true, breaks: false });
+            // Rewrite internal /slug links to article.html?dir=…&doc=… before rendering
+            const renderer = new marked.Renderer();
+            const _link = renderer.link.bind(renderer);
+            renderer.link = function({ href, title, text }) {
+                const m = href && href.match(/^\/([^/#?]+)$/);
+                if (m && globalSlugMap[m[1]]) {
+                    href = `article.html?dir=${globalSlugMap[m[1]]}&doc=${m[1]}`;
+                }
+                return _link({ href, title, text });
+            };
+            marked.use({ renderer, gfm: true, breaks: false });
             document.getElementById('article-body').innerHTML = marked.parse(content);
 
             // Related articles
