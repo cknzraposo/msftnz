@@ -2,7 +2,7 @@
 title: "Azure New Zealand North — Cloud Region Dossier"
 description: "A comprehensive dossier of the Azure New Zealand North region including available services, service rings, disaster recovery, compliance, latency, and pricing."
 date: 2026-03-09
-lastmod: 2026-03-09
+lastmod: 2026-03-08
 author: "Chandima Kulathilake"
 tags: ["azure", "new-zealand-north", "cloud-region", "services", "compliance", "disaster-recovery", "pricing"]
 category: "Cloud Infrastructure"
@@ -17,6 +17,10 @@ related:
 ---
 
 # Azure New Zealand North — Cloud Region Dossier
+
+> **Service availability changes frequently.** Always verify current service status against the official [Azure Products by Region table — New Zealand North](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/table) before making architecture or procurement decisions.
+
+---
 
 ## Region Overview
 
@@ -48,140 +52,6 @@ Azure categorises every service into one of three deployment rings. These determ
 Services typically progress from Strategic → Mainstream → Foundational as adoption grows. NZ North is a **recommended region**, so it receives Foundational and Mainstream services as a priority.
 
 ---
-
-## Available Services by Category
-
-> Based on published availability as of early 2026. Always verify against the [Azure Products by Region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) tool for the latest status.
-
-### Compute
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Virtual Machines | Foundational | ✅ GA |
-| VM Scale Sets | Foundational | ✅ GA |
-| Azure Kubernetes Service (AKS) | Mainstream | ✅ GA |
-| Azure App Service | Foundational | ✅ GA |
-| App Service Environments | Mainstream | ✅ GA |
-| Azure Functions | Mainstream | ✅ GA |
-| Azure Batch | Foundational | ✅ GA |
-| Azure Virtual Desktop | Mainstream | ✅ GA |
-| Azure Container Instances | Mainstream | ✅ GA |
-| Windows 365 Cloud PC | Mainstream | ✅ GA (Feb 2026) |
-
-### Networking
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Virtual Network (VNet) | Foundational | ✅ GA |
-| Azure Load Balancer | Foundational | ✅ GA |
-| Azure Application Gateway (incl. WAF) | Foundational | ✅ GA |
-| Azure VPN Gateway | Foundational | ✅ GA |
-| Azure ExpressRoute | Foundational | ✅ GA |
-| Azure DNS | Foundational | ✅ GA |
-| Azure Front Door | Mainstream | ✅ GA |
-| Azure Firewall | Mainstream | ✅ GA |
-| Azure Bastion | Mainstream | ✅ GA |
-| Azure Private Link / Private Endpoint | Mainstream | ✅ GA |
-| Azure DDoS Protection | Mainstream | ✅ GA |
-
-### Storage
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Azure Blob Storage | Foundational | ✅ GA |
-| Azure Files | Foundational | ✅ GA |
-| Azure Queue / Table Storage | Foundational | ✅ GA |
-| Managed Disks | Foundational | ✅ GA |
-| Azure Data Lake Storage Gen2 | Mainstream | ✅ GA |
-| Azure NetApp Files | Mainstream | ✅ GA |
-| Azure Backup | Foundational | ✅ GA |
-
-### Databases
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Azure SQL Database | Foundational | ✅ GA |
-| Azure SQL Managed Instance | Mainstream | ✅ GA |
-| Azure Database for PostgreSQL | Mainstream | ✅ GA |
-| Azure Database for MySQL | Mainstream | ✅ GA |
-| Azure Cosmos DB | Mainstream | ✅ GA |
-| Azure Cache for Redis | Mainstream | ✅ GA |
-| Azure Database Migration Service | Mainstream | ✅ GA |
-
-### AI and Machine Learning
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Azure AI Services (Cognitive Services) | Mainstream | ✅ GA |
-| Azure Machine Learning | Mainstream | ✅ GA |
-| Azure Bot Service | Mainstream | ✅ GA |
-| Azure AI Search | Mainstream | ✅ GA |
-| Azure OpenAI Service | Strategic | ⚠️ Not yet GA in NZ North — use Australia East |
-
-### Analytics
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Azure Synapse Analytics | Mainstream | ✅ GA |
-| Azure Data Factory | Mainstream | ✅ GA |
-| Azure Databricks | Mainstream | ✅ GA |
-| Azure Stream Analytics | Mainstream | ✅ GA |
-| Azure Data Explorer | Mainstream | ✅ GA |
-| Power BI Embedded | Mainstream | ✅ GA |
-
-### Security and Identity
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Microsoft Entra ID (Azure AD) | Foundational | ✅ GA |
-| Azure Key Vault | Foundational | ✅ GA |
-| Microsoft Defender for Cloud | Mainstream | ✅ GA |
-| Microsoft Sentinel (SIEM) | Mainstream | ✅ GA |
-| Azure Firewall | Mainstream | ✅ GA |
-| Azure DDoS Protection | Mainstream | ✅ GA |
-| Azure Policy | Foundational | ✅ GA |
-
-### Integration
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Azure Logic Apps | Mainstream | ✅ GA |
-| Azure Service Bus | Mainstream | ✅ GA |
-| Azure Event Grid | Mainstream | ✅ GA |
-| Azure API Management | Mainstream | ✅ GA |
-
-### Management and Monitoring
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Azure Monitor | Foundational | ✅ GA |
-| Log Analytics | Foundational | ✅ GA |
-| Azure Automation | Mainstream | ✅ GA |
-| Azure Advisor | Foundational | ✅ GA |
-| Azure Resource Manager | Foundational | ✅ GA |
-| Azure Update Manager | Mainstream | ✅ GA |
-
-### Migration
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Azure Migrate | Mainstream | ✅ GA |
-| Azure Site Recovery | Mainstream | ✅ GA |
-
-### IoT
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Azure IoT Hub | Mainstream | ✅ GA |
-| Azure IoT Central | Mainstream | ✅ GA |
-| Azure IoT Edge | Mainstream | ✅ GA |
-
-### DevOps
-
-| Service | Ring | Status |
-|---------|------|--------|
-| Azure DevOps | Global | ✅ GA (global service, not region-bound) |
-| Azure App Configuration | Mainstream | ✅ GA |
 
 ---
 
