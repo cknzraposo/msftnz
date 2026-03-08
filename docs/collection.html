@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading…</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .collection-intro {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #0078d4;
+        }
+        .collection-intro p { margin: 0; font-size: 1.1rem; color: #444; line-height: 1.7; }
+        .category-group { margin-bottom: 2.5rem; }
+        .category-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #0078d4;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid #e8f0fe;
+        }
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+        .article-card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .article-card:hover { box-shadow: 0 4px 20px rgba(0,120,212,0.15); border-color: #0078d4; }
+        .article-card h3 { font-size: 1rem; font-weight: 600; color: #0078d4; margin: 0; line-height: 1.4; }
+        .article-card p { font-size: 0.92rem; color: #555; margin: 0; line-height: 1.55; flex: 1; }
+        .article-card .read-link { font-size: 0.85rem; color: #0078d4; font-weight: 500; margin-top: 0.25rem; }
+        .back-link { display: inline-block; margin-bottom: 1.5rem; color: #0078d4; text-decoration: none; font-size: 0.95rem; }
+        .back-link:hover { text-decoration: underline; }
+        .error-msg { background: #fff0f0; border: 1px solid #ffccc7; border-radius: 6px; padding: 1.5rem; color: #cf1322; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="page-title">Resources</h1>
+        <p id="page-subtitle"></p>
+    </header>
+    <main>
+        <a href="index.html" class="back-link">← Back to all resources</a>
+        <div id="collection-intro" class="collection-intro" style="display:none"><p id="collection-desc"></p></div>
+        <div id="collections"></div>
+    </main>
+    <footer>
+        <p>Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Resources are provided as is with no guarantees or warranties of any kind.</p>
+        <p>Sharing knowledge, building communities</p>
+        <div class="footer-links">
+            <a href="https://github.com/cknzraposo/">My GitHub Profile</a>
+            <a href="#contact">hi@chandima.net</a>
+            <a href="https://chandima.net/about/">About Me</a>
+        </div>
+    </footer>
+    <script>
+        async function init() {
+            const params = new URLSearchParams(window.location.search);
+            const dir = params.get('dir');
+            if (!dir) { window.location.replace('index.html'); return; }
+
+            let registry;
+            try {
+                const res = await fetch('./collections.json');
+                registry = await res.json();
+            } catch {
+                document.getElementById('collections').innerHTML =
+                    '<div class="error-msg">Could not load collections registry.</div>';
+                return;
+            }
+
+            const col = registry.collections.find(c => c.dir === dir);
+            if (!col) {
+                document.getElementById('collections').innerHTML =
+                    `<div class="error-msg">Collection "<strong>${dir}</strong>" not found. <a href="index.html">Back to all resources →</a></div>`;
+                return;
+            }
+
+            document.title = `${col.title} — Resources`;
+            document.getElementById('page-title').textContent = col.title;
+            document.getElementById('page-subtitle').textContent = col.subtitle || '';
+
+            if (col.description) {
+                document.getElementById('collection-intro').style.display = 'block';
+                document.getElementById('collection-desc').textContent = col.description;
+            }
+
+            const grouped = {};
+            col.articles.forEach(a => {
+                const cat = a.category || 'Articles';
+                if (!grouped[cat]) grouped[cat] = [];
+                grouped[cat].push(a);
+            });
+
+            const container = document.getElementById('collections');
+            Object.entries(grouped).forEach(([category, items]) => {
+                const section = document.createElement('div');
+                section.className = 'category-group';
+                section.innerHTML = `
+                    <div class="category-label">${category}</div>
+                    <div class="articles-grid">
+                        ${items.map(a => `
+                        <a href="article.html?dir=${dir}&doc=${a.slug}" class="article-card">
+                            <h3>${a.title}</h3>
+                            <p>${a.description}</p>
+                            <span class="read-link">Read →</span>
+                        </a>`).join('')}
+                    </div>`;
+                container.appendChild(section);
+            });
+        }
+        init();
+    </script>
+</body>
+</html>

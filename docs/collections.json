@@ -1,0 +1,49 @@
+{
+  "collections": [
+    {
+      "dir": "cloud",
+      "title": "Cloud Resources",
+      "subtitle": "Azure & Microsoft Cloud — New Zealand",
+      "description": "Plain-language guides on Azure and Microsoft cloud topics for New Zealand organisations — data residency, data sovereignty, the Azure New Zealand North region, and more.",
+      "icon": "☁️",
+      "articles": [
+        {
+          "slug": "summary",
+          "title": "Data Sovereignty & Data Residency — What They Mean in the Public Cloud",
+          "description": "A plain-language guide to data sovereignty and data residency from a public cloud perspective, with New Zealand-specific context.",
+          "category": "Cloud Strategy"
+        },
+        {
+          "slug": "data-residency-summary",
+          "title": "Data Residency & Data Sovereignty — Summary",
+          "description": "A summary of data residency and data sovereignty options for Azure and Microsoft 365, tailored for New Zealand organisations.",
+          "category": "Cloud Strategy"
+        },
+        {
+          "slug": "data-residency-detail",
+          "title": "Data Residency & Data Sovereignty — Detail",
+          "description": "A detailed guide to data residency and sovereignty options across Microsoft 365 and Azure, with New Zealand context, legal considerations, and practical steps.",
+          "category": "Cloud Strategy"
+        },
+        {
+          "slug": "data-residency-faq",
+          "title": "Data Residency & Data Sovereignty — FAQ",
+          "description": "Frequently asked questions about data residency and data sovereignty for Azure and Microsoft 365 in New Zealand.",
+          "category": "Cloud Strategy"
+        },
+        {
+          "slug": "nz-cloud-region",
+          "title": "Azure New Zealand North — Cloud Region Dossier",
+          "description": "A comprehensive dossier of the Azure New Zealand North region including available services, service rings, disaster recovery, compliance, latency, and pricing.",
+          "category": "Cloud Infrastructure"
+        },
+        {
+          "slug": "nz-cloud-region-faq",
+          "title": "Azure New Zealand North — FAQ",
+          "description": "Frequently asked questions about the Azure New Zealand North cloud region, covering services, availability zones, pricing, compliance, and data sovereignty.",
+          "category": "Cloud Infrastructure"
+        }
+      ]
+    }
+  ]
+}

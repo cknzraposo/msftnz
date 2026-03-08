@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<script>
+var p = new URLSearchParams(window.location.search);
+var doc = p.get('doc') || '';
+window.location.replace('../article.html?dir=cloud' + (doc ? '&doc=' + doc : ''));
+</script>
+</head><body></body></html>

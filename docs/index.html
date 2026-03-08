@@ -5,47 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shared Resources</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+        .collection-card {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .collection-card:hover { box-shadow: 0 4px 20px rgba(0,120,212,0.15); border-color: #0078d4; }
+        .collection-card .icon { font-size: 1.8rem; }
+        .collection-card h3 { font-size: 1.05rem; font-weight: 600; color: #0078d4; margin: 0; }
+        .collection-card p { font-size: 0.92rem; color: #555; margin: 0; line-height: 1.55; flex: 1; }
+        .collection-card .article-count { font-size: 0.82rem; color: #999; margin-top: 0.25rem; }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Presentation Resources & Links</h1>
+        <h1>Presentation Resources &amp; Links</h1>
     </header>
 
     <main>
         <section class="content-section">
             <h2>Welcome</h2>
             <p>
-                This repository includes various resources and links shared in my presentations. 
-                Here you'll find useful materials, code samples, and references that complement 
+                This repository includes various resources and links shared in my presentations.
+                Here you will find useful materials, code samples, and references that complement
                 the topics covered in my talks and workshops.
             </p>
         </section>
 
         <section class="content-section">
-            <h2>Featured Resources</h2>
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <h3>Links & References</h3>
-                    <p>Curated collection of useful external resources and tools.</p>
-                </div>
-                <div class="resource-card">
-                    <h3>Slides & Materials</h3>
-                    <p>Presentation slides and supporting materials from recent talks.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2>Get Started</h2>
-            <p>
-                Browse through the repository to find the resources you're looking for. 
-                Each presentation folder contains specific materials related to that topic.
-            </p>
+            <h2>Resources</h2>
+            <div id="collections-grid" class="collections-grid"></div>
         </section>
     </main>
 
     <footer>
-        <p>Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer’s view in any way. Presentation Resources are provided as is with no guarantees or warranties of any kind.</p>
+        <p>Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Presentation Resources are provided as is with no guarantees or warranties of any kind.</p>
         <p>Sharing knowledge, building communities</p>
         <div class="footer-links">
             <a href="https://github.com/cknzraposo/">My GitHub Profile</a>
@@ -53,5 +61,32 @@
             <a href="https://chandima.net/about/">About Me</a>
         </div>
     </footer>
+
+    <script>
+        async function init() {
+            const grid = document.getElementById('collections-grid');
+            let registry;
+            try {
+                const res = await fetch('./collections.json');
+                registry = await res.json();
+            } catch {
+                grid.innerHTML = '<p style="color:#cf1322">Could not load collections.</p>';
+                return;
+            }
+
+            registry.collections.forEach(col => {
+                const card = document.createElement('a');
+                card.href = 'collection.html?dir=' + col.dir;
+                card.className = 'collection-card';
+                card.innerHTML =
+                    (col.icon ? '<div class="icon">' + col.icon + '</div>' : '') +
+                    '<h3>' + col.title + '</h3>' +
+                    '<p>' + col.description + '</p>' +
+                    '<span class="article-count">' + col.articles.length + ' article' + (col.articles.length !== 1 ? 's' : '') + '</span>';
+                grid.appendChild(card);
+            });
+        }
+        init();
+    </script>
 </body>
 </html>

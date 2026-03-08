@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading…</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .article-header {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #0078d4;
+        }
+        .article-header h1 { color: #1a1a1a; font-size: 1.8rem; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+        .article-meta { font-size: 0.88rem; color: #777; }
+        .article-body {
+            background: white;
+            padding: 2rem 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        .article-body h1 { display: none; }
+        .article-body h2 { font-size: 1.35rem; color: #0078d4; margin-top: 1.8rem; margin-bottom: 0.6rem; }
+        .article-body h3 { font-size: 1.1rem; margin-top: 1.4rem; margin-bottom: 0.5rem; color: #1a1a1a; }
+        .article-body h4 { margin-top: 1.2rem; margin-bottom: 0.4rem; color: #1a1a1a; }
+        .article-body p { margin-bottom: 1rem; line-height: 1.75; color: #333; }
+        .article-body ul, .article-body ol { margin: 0 0 1rem 1.5rem; line-height: 1.75; color: #333; }
+        .article-body li { margin-bottom: 0.3rem; }
+        .article-body strong { color: #1a1a1a; }
+        .article-body blockquote {
+            border-left: 4px solid #0078d4;
+            margin: 1.2rem 0;
+            padding: 0.75rem 1.25rem;
+            background: #f0f6ff;
+            border-radius: 0 4px 4px 0;
+            color: #444;
+        }
+        .article-body blockquote p { margin: 0; }
+        .article-body table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.95rem; }
+        .article-body th { background: #0078d4; color: white; padding: 0.6rem 1rem; text-align: left; font-weight: 600; }
+        .article-body td { padding: 0.55rem 1rem; border-bottom: 1px solid #e8e8e8; vertical-align: top; }
+        .article-body tr:nth-child(even) td { background: #f8f9fa; }
+        .article-body hr { border: none; border-top: 1px solid #e0e0e0; margin: 2rem 0; }
+        .article-body code { background: #f4f4f4; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+        .article-body pre { background: #f4f4f4; padding: 1rem 1.25rem; border-radius: 6px; overflow-x: auto; margin-bottom: 1rem; }
+        .article-body pre code { background: none; padding: 0; }
+        .related-section h2 { color: #0078d4; font-size: 1.1rem; margin-bottom: 1rem; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+        .related-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .related-card:hover { border-color: #0078d4; box-shadow: 0 2px 12px rgba(0,120,212,0.12); }
+        .related-card h3 { font-size: 0.92rem; font-weight: 600; color: #0078d4; margin: 0; line-height: 1.4; }
+        .related-card p { font-size: 0.85rem; color: #666; margin: 0; line-height: 1.5; }
+        .back-link { display: inline-block; margin-bottom: 1.5rem; color: #0078d4; text-decoration: none; font-size: 0.95rem; }
+        .back-link:hover { text-decoration: underline; }
+        .disclaimer-box {
+            background: #fffbe6;
+            border: 1px solid #ffe58f;
+            border-radius: 6px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 2rem;
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .error-msg { background: #fff0f0; border: 1px solid #ffccc7; border-radius: 6px; padding: 1.5rem; color: #cf1322; }
+        @media (max-width: 768px) {
+            .article-body { padding: 1.25rem; }
+            .article-header { padding: 1.25rem; }
+            .article-header h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="collection-title">Resources</h1>
+        <p id="collection-subtitle"></p>
+    </header>
+    <main>
+        <a id="back-link" href="index.html" class="back-link">← Back</a>
+        <div id="article-header" class="article-header"></div>
+        <div id="disclaimer" class="disclaimer-box" style="display:none"></div>
+        <div id="article-body" class="article-body"></div>
+        <div id="related-section"></div>
+    </main>
+    <footer>
+        <p>Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Resources are provided as is with no guarantees or warranties of any kind.</p>
+        <p>Sharing knowledge, building communities</p>
+        <div class="footer-links">
+            <a href="https://github.com/cknzraposo/">My GitHub Profile</a>
+            <a href="#contact">hi@chandima.net</a>
+            <a href="https://chandima.net/about/">About Me</a>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        function parseFrontmatter(text) {
+            const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+            if (!match) return { data: {}, content: text };
+            const yamlBlock = match[1];
+            const data = {};
+            yamlBlock.split('\n').forEach(line => {
+                const kv = line.match(/^([\w-]+)\s*:\s*"?([^"\n]+?)"?\s*$/);
+                if (kv) data[kv[1]] = kv[2].trim();
+            });
+            const relatedMatch = yamlBlock.match(/related:\s*\n((?:[ \t]+-[ \t]+.+\n?)*)/);
+            if (relatedMatch) {
+                data.related = relatedMatch[1]
+                    .match(/- "?([^"\n]+)"?/g)
+                    ?.map(r => r.replace(/^-\s+"?/, '').replace(/"$/, '').replace(/^\//, '').trim()) || [];
+            }
+            return { data, content: match[2] };
+        }
+
+        function hasLegalContent(content) {
+            return /privacy act|sovereignty|legal|law|compliance|cloud act/i.test(content);
+        }
+
+        async function init() {
+            const params = new URLSearchParams(window.location.search);
+            const dir = params.get('dir');
+            const slug = params.get('doc');
+
+            if (!dir || !slug) {
+                document.getElementById('article-body').innerHTML =
+                    '<div class="error-msg">Missing parameters. <a href="index.html">Back to all resources →</a></div>';
+                return;
+            }
+
+            // Load registry for metadata and back-link label
+            let registry, col, slugMap = {};
+            try {
+                const res = await fetch('./collections.json');
+                registry = await res.json();
+                col = registry.collections.find(c => c.dir === dir);
+                if (col) {
+                    slugMap = Object.fromEntries(col.articles.map(a => [a.slug, a]));
+                    document.getElementById('collection-title').textContent = col.title;
+                    document.getElementById('collection-subtitle').textContent = col.subtitle || '';
+                    document.getElementById('back-link').href = `collection.html?dir=${dir}`;
+                    document.getElementById('back-link').textContent = `← Back to ${col.title}`;
+                }
+            } catch { /* non-fatal — article still renders without registry */ }
+
+            // Fetch and render markdown
+            let raw;
+            try {
+                const res = await fetch(`./${dir}/${slug}.md`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                raw = await res.text();
+            } catch {
+                document.getElementById('article-body').innerHTML =
+                    `<div class="error-msg">Could not load "<strong>${slug}</strong>". <a href="collection.html?dir=${dir}">Back to collection →</a></div>`;
+                return;
+            }
+
+            const { data, content } = parseFrontmatter(raw);
+            const title = data.title || slugMap[slug]?.title || slug;
+
+            document.title = `${title} — Resources`;
+
+            document.getElementById('article-header').innerHTML = `
+                <h1>${title}</h1>
+                <div class="article-meta">
+                    ${data.category ? `<span>${data.category}</span>` : ''}
+                    ${data.lastmod || data.date ? ` &middot; Updated ${data.lastmod || data.date}` : ''}
+                    ${data.author ? ` &middot; ${data.author}` : ''}
+                </div>`;
+
+            if (hasLegalContent(content)) {
+                const d = document.getElementById('disclaimer');
+                d.style.display = 'block';
+                d.textContent = 'This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.';
+            }
+
+            marked.use({ gfm: true, breaks: false });
+            document.getElementById('article-body').innerHTML = marked.parse(content);
+
+            // Related articles
+            if (data.related?.length > 0) {
+                const related = data.related.map(s => slugMap[s]).filter(Boolean);
+                if (related.length > 0) {
+                    document.getElementById('related-section').innerHTML = `
+                        <div class="related-section">
+                            <h2>Related Articles</h2>
+                            <div class="related-grid">
+                                ${related.map(a => `
+                                <a href="article.html?dir=${dir}&doc=${a.slug}" class="related-card">
+                                    <h3>${a.title}</h3>
+                                    <p>${a.description}</p>
+                                </a>`).join('')}
+                            </div>
+                        </div>`;
+                }
+            }
+        }
+        init();
+    </script>
+</body>
+</html>
