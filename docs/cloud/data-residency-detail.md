@@ -22,7 +22,7 @@ related:
 
 ---
 
-*This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
+*This document is shared for discussion purposes only. It does not constitute a binding commitment or commercial offer. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
 
 ---
 
@@ -40,9 +40,8 @@ When a Microsoft 365 tenant is provisioned, core customer data at rest is stored
 
 ### Advanced Data Residency (ADR)
 
-ADR is a paid add-on that extends data residency commitments beyond the core workloads. It also provides priority migration services for existing tenants moving to a new local region.
-
-**Licensing requirement:** 100% of paid seats in the tenant must be covered by the ADR add-on. Compatible plans include Microsoft 365 F1/F3/E3/E5, Office 365 F3/E1/E3/E5, and Microsoft 365 Business.
+ADR is an add-on that extends data residency commitments beyond the core workloads. It also provides priority migration services for existing tenants moving to a new local region.
+
 
 ### Multi-Geo
 
@@ -122,7 +121,7 @@ Data residency and data sovereignty are not the same thing, and technology alone
 
 ---
 
-*This document is intended as a guide and should be verified against Microsoft's official documentation before making compliance or procurement decisions. Key references:*
+*This document is shared for discussion purposes only and does not constitute a binding commitment or commercial offer. Verify details against Microsoft's official documentation before making compliance or procurement decisions. Key references:*
 
 - *[Microsoft 365 data locations](https://learn.microsoft.com/en-us/microsoft-365/enterprise/o365-data-locations)*
 - *[Advanced Data Residency](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency)*

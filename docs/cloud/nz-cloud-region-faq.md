@@ -20,7 +20,7 @@ related:
 
 ---
 
-*This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
+*This document is shared for discussion purposes only. It does not constitute a binding commitment or commercial offer. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
 
 ---
 
@@ -114,14 +114,6 @@ Latency from NZ North is a significant improvement over routing to Australia Eas
 
 ---
 
-### Is NZ North more expensive than Australia East?
-
-For some compute services there is a difference, though the premium varies by service and VM SKU. Storage pricing is comparable.
-
-Use the [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/) to compare costs for your specific workloads. For many organisations, the latency reduction and data residency compliance justify the premium.
-
----
-
 ### Can I use ExpressRoute to connect to NZ North?
 
 Yes. Azure ExpressRoute provides private, dedicated connectivity from your on-premises network to the Auckland data centres, bypassing the public internet. This is recommended for hybrid deployments, sensitive workloads, and organisations with strict security requirements.
@@ -185,6 +177,26 @@ Yes. Microsoft has committed to powering the NZ North region with **100% renewab
 
 ---
 
+### How do I compare pricing between NZ North and Australia East?
+
+Use the [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/) to estimate and compare costs across regions:
+
+1. Go to [https://azure.microsoft.com/en-us/pricing/calculator/](https://azure.microsoft.com/en-us/pricing/calculator/)
+2. Click **Add items** and select the product you want to price (e.g., **Virtual Machines**, **App Service**, **SQL Database**)
+3. In the product card, find the **Region** dropdown and select **New Zealand North**
+4. Configure the SKU, tier, instance count, and hours/month to match your workload
+5. Note the estimated monthly cost
+6. Change the **Region** dropdown to **Australia East** and compare
+7. Repeat for each product in your workload
+
+> **Tips:**
+> - You can add multiple product cards to a single estimate to model an entire workload
+> - Use **Save** or **Export** to share the estimate with stakeholders
+> - The calculator shows list prices — actual costs may differ if you have Enterprise Agreements, reservations, or hybrid benefit entitlements
+> - Currency defaults to USD; use the **Currency** dropdown at the top of the page to switch to NZD if needed
+
+---
+
 ### Where can I find the most up-to-date information?
 
 | Resource | Link |
@@ -192,13 +204,12 @@ Yes. Microsoft has committed to powering the NZ North region with **100% renewab
 | Azure Products by Region | [azure.microsoft.com/products-by-region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) |
 | NZ Cloud Region Playbook | [Microsoft Customer Playbook (PDF)](https://info.microsoft.com/rs/157-GQE-382/images/EN-CNTNT-eBook-SRGCM12351.pdf) |
 | Azure Compliance | [learn.microsoft.com/azure/compliance](https://learn.microsoft.com/en-us/azure/compliance/) |
-| Azure Pricing Calculator | [azure.microsoft.com/pricing/calculator](https://azure.microsoft.com/en-us/pricing/calculator/) |
 | Region Comparison (third-party) | [azurecharts.com/regions](https://azurecharts.com/regions) |
 | Latency Testing (third-party) | [luke.geek.nz](https://luke.geek.nz/azure/nz-north-latency-testing/) |
 
 ---
 
-*This document is intended as a guide. Verify details against Microsoft's official documentation before making compliance or procurement decisions.*
+*This document is shared for discussion purposes only and does not constitute a binding commitment or commercial offer. Verify details against Microsoft's official documentation before making compliance or procurement decisions.*
 
 ---
 

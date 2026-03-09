@@ -30,7 +30,7 @@ When organisations move to the public cloud, one of the first questions is: *whe
 ---
 ---
 
-*This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
+*This document is shared for discussion purposes only. It does not constitute a binding commitment or commercial offer. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
 
 ---
 
@@ -181,7 +181,7 @@ These questions help assess whether a provider's offering meets your residency a
 
 ---
 
-*This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
+*This document is shared for discussion purposes only. It does not constitute a binding commitment or commercial offer. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
 
 ---
 

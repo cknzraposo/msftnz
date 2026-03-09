@@ -22,7 +22,7 @@ related:
 
 ---
 
-*This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
+*This document is shared for discussion purposes only. It does not constitute a binding commitment or commercial offer. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
 
 ---
 
@@ -86,7 +86,7 @@ Start by confirming where your data is stored today (M365 Admin Center and Azure
 
 ---
 
-*This document is intended as a guide and should be verified against Microsoft's official documentation before making compliance or procurement decisions. Key references:*
+*This document is shared for discussion purposes only and does not constitute a binding commitment or commercial offer. Verify details against Microsoft's official documentation before making compliance or procurement decisions. Key references:*
 
 - *[Microsoft 365 data locations](https://learn.microsoft.com/en-us/microsoft-365/enterprise/o365-data-locations)*
 - *[Advanced Data Residency](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency)*

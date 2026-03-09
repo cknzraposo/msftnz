@@ -22,7 +22,7 @@ related:
 
 ---
 
-*This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
+*This document is shared for discussion purposes only. It does not constitute a binding commitment or commercial offer. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
 
 ---
 
@@ -34,7 +34,7 @@ Microsoft provides a range of options to help organisations control where their 
 
 - **Azure New Zealand North** (Auckland) — live since December 2024. You can deploy Azure resources locally and enforce this with policy.
 - **Microsoft 365 data residency** — new NZ tenants store core workload data (Exchange, SharePoint, OneDrive, Teams) in New Zealand by default. Existing tenants can request migration from Australia.
-- **Advanced Data Residency (ADR)** — a paid add-on that extends residency commitments to additional workloads including Copilot, Defender, and Purview.
+- **Advanced Data Residency (ADR)** — an add-on that extends residency commitments to additional workloads including Copilot, Defender, and Purview.
 - **Microsoft Cloud for Sovereignty** — additional controls for regulated industries, available across all Azure regions.
 
 ### At a glance
