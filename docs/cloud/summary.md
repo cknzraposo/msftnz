@@ -82,7 +82,7 @@ You can have data residency without data sovereignty. You can also pursue sovere
 
 ### What cloud providers cannot fully control
 
-- **Foreign legal reach** — if a provider is headquartered in the United States, US law (including the CLOUD Act) may allow US courts to compel the provider to produce data, regardless of where it is stored. Other countries have similar laws
+- **Foreign legal reach** — if a provider is headquartered in the United States, US law (including the [CLOUD Act](https://www.congress.gov/bill/115th-congress/house-bill/4943)) may allow US courts to compel the provider to produce data, regardless of where it is stored. Other countries have similar laws
 - **Intelligence and surveillance laws** — these vary by jurisdiction and can override contractual commitments
 - **Subprocessor chains** — cloud providers use subcontractors for certain functions; data may pass through additional parties
 
@@ -117,7 +117,7 @@ Encryption is a strong control, particularly when the customer holds the keys. H
 
 ## New Zealand perspective
 
-### The Privacy Act 2020
+### The [Privacy Act 2020](https://www.legislation.govt.nz/act/public/2020/0031/latest/LMS23223.html)
 
 New Zealand's primary data protection law. Key points relevant to public cloud:
 
@@ -128,17 +128,17 @@ New Zealand's primary data protection law. Key points relevant to public cloud:
 
 ### Cloud First policy
 
-The New Zealand Government operates a **Cloud First policy**, meaning government agencies should adopt public cloud services by default unless there is a specific reason not to. Key requirements:
+The New Zealand Government operates a **[Cloud First policy](https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/cloud-services/)**, meaning government agencies should adopt public cloud services by default unless there is a specific reason not to. Key requirements:
 
 - Agencies must classify their information and assess risk before adopting cloud services
 - Data classified as **RESTRICTED or lower** can be hosted in public cloud
 - Over time, RESTRICTED-classified data should be hosted in **certified New Zealand-based data centres**
 - All cloud adoption decisions must consider Māori data interests and sustainability
-- The Government Chief Digital Officer (GCDO) has established a **Public Cloud Data Centre Certification (PCDCC)** programme — providers must meet New Zealand's Protective Security Requirements to host government data
+- The Government Chief Digital Officer (GCDO) has established a **Public Cloud Data Centre Certification (PCDCC)** programme — providers must meet New Zealand's [Protective Security Requirements](https://www.protectivesecurity.govt.nz/) to host government data
 
 ### Māori data sovereignty
 
-Māori data sovereignty is recognised as a distinct and important dimension in New Zealand. It is grounded in the principles of Te Tiriti o Waitangi and the framework established by **Te Mana Raraunga** (the Māori Data Sovereignty Network).
+Māori data sovereignty is recognised as a distinct and important dimension in New Zealand. It is grounded in the principles of Te Tiriti o Waitangi and the framework established by **[Te Mana Raraunga](https://www.temanararaunga.maori.nz/)** (the Māori Data Sovereignty Network).
 
 Core principles:
 

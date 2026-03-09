@@ -35,7 +35,7 @@ related:
 | **Paired region** | None — customers must architect their own DR strategy |
 | **Recommended DR target** | Australia East (Sydney), ~30–40ms latency |
 | **Energy** | 100% renewable (solar, wind, hydro) |
-| **ExpressRoute** | Supported — private, dedicated connectivity to Auckland DCs |
+| **[ExpressRoute](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction)** | Supported — private, dedicated connectivity to Auckland DCs |
 | **Global backbone** | Connected to Microsoft's global WAN |
 
 ---
@@ -60,15 +60,15 @@ Since NZ North has **no paired region**, you need to design your own DR strategy
 
 ### Option 1: Zone-to-zone (within NZ North)
 
-- Use availability zones for high availability within Auckland
+- Use [availability zones](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview) for high availability within Auckland
 - Sub-2ms latency between zones
 - Protects against single-DC failure
 - Does not protect against region-wide events
 
 ### Option 2: Region-to-region (NZ North → Australia East)
 
-- Use Azure Site Recovery for VM replication
-- Use geo-redundant storage (GRS) — select Australia East as the replication target
+- Use [Azure Site Recovery](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview) for VM replication
+- Use [geo-redundant storage (GRS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy) — select Australia East as the replication target
 - ~30–40ms latency Auckland ↔ Sydney
 - Protects against region-wide events but data leaves NZ
 
@@ -93,7 +93,7 @@ Combine both: zone-redundant deployments within NZ North for HA, with Australia 
 
 ### Māori Data Sovereignty
 
-Microsoft has committed to working with Māori communities on data governance, aligning with the principles of Te Mana Raraunga (the Māori Data Sovereignty Network). This includes co-design with iwi and Māori organisations for governance oversight. Frameworks are being formalised — engage with Microsoft NZ for current status and partnership details.
+Microsoft has committed to working with Māori communities on data governance, aligning with the principles of [Te Mana Raraunga](https://www.temanararaunga.maori.nz/) (the Māori Data Sovereignty Network). This includes co-design with iwi and Māori organisations for governance oversight. Frameworks are being formalised — engage with Microsoft NZ for current status and partnership details.
 
 ---
 

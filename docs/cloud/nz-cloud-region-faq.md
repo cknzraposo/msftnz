@@ -44,7 +44,7 @@ Yes. New Zealand North is the only Azure region in the country. There is no "New
 
 ### What happened to my data before this region existed?
 
-Before December 2024, Azure and Microsoft 365 data for New Zealand customers was stored in **Australia East** (Sydney). If your tenant or resources were provisioned before the NZ North launch, your data may still be in Australia unless you have migrated.
+Before December 2024, Azure and Microsoft 365 data for New Zealand customers was stored in **Australia East** (Sydney). If your tenant or resources were provisioned before the NZ North launch, your data may still be in Australia. Contact your Microsoft account team to discuss data location options.
 
 ---
 
@@ -52,7 +52,7 @@ Before December 2024, Azure and Microsoft 365 data for New Zealand customers was
 
 No. **Existing Azure resources** remain in whatever region they were deployed to. You need to migrate or redeploy them to NZ North.
 
-For **Microsoft 365**, new tenants with an NZ billing address will default to NZ North. Existing M365 tenants can request migration — contact your Microsoft account team or partner.
+For **Microsoft 365**, new tenants with an NZ billing address will default to NZ North. For existing tenants, contact your Microsoft account team to discuss data location options.
 
 ---
 
@@ -60,7 +60,7 @@ For **Microsoft 365**, new tenants with an NZ billing address will default to NZ
 
 NZ North offers the vast majority of Azure services across compute, networking, storage, databases, AI, analytics, security, integration, management, and IoT. Over 70 services are generally available.
 
-Notable exceptions include **Azure OpenAI Service**, which is not yet GA in NZ North — you would deploy this in Australia East for now.
+Notable exceptions include **[Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview)**, which is not yet GA in NZ North — you would deploy this in Australia East for now.
 
 For the current list, check the [Azure Products by Region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) page.
 
@@ -86,7 +86,7 @@ Not yet as of early 2026. Azure OpenAI Service is classified as a Strategic serv
 
 ### Does NZ North have availability zones?
 
-Yes — three availability zones. Each zone is a physically separate facility with independent power, cooling, and networking. Inter-zone latency is under 2ms. This enables zone-redundant deployments for high availability without leaving New Zealand.
+Yes — three [availability zones](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview). Each zone is a physically separate facility with independent power, cooling, and networking. Inter-zone latency is under 2ms. This enables zone-redundant deployments for high availability without leaving New Zealand.
 
 ---
 
@@ -116,7 +116,7 @@ Latency from NZ North is a significant improvement over routing to Australia Eas
 
 ### Can I use ExpressRoute to connect to NZ North?
 
-Yes. Azure ExpressRoute provides private, dedicated connectivity from your on-premises network to the Auckland data centres, bypassing the public internet. This is recommended for hybrid deployments, sensitive workloads, and organisations with strict security requirements.
+Yes. [Azure ExpressRoute](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction) provides private, dedicated connectivity from your on-premises network to the Auckland data centres, bypassing the public internet. This is recommended for hybrid deployments, sensitive workloads, and organisations with strict security requirements.
 
 ---
 
@@ -137,19 +137,19 @@ Yes. Azure ExpressRoute provides private, dedicated connectivity from your on-pr
 
 ### Does NZ North meet New Zealand government security requirements?
 
-Azure aligns with the **New Zealand Information Security Manual (NZISM)** and holds IRAP assessment at the PROTECTED level (an Australian standard widely used as a benchmark in NZ). For specific agency requirements, consult the [Microsoft Trust Center](https://www.microsoft.com/en-us/trust-center) and engage with Microsoft NZ for detailed compliance mapping.
+Azure aligns with the **[New Zealand Information Security Manual (NZISM)](https://nzism.gcsb.govt.nz/)** and holds IRAP assessment at the PROTECTED level (an Australian standard widely used as a benchmark in NZ). For specific agency requirements, consult the [Microsoft Trust Center](https://www.microsoft.com/en-us/trust-center) and engage with Microsoft NZ for detailed compliance mapping.
 
 ---
 
 ### What about Māori data sovereignty?
 
-Microsoft has committed to working with Māori communities on data governance, aligning with the principles of **Te Mana Raraunga** (the Māori Data Sovereignty Network). This includes co-design with iwi and Māori organisations for governance oversight. Frameworks are being formalised — contact Microsoft NZ for current partnership details and how they apply to your organisation.
+Microsoft has committed to working with Māori communities on data governance, aligning with the principles of **[Te Mana Raraunga](https://www.temanararaunga.maori.nz/)** (the Māori Data Sovereignty Network). This includes co-design with iwi and Māori organisations for governance oversight. Frameworks are being formalised — contact Microsoft NZ for current partnership details and how they apply to your organisation.
 
 ---
 
 ### Does Microsoft 365 data also sit in NZ North?
 
-Yes. Since December 2024, new M365 tenants with an NZ billing address store core workload data (Exchange, SharePoint, OneDrive, Teams) in New Zealand by default. The **Advanced Data Residency (ADR)** add-on extends residency commitments to additional workloads including Copilot, Defender, and Purview. See the [Data Residency — Detail](/data-residency-detail) page for full coverage.
+Yes. Since December 2024, new M365 tenants with an NZ billing address store core workload data (Exchange, SharePoint, OneDrive, Teams) in New Zealand by default. The **[Advanced Data Residency (ADR)](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency)** add-on extends residency commitments to additional workloads including Copilot, Defender, and Purview. See the [Data Residency — Detail](/data-residency-detail) page for full coverage.
 
 ---
 
@@ -161,13 +161,13 @@ M365 Admin Center → Settings → Org Settings → Organization Profile → **D
 
 ### How do I prevent Azure resources from being deployed outside NZ?
 
-Use **Azure Policy** to restrict allowed regions at the subscription or management group level. Apply a policy that only permits `newzealandnorth` as an allowed location. This prevents anyone in your organisation from accidentally deploying resources to another region.
+Use **[Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview)** to restrict allowed regions at the subscription or management group level. Apply a policy that only permits `newzealandnorth` as an allowed location. This prevents anyone in your organisation from accidentally deploying resources to another region.
 
 ---
 
 ### Can I use NZ North as a secondary region for workloads hosted in Australia?
 
-Yes. This is a valid architecture — deploy primary workloads in Australia East with NZ North as a DR or failover target. Azure Site Recovery and geo-redundant storage both support this pattern. Note that this means data will be replicated into New Zealand, which may have positive sovereignty implications for NZ-based organisations.
+Yes. This is a valid architecture — deploy primary workloads in Australia East with NZ North as a DR or failover target. [Azure Site Recovery](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview) and [geo-redundant storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy) both support this pattern. Note that this means data will be replicated into New Zealand, which may have positive sovereignty implications for NZ-based organisations.
 
 ---
 

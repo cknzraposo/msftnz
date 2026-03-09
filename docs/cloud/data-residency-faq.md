@@ -28,7 +28,7 @@ related:
 
 ### Where is my Microsoft 365 data stored today?
 
-You can check in the M365 Admin Center under Settings → Org Settings → Organization Profile → Data Location. If your tenant was created before December 2024 with a New Zealand address, your data is likely still in Australia. You can request migration to NZ North.
+You can check in the M365 Admin Center under Settings → Org Settings → Organization Profile → Data Location. If your tenant was created before December 2024 with a New Zealand address, your data is likely still in Australia. Contact your Microsoft account team to discuss data location options.
 
 ---
 
@@ -40,7 +40,7 @@ Data residency means your data is physically stored in a specific country or reg
 
 ### Do I need Advanced Data Residency (ADR)?
 
-If your data residency requirements only cover Exchange, SharePoint, OneDrive, and Teams, default residency may be sufficient. ADR is needed if you require residency commitments for additional workloads such as Copilot, Defender for Office 365, or Purview services. It also provides priority migration for existing tenants.
+If your data residency requirements only cover Exchange, SharePoint, OneDrive, and Teams, default residency may be sufficient. ADR is needed if you require residency commitments for additional workloads such as Copilot, Defender for Office 365, or Purview services. Contact your Microsoft account team for details on ADR coverage and eligibility.
 
 ---
 
@@ -52,19 +52,19 @@ Copilot interaction data is covered under ADR. In-country Copilot processing is 
 
 ### Can Microsoft access my data?
 
-Microsoft operates on a principle of zero standing access — engineers do not have persistent access to customer data. Access is granted on a time-limited, audited basis when required for service operations. With customer-managed keys, Microsoft cannot decrypt your data without your involvement. Transparency logs (available to qualified government customers) provide visibility into any access.
+Microsoft operates on a principle of zero standing access — engineers do not have persistent access to customer data. Access is granted on a time-limited, audited basis when required for service operations. With [customer-managed keys](https://learn.microsoft.com/en-us/microsoft-365/compliance/customer-key-overview), Microsoft cannot decrypt your data without your involvement. Transparency logs (available to qualified government customers) provide visibility into any access.
 
 ---
 
 ### Does the US CLOUD Act affect data stored in New Zealand?
 
-The CLOUD Act allows US courts to compel US-headquartered companies to produce data regardless of where it is stored. Microsoft has committed to challenging requests it considers inappropriate and publishes a transparency report. For organisations that need stronger legal separation, options include national partner clouds (not yet in NZ) or fully air-gapped deployments using Azure Local.
+The [CLOUD Act](https://www.congress.gov/bill/115th-congress/house-bill/4943) allows US courts to compel US-headquartered companies to produce data regardless of where it is stored. Microsoft has committed to challenging requests it considers inappropriate and publishes a transparency report. For organisations that need stronger legal separation, options include national partner clouds (not yet in NZ) or fully air-gapped deployments using Azure Local.
 
 ---
 
 ### What is Azure Local?
 
-Azure Local (formerly Azure Stack HCI) lets you run Azure services on hardware you own and control, in your own data centre or facility. It supports scaling from small clusters to hundreds of servers and can operate fully disconnected from the public cloud for air-gapped workloads.
+[Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/overview) (formerly Azure Stack HCI) lets you run Azure services on hardware you own and control, in your own data centre or facility. It supports scaling from small clusters to hundreds of servers and can operate fully disconnected from the public cloud for air-gapped workloads.
 
 ---
 
@@ -76,13 +76,13 @@ Microsoft 365 Local runs core M365 services (Exchange, SharePoint) on Azure Loca
 
 ### How do I enforce that Azure resources stay in New Zealand?
 
-Use Azure Policy to restrict allowed regions at the subscription or management group level. This prevents anyone in your organisation from deploying resources outside approved locations (e.g., only permit New Zealand North).
+Use [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) to restrict allowed regions at the subscription or management group level. This prevents anyone in your organisation from deploying resources outside approved locations (e.g., only permit New Zealand North).
 
 ---
 
 ### What should I do if I have regulatory obligations around data location?
 
-Start by confirming where your data is stored today (M365 Admin Center and Azure Portal). Then assess whether default residency, ADR, Multi-Geo, or sovereign cloud controls are needed for your specific regulatory framework. Involve your legal and compliance teams early — technology controls are one part of the picture, but contractual and legal coverage is equally important.
+Start by confirming where your data is stored today (M365 Admin Center and Azure Portal). Then assess whether default residency, [ADR](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency), [Multi-Geo](https://learn.microsoft.com/en-us/microsoft-365/enterprise/microsoft-365-multi-geo), or sovereign cloud controls are needed for your specific regulatory framework. Involve your legal and compliance teams early — technology controls are one part of the picture, but contractual and legal coverage is equally important.
 
 ---
 

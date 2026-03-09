@@ -40,12 +40,12 @@ When a Microsoft 365 tenant is provisioned, core customer data at rest is stored
 
 ### Advanced Data Residency (ADR)
 
-ADR is an add-on that extends data residency commitments beyond the core workloads. It also provides priority migration services for existing tenants moving to a new local region.
+[ADR](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency) is an add-on that extends data residency commitments beyond the core workloads. Contact your Microsoft account team for details on ADR coverage and eligibility.
 
 
 ### Multi-Geo
 
-Multi-Geo allows organisations to specify, on a per-user basis, where Microsoft 365 data is stored across multiple regions within a single tenant.
+[Multi-Geo](https://learn.microsoft.com/en-us/microsoft-365/enterprise/microsoft-365-multi-geo) allows organisations to specify, on a per-user basis, where Microsoft 365 data is stored across multiple regions within a single tenant.
 
 This is designed for multinational organisations. For example, an NZ-headquartered organisation with staff in Australia and the UK can store each user's Exchange mailbox and OneDrive data in their respective local region — without needing separate tenants.
 
@@ -66,9 +66,9 @@ Azure operates 60+ regions globally, including **New Zealand North** (Auckland).
 | Control | What it does |
 |---------|-------------|
 | **Region selection** | You choose where each resource is deployed |
-| **Azure Policy** | Enforce allowed regions at the subscription or management group level, preventing resources from being created outside approved locations |
-| **Customer-managed keys** | You control encryption keys through Azure Key Vault — Microsoft cannot access your data without your key |
-| **Data Protection Addendum (DPA)** | Contractual commitment covering data location, subprocessor access, and cross-border transfer mechanisms |
+| **[Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview)** | Enforce allowed regions at the subscription or management group level, preventing resources from being created outside approved locations |
+| **[Customer-managed keys](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models)** | You control encryption keys through [Azure Key Vault](https://learn.microsoft.com/en-us/azure/key-vault/general/overview) — Microsoft cannot access your data without your key |
+| **[Data Protection Addendum (DPA)](https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA)** | Contractual commitment covering data location, subprocessor access, and cross-border transfer mechanisms |
 
 ### Microsoft Cloud for Sovereignty (Future service - NA)
 
@@ -86,9 +86,9 @@ A solution layer built on top of Azure that adds governance, compliance, and tra
 
 **Key capabilities:**
 
-- **Sovereign Landing Zone** — a pre-configured environment with automated regulatory policy mappings. Helps accelerate compliant deployments. Available on Terraform.
+- **[Sovereign Landing Zone](https://learn.microsoft.com/en-us/industry/sovereignty/slz-overview)** — a pre-configured environment with automated regulatory policy mappings. Helps accelerate compliant deployments. Available on Terraform.
 - **Transparency logs** — give qualified government customers visibility into Microsoft engineer access to their environment.
-- **Azure Local** — run Azure services on your own hardware, scaling from 16 to hundreds of servers. Supports SAN storage and NVIDIA GPUs for sovereign AI workloads.
+- **[Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/overview)** — run Azure services on your own hardware, scaling from 16 to hundreds of servers. Supports SAN storage and NVIDIA GPUs for sovereign AI workloads.
 
 ### Microsoft 365 Local (Future service - NA)
 
