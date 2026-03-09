@@ -42,14 +42,6 @@ When a Microsoft 365 tenant is provisioned, core customer data at rest is stored
 
 ADR is a paid add-on that extends data residency commitments beyond the core workloads. It also provides priority migration services for existing tenants moving to a new local region.
 
-| Workload | What's covered |
-|----------|---------------|
-| Microsoft 365 Copilot and Copilot Chat | Interaction data, chat histories |
-| Microsoft Defender for Office 365 P1 | Service configuration data |
-| Microsoft Purview (selected services) | Audit logs, DLP policies, data lifecycle management, Information Protection, Information Barriers |
-| Viva Connections | Service data |
-| Microsoft 365 Web Apps | Files stored via SharePoint and OneDrive |
-
 **Licensing requirement:** 100% of paid seats in the tenant must be covered by the ADR add-on. Compatible plans include Microsoft 365 F1/F3/E3/E5, Office 365 F3/E1/E3/E5, and Microsoft 365 Business.
 
 ### Multi-Geo
@@ -79,9 +71,11 @@ Azure operates 60+ regions globally, including **New Zealand North** (Auckland).
 | **Customer-managed keys** | You control encryption keys through Azure Key Vault — Microsoft cannot access your data without your key |
 | **Data Protection Addendum (DPA)** | Contractual commitment covering data location, subprocessor access, and cross-border transfer mechanisms |
 
-### Microsoft Cloud for Sovereignty
+### Microsoft Cloud for Sovereignty (Future service - NA)
 
 A solution layer built on top of Azure that adds governance, compliance, and transparency controls for governments and regulated industries. It is available across all Azure regions.
+
+> Please see [Sovereign Public Cloud](https://learn.microsoft.com/en-us/industry/sovereign-cloud/sovereign-private-cloud/overview-sovereign-private-cloud)
 
 **Deployment models:**
 
@@ -97,37 +91,24 @@ A solution layer built on top of Azure that adds governance, compliance, and tra
 - **Transparency logs** — give qualified government customers visibility into Microsoft engineer access to their environment.
 - **Azure Local** — run Azure services on your own hardware, scaling from 16 to hundreds of servers. Supports SAN storage and NVIDIA GPUs for sovereign AI workloads.
 
-### Microsoft 365 Local
+### Microsoft 365 Local (Future service - NA)
 
-Expected to reach general availability in 2026. This runs core Microsoft 365 services (Exchange, SharePoint) on Azure Local infrastructure within your own premises. It enables fully disconnected, air-gapped Microsoft 365 deployments for organisations that require maximum data sovereignty.
+This runs core Microsoft 365 services (Exchange, SharePoint) on Azure Local infrastructure within your own premises. It enables fully disconnected, air-gapped Microsoft 365 deployments for organisations that require maximum data sovereignty.
 
 ---
-
-## New Zealand Timeline
-
-| When | What |
-|------|------|
-| **December 2024** | Azure New Zealand North region (Auckland) goes live |
-| **December 2024** | Microsoft 365 data residency and ADR become available for NZ tenants |
-| **2025** | In-country Copilot processing available in Australia (relevant for NZ routing) |
-| **2025–2026** | Existing NZ tenants can request migration of M365 data from Australia to NZ North |
-| **2026** | Microsoft 365 Local expected to reach general availability |
 
 **What to do now:**
 
 1. **Check your current data location** — M365 Admin Center → Settings → Org Settings → Organization Profile → Data Location
-2. **New tenants** provisioned with an NZ billing address will default to NZ North
-3. **Existing tenants** can request migration from Australia — contact your Microsoft account team or partner
-4. **Evaluate ADR** if you need residency commitments for Copilot, Purview, or Defender workloads
-5. **Enforce Azure region policy** to ensure resources are deployed to NZ North where required
+2. **New tenants** provisioned with an NZ billing address will default to NZ North (i.e new M365 subscriptions)
+3. **Evaluate ADR** if you need residency commitments for Copilot, Purview, or Defender workloads
+4. **Enforce Azure region policy** to ensure resources are deployed to NZ North where required
 
 ---
 
 ## Legal Considerations
 
 Data residency and data sovereignty are not the same thing, and technology alone does not resolve jurisdictional questions.
-
-**The US CLOUD Act** allows US courts to compel US-headquartered companies (including Microsoft) to produce data, regardless of where it is physically stored. Microsoft has publicly committed to challenging such requests and publishes transparency reports — but it cannot guarantee absolute immunity from foreign legal processes.
 
 **How to strengthen your position:**
 
