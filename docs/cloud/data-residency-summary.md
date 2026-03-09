@@ -3,7 +3,7 @@ title: "Data Residency & Data Sovereignty — Summary"
 description: "A summary of data residency and data sovereignty options for Azure and Microsoft 365, tailored for New Zealand organisations."
 date: 2026-03-09
 lastmod: 2026-03-09
-author: "Chandima Kulathilake"
+author: "NA"
 tags: ["data-residency", "data-sovereignty", "azure", "microsoft-365", "new-zealand"]
 category: "Cloud Strategy"
 slug: "data-residency-summary"
@@ -19,6 +19,12 @@ related:
 # Data Residency & Data Sovereignty — Summary
 
 ## Azure and Microsoft 365 — A Guide for New Zealand Organisations
+
+---
+
+*This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
+
+---
 
 Microsoft provides a range of options to help organisations control where their data is stored and how it is governed across Azure and Microsoft 365.
 

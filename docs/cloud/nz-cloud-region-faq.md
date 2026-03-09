@@ -3,7 +3,7 @@ title: "Azure New Zealand North — FAQ"
 description: "Frequently asked questions about the Azure New Zealand North cloud region, covering services, availability zones, pricing, compliance, and data sovereignty."
 date: 2026-03-09
 lastmod: 2026-03-09
-author: "Chandima Kulathilake"
+author: "NA"
 tags: ["azure", "new-zealand-north", "cloud-region", "faq", "compliance", "data-residency"]
 category: "Cloud Infrastructure"
 slug: "nz-cloud-region-faq"
@@ -17,6 +17,12 @@ related:
 ---
 
 # Azure New Zealand North — Frequently Asked Questions
+
+---
+
+*This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
+
+---
 
 ### What is Azure New Zealand North?
 

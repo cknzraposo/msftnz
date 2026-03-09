@@ -3,7 +3,7 @@ title: "Data Residency & Data Sovereignty — FAQ"
 description: "Frequently asked questions about data residency and data sovereignty for Azure and Microsoft 365 in New Zealand."
 date: 2026-03-09
 lastmod: 2026-03-09
-author: "Chandima Kulathilake"
+author: "NA"
 tags: ["data-residency", "data-sovereignty", "azure", "microsoft-365", "new-zealand", "faq"]
 category: "Cloud Strategy"
 slug: "data-residency-faq"
@@ -19,6 +19,12 @@ related:
 # Data Residency & Data Sovereignty — FAQ
 
 ## Azure and Microsoft 365 — A Guide for New Zealand Organisations
+
+---
+
+*This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
+
+---
 
 ### Where is my Microsoft 365 data stored today?
 

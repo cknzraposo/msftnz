@@ -3,7 +3,7 @@ title: "Data Sovereignty & Data Residency — What They Mean in the Public Cloud
 description: "A plain-language guide to data sovereignty and data residency from a public cloud perspective, with New Zealand-specific context."
 date: 2026-03-09
 lastmod: 2026-03-09
-author: "Chandima Kulathilake"
+author: "NA"
 tags: ["data-residency", "data-sovereignty", "public-cloud", "new-zealand", "privacy-act", "maori-data-sovereignty"]
 category: "Cloud Strategy"
 slug: "summary"
@@ -26,6 +26,11 @@ related:
 ## Why this matters
 
 When organisations move to the public cloud, one of the first questions is: *where does my data go, and who has authority over it?* These are not the same question. This document defines each concept clearly, explains how they relate to public cloud services, and outlines what they mean specifically in New Zealand.
+
+---
+---
+
+*This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
 
 ---
 
