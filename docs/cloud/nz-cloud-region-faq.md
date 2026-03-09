@@ -110,7 +110,7 @@ Latency from NZ North is a significant improvement over routing to Australia Eas
 
 ### Is NZ North more expensive than Australia East?
 
-Yes — approximately **17% more** on average, though the premium varies by service and VM SKU. The higher cost reflects newer infrastructure and smaller regional scale.
+Yes — approximately **5% more** for compute services, though the premium varies by service and VM SKU. Storage pricing is comparable. For example, a D2s v5 Linux VM costs $0.1260/hour in NZ North versus $0.1200/hour in Australia East (5.0% premium; source: [Azure Retail Prices API](https://prices.azure.com), March 2026).
 
 Use the [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/) to compare costs for your specific workloads. For many organisations, the latency reduction and data residency compliance justify the premium.
 

@@ -180,6 +180,19 @@ These questions help assess whether a provider's offering meets your residency a
 
 ---
 
+## Key references
+
+- [New Zealand Privacy Act 2020](https://www.legislation.govt.nz/act/public/2020/0031/latest/LMS23223.html) — full text on the NZ Legislation website
+- [US CLOUD Act (H.R.4943)](https://www.congress.gov/bill/115th-congress/house-bill/4943) — Clarifying Lawful Overseas Use of Data Act, via Congress.gov
+- [NZ Government Cloud First Policy — Cabinet Papers](https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/cloud-services/) — cloud adoption policy and strategy guidance
+- [Te Mana Raraunga — Māori Data Sovereignty Network](https://www.temanararaunga.maori.nz/) — charter, principles, and resources on Māori data sovereignty
+- [Waitangi Tribunal WAI 2522 — E-Commerce and Māori Data Sovereignty (PDF)](https://forms.justice.govt.nz/search/Documents/WT/wt_DOC_167236540/Wai%202522,%20B026(b).pdf) — Tribunal report affirming Māori data governance under Te Tiriti
+- [Azure Regions List — including New Zealand North](https://learn.microsoft.com/en-us/azure/reliability/regions-list) — official Microsoft reference for all Azure regions
+- [New Zealand Information Security Manual (NZISM)](https://nzism.gcsb.govt.nz/) — NZ Government information security standard, maintained by the GCSB
+- [Protective Security Requirements (PSR)](https://www.protectivesecurity.govt.nz/) — NZ Government framework for personnel, physical, and information security
+
+---
+
 ## Related pages
 
 - [Data Residency — Summary](/data-residency-summary) — options available across Azure and Microsoft 365
