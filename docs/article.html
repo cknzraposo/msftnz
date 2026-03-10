@@ -241,9 +241,8 @@
                 if (!/\.md$/i.test(localPath)) return;
 
                 const resolvedSlug = resolveRelativeMdSlug(slug, localPath);
-                if (!globalSlugMap[resolvedSlug]) return;
-
-                link.setAttribute('href', `article.html?dir=${globalSlugMap[resolvedSlug]}&doc=${resolvedSlug}${suffix}`);
+                const targetDir = globalSlugMap[resolvedSlug] || dir;
+                link.setAttribute('href', `article.html?dir=${targetDir}&doc=${resolvedSlug}${suffix}`);
             });
             document.getElementById('article-body').innerHTML = temp.innerHTML;
 
