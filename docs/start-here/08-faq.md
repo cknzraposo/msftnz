@@ -430,7 +430,7 @@ Use RAG when:
 
 The pattern: **Azure AI Search** indexes your documents → your agent retrieves relevant chunks → **Azure OpenAI** generates a grounded response.
 
-→ See [Use Case summaries](use-cases/) | [learn.microsoft.com – RAG overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
+→ See [Clinical Assessment](use-cases/clinical-assessment-digitisation-agent.md) | [Immunisation Adviser](use-cases/immunisation-guidelines-adviser-agent.md) | [Research Contracts](use-cases/research-contracts-adviser-agent.md) | [learn.microsoft.com – RAG overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview)
 
 ---
 

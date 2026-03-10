@@ -191,16 +191,61 @@
                 d.textContent = 'This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.';
             }
 
-            // Rewrite internal /slug links to article.html?dir=…&doc=… after rendering
+            function normalizeSegments(input) {
+                const out = [];
+                input.split('/').forEach(seg => {
+                    if (!seg || seg === '.') return;
+                    if (seg === '..') {
+                        out.pop();
+                        return;
+                    }
+                    out.push(seg);
+                });
+                return out;
+            }
+
+            function resolveRelativeMdSlug(currentSlug, relativePath) {
+                const base = currentSlug.includes('/') ? currentSlug.slice(0, currentSlug.lastIndexOf('/') + 1) : '';
+                const joined = base + relativePath;
+                const normalized = normalizeSegments(joined).join('/');
+                return normalized.replace(/\.md$/i, '');
+            }
+
+            // Rewrite internal links to article routes after rendering
             marked.use({ gfm: true, breaks: false });
             let html = marked.parse(content);
-            html = html.replace(/href="\/([^"/#?]+)"/g, (match, slug) => {
-                if (globalSlugMap[slug]) {
-                    return `href="article.html?dir=${globalSlugMap[slug]}&doc=${slug}"`;
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+
+            temp.querySelectorAll('a[href]').forEach(link => {
+                const href = link.getAttribute('href');
+                if (!href || href.startsWith('#')) return;
+                if (/^(https?:|mailto:|tel:|\/\/)/i.test(href)) return;
+
+                const hashIndex = href.indexOf('#');
+                const queryIndex = href.indexOf('?');
+                let suffixIndex = -1;
+                if (hashIndex !== -1 && queryIndex !== -1) suffixIndex = Math.min(hashIndex, queryIndex);
+                else suffixIndex = Math.max(hashIndex, queryIndex);
+                const suffix = suffixIndex === -1 ? '' : href.slice(suffixIndex);
+
+                if (href.startsWith('/')) {
+                    const slugOnly = href.slice(1).split('#')[0].split('?')[0];
+                    if (globalSlugMap[slugOnly]) {
+                        link.setAttribute('href', `article.html?dir=${globalSlugMap[slugOnly]}&doc=${slugOnly}${suffix}`);
+                    }
+                    return;
                 }
-                return match;
+
+                const localPath = href.split('#')[0].split('?')[0];
+                if (!/\.md$/i.test(localPath)) return;
+
+                const resolvedSlug = resolveRelativeMdSlug(slug, localPath);
+                if (!globalSlugMap[resolvedSlug]) return;
+
+                link.setAttribute('href', `article.html?dir=${globalSlugMap[resolvedSlug]}&doc=${resolvedSlug}${suffix}`);
             });
-            document.getElementById('article-body').innerHTML = html;
+            document.getElementById('article-body').innerHTML = temp.innerHTML;
 
             // Related articles
             if (data.related?.length > 0) {
