@@ -47,8 +47,14 @@
         </section>
 
         <section class="content-section">
+            <h2>Start Here</h2>
+            <p>Begin with the hackathon setup path, UoA Azure environment guidance, and use-case briefings.</p>
+            <div id="start-here-grid" class="collections-grid"></div>
+        </section>
+
+        <section class="content-section">
             <h2>Resources</h2>
-            <div id="collections-grid" class="collections-grid"></div>
+            <div id="resources-grid" class="collections-grid"></div>
         </section>
     </main>
 
@@ -64,17 +70,22 @@
 
     <script>
         async function init() {
-            const grid = document.getElementById('collections-grid');
+            const startHereGrid = document.getElementById('start-here-grid');
+            const resourcesGrid = document.getElementById('resources-grid');
             let registry;
             try {
                 const res = await fetch('./collections.json');
                 registry = await res.json();
             } catch {
-                grid.innerHTML = '<p style="color:#cf1322">Could not load collections.</p>';
+                startHereGrid.innerHTML = '<p style="color:#cf1322">Could not load collections.</p>';
+                resourcesGrid.innerHTML = '<p style="color:#cf1322">Could not load collections.</p>';
                 return;
             }
 
-            registry.collections.forEach(col => {
+            const startHereCollection = registry.collections.find(col => col.dir === 'start-here');
+            const resourceCollections = registry.collections.filter(col => col.dir !== 'start-here');
+
+            function renderCard(col, targetGrid) {
                 const card = document.createElement('a');
                 card.href = 'collection.html?dir=' + col.dir;
                 card.className = 'collection-card';
@@ -83,8 +94,21 @@
                     '<h3>' + col.title + '</h3>' +
                     '<p>' + col.description + '</p>' +
                     '<span class="article-count">' + col.articles.length + ' article' + (col.articles.length !== 1 ? 's' : '') + '</span>';
-                grid.appendChild(card);
-            });
+                targetGrid.appendChild(card);
+            }
+
+            if (startHereCollection) {
+                renderCard(startHereCollection, startHereGrid);
+            } else {
+                startHereGrid.innerHTML = '<p style="color:#777">Start Here collection is not available yet.</p>';
+            }
+
+            if (resourceCollections.length === 0) {
+                resourcesGrid.innerHTML = '<p style="color:#777">No additional collections are available yet.</p>';
+                return;
+            }
+
+            resourceCollections.forEach(col => renderCard(col, resourcesGrid));
         }
         init();
     </script>

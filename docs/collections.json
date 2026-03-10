@@ -42,6 +42,99 @@
           "title": "Azure New Zealand North — FAQ",
           "description": "Frequently asked questions about the Azure New Zealand North cloud region, covering services, availability zones, pricing, compliance, and data sovereignty.",
           "category": "Cloud Infrastructure"
+        },
+        {
+          "slug": "decisions-to-make",
+          "title": "Data Residency vs Data Sovereignty — Decisions to Make",
+          "description": "An objective comparison of data residency and sovereignty postures for New Zealand organisations, including trade-offs, costs, and risk implications.",
+          "category": "Cloud Strategy"
+        }
+      ]
+    },
+    {
+      "dir": "start-here",
+      "title": "Start Here",
+      "subtitle": "Masters of AI Hackathon Setup Guides",
+      "description": "Step-by-step setup guides, UoA environment instructions, FAQs, and project use cases for COMPSCI 714 teams.",
+      "icon": "🚀",
+      "articles": [
+        {
+          "slug": "01-prerequisites",
+          "title": "01 - Prerequisites",
+          "description": "Checklist of required accounts, software, and system prerequisites before starting.",
+          "category": "Getting Started"
+        },
+        {
+          "slug": "02-github-setup",
+          "title": "02 - GitHub Setup",
+          "description": "Create your GitHub account, install Git, and configure authentication and identity.",
+          "category": "Getting Started"
+        },
+        {
+          "slug": "03-vscode-setup",
+          "title": "03 - VS Code Setup",
+          "description": "Install and configure Visual Studio Code with recommended extensions.",
+          "category": "Getting Started"
+        },
+        {
+          "slug": "04-python-setup",
+          "title": "04 - Python Setup",
+          "description": "Install Python, create virtual environments, and prepare core development dependencies.",
+          "category": "Getting Started"
+        },
+        {
+          "slug": "05-azure-setup",
+          "title": "05 - Azure Setup",
+          "description": "Set up Azure access, understand core resource hierarchy, and install Azure CLI.",
+          "category": "Getting Started"
+        },
+        {
+          "slug": "06-first-repo",
+          "title": "06 - Your First Repository",
+          "description": "Learn the daily Git workflow: clone, branch, commit, push, and open pull requests.",
+          "category": "Getting Started"
+        },
+        {
+          "slug": "07-azure-ai-foundry",
+          "title": "07 - Azure AI Foundry",
+          "description": "Create projects, deploy models, and build agents in Azure AI Foundry.",
+          "category": "Getting Started"
+        },
+        {
+          "slug": "using-uoa-azure",
+          "title": "Using the University of Auckland Azure Environment",
+          "description": "Access guidance for the pre-provisioned UoA hackathon Azure environment.",
+          "category": "UoA Environment"
+        },
+        {
+          "slug": "08-faq",
+          "title": "08 - Frequently Asked Questions",
+          "description": "Common setup and workflow answers for accounts, tools, Azure, and team collaboration.",
+          "category": "FAQ"
+        },
+        {
+          "slug": "09-wsl-getting-started",
+          "title": "09 - Optional: Getting Started with WSL",
+          "description": "Optional Linux-style setup path for Windows students using WSL and Ubuntu.",
+          "category": "Optional Reading"
+        },
+        {
+          "slug": "use-cases/clinical-assessment-digitisation-agent",
+          "title": "Clinical Assessment Digitisation Agent",
+          "description": "Use case for digitising paper clinical assessments with extraction, grading, and escalation.",
+          "category": "Use Cases"
+        },
+        {
+          "slug": "use-cases/immunisation-guidelines-adviser-agent",
+          "title": "Immunisation Guidelines Adviser Agent",
+          "description": "Use case for helping advisors retrieve and cite official immunisation guidance quickly.",
+          "category": "Use Cases"
+        },
+        {
+          "slug": "use-cases/research-contracts-adviser-agent",
+          "title": "Research Contracts Adviser Agent",
+          "description": "Use case for identifying contract deviations and risk flags against UoA standards.",
+          "category": "Use Cases"
         }
       ]
     }
