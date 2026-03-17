@@ -49,27 +49,41 @@
 Install dependencies first:
 
 ```bash
-pip install azure-ai-projects azure-identity
+pip install openai azure-identity
+```
+
+Create your local config file from the template:
+
+```powershell
+copy demo-1\foundry_config.template.py demo-1\foundry_config.py
+```
+
+Then update `demo-1/foundry_config.py` with your own values:
+
+```python
+# demo-1/foundry_config.py
+ENDPOINT = "https://<your-resource>.services.ai.azure.com/"
+MODEL_NAME = "<your-deployment-name>"
+USE_AAD_AUTH = True
+API_KEY = ""  # only needed when USE_AAD_AUTH = False
 ```
 
 Then run:
 
-```python
-from azure.identity import DefaultAzureCredential
-from azure.ai.projects import AIProjectClient
-
-project = AIProjectClient(
-    endpoint="https://<your-resource>.ai.azure.com/api/projects/<project>",
-    credential=DefaultAzureCredential(),
-)
-
-# Call the model
-response = project.inference.get_chat_completions(
-    model="gpt-4.1",
-    messages=[{"role": "user", "content": "Hello from VS Code!"}]
-)
-print(response.choices[0].message.content)
+```powershell
+python demo-1/query_llm.py
 ```
+
+### First-Day Student Checklist
+
+1. Copy config template:
+    `copy demo-1\foundry_config.template.py demo-1\foundry_config.py`
+2. Update two values in `demo-1/foundry_config.py`:
+    `ENDPOINT` and `MODEL_NAME`
+3. Authenticate once:
+    `az login`
+4. Run the demo:
+    `python demo-1/query_llm.py`
 
 ---
 
@@ -79,6 +93,61 @@ print(response.choices[0].message.content)
 - **Pre-deploy a model** in the portal so the playground works immediately
 - The **"Open in VS Code"** shortcut from the portal is the fastest wow-moment
 - Keep a terminal open to show `pip install` if students ask about setup
+
+---
+
+## How to Run the Classroom Demo (Simple 5-Minute Flow)
+
+Use `demo-1/query_llm.py` to show how the same model responds differently with and without a system prompt.
+
+### 1. Open the demo script
+
+- Open `demo-1/query_llm.py`
+- Open `demo-1/foundry_config.template.py` and explain this is what each student copies to `demo-1/foundry_config.py`
+- Open `demo-1/foundry_config.py` and point students to:
+    - `ENDPOINT`
+    - `MODEL_NAME`
+    - `USE_AAD_AUTH` / `API_KEY`
+- Back in `demo-1/query_llm.py`, point students to `PERSONA`
+
+### 2. Run once
+
+In the terminal from the repo root:
+
+```powershell
+python demo-1/query_llm.py
+```
+
+What students should notice:
+
+- The first answer is a standard response
+- The second answer uses the same question but a different tone/style because of the system prompt (`PERSONA`)
+
+### 3. Live-edit the persona and run again
+
+Change `PERSONA` to something obvious, for example:
+
+```text
+You are a strict exam marker. Respond in exactly two short bullet points.
+```
+
+Run again:
+
+```powershell
+python demo-1/query_llm.py
+```
+
+### 4. Wrap-up takeaway
+
+Use this one sentence:
+
+> Same model + same question, but different **system prompt** = different behavior.
+
+### Optional 30-second talk track
+
+- "First output: default assistant behavior."
+- "Second output: behavior shaped by a system persona."
+- "Prompt structure controls style, detail, and tone."
 
 ## Reference Links
 
