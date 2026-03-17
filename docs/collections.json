@@ -113,6 +113,12 @@
           "category": "FAQ"
         },
         {
+          "slug": "vscode-foundry-demo-guide",
+          "title": "Demo: Connecting VS Code to Azure AI Foundry",
+          "description": "Step-by-step demo guide for connecting VS Code to an Azure AI Foundry project, testing models in the playground, and running code locally.",
+          "category": "FAQ"
+        },
+        {
           "slug": "09-wsl-getting-started",
           "title": "09 - Optional: Getting Started with WSL",
           "description": "Optional Linux-style setup path for Windows students using WSL and Ubuntu.",
