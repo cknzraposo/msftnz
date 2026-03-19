@@ -143,6 +143,21 @@
           "category": "Use Cases"
         }
       ]
+    },
+    {
+      "dir": "copilot-learning",
+      "title": "Copilot Learning",
+      "subtitle": "Getting Started with GitHub Copilot",
+      "description": "A practical learning path for GitHub Copilot — what it is, how to set it up, and how to get the most out of AI-assisted development.",
+      "icon": "🤖",
+      "articles": [
+        {
+          "slug": "what-is-github-copilot",
+          "title": "What is GitHub Copilot — Overview of Features and Capabilities",
+          "description": "A plain-language overview of GitHub Copilot, what it does, how it works, and the features available to developers today.",
+          "category": "Copilot Fundamentals"
+        }
+      ]
     }
   ]
 }
