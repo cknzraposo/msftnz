@@ -91,11 +91,11 @@ Experiment with different system prompts to understand how they shape the model'
 
 ## Step 5 – Get Your Connection Details
 
-To call your model from Python, you need the endpoint and API key.
+To call your model from Python, you need the endpoint and API key. The Home page shows all three values right on the screen:
 
-1. Go to **Settings** → **Connections** inside your project
-2. Find your Azure OpenAI connection
-3. Note the **endpoint URL** and click **Show API key** to copy the key
+1. Click **Home** in the top nav
+2. You'll see **API key**, **Project endpoint**, and **Azure OpenAI endpoint** displayed on the page
+3. Use the copy icon next to each value to copy them
 
 Store these in your `.env` file (as shown in guide 04):
 ```
