@@ -1,132 +1,189 @@
-# 07 – Azure AI Foundry
+# 07 – Microsoft Foundry (Azure AI Foundry)
 
-Azure AI Foundry is the platform you will use to build, deploy, and manage AI agents for this hackathon. It brings together model deployment, data connections, agent orchestration, and evaluation in one place.
+Microsoft Foundry is the platform you will use to build, deploy, and manage AI agents for this hackathon. It brings together model deployment, agent orchestration, tools, evaluation, and observability in one place.
+
+This guide is written for both hackathon teams and independent learners. UI labels can change over time, so if your portal looks different, follow the intent of each step.
 
 ---
 
-## What is Azure AI Foundry?
+## What Is Microsoft Foundry?
 
-Azure AI Foundry is a unified platform for enterprise AI development. It provides:
+Microsoft Foundry is the current unified platform for enterprise AI development. It provides:
 
-- **Model catalogue** — Access to GPT-4o, o1, Phi, and other foundation models
-- **Azure AI Agent Service** — Build agents that use tools, call APIs, and reason over data
-- **Azure AI Search integration** — Ground your agents in your own documents (RAG)
-- **Prompt Flow** — Visual and code-first workflow orchestration
-- **Evaluation** — Built-in tools to measure quality, safety, and groundedness
-- **Responsible AI** — Content safety, monitoring, and audit trails
+- **Model catalog** — Access to Azure OpenAI and other Foundry-supported models
+- **Foundry Agent Service** — Build prompt, workflow, and hosted agents
+- **Tool integration** — Add MCP tools, file/web search, and custom function tools
+- **Evaluation and tracing** — Measure quality and inspect runtime behavior
+- **Responsible AI controls** — Safety guardrails, governance, and monitoring
 
-📖 Reference: [Azure AI Foundry overview](https://learn.microsoft.com/en-us/azure/ai-studio/what-is-ai-studio)
+📖 Reference: [What is Microsoft Foundry?](https://learn.microsoft.com/en-us/azure/foundry/what-is-foundry)
 
 ---
 
 ## Key Concepts
 
 | Concept | Description |
-|---|---|
-| **Hub** | The top-level organisational unit. Shared across projects in your team. Manages shared connections, compute, and security. |
-| **Project** | A workspace within a Hub for a specific use case. Each team will have their own project. |
-| **Deployment** | A specific model (e.g. GPT-4o) made available via an endpoint in your project. |
-| **Connection** | A link to an external service (Azure AI Search, Blob Storage, etc.) used by your project. |
-| **Agent** | An AI assistant configured with instructions, tools, and data sources. |
+| --- | --- |
+| **Foundry resource** | The Azure resource boundary for billing, governance, and platform capabilities. |
+| **Project** | The workspace where your team builds and manages models, tools, and agents. |
+| **Deployment** | A specific model deployment you call from code using its deployment name. |
+| **Conversation/Response** | The modern runtime pattern for agent interactions (replacing older thread/run patterns). |
+| **Agent version** | A versioned definition of an agent (instructions + model + tools). |
+
+> If your team already has a pre-created project, you can skip setup steps and start at model deployment/testing.
 
 ---
 
-## Step 1 – Access Azure AI Foundry
+## Step 1 – Access Foundry
 
 1. Go to [ai.azure.com](https://ai.azure.com)
-2. Sign in with the same Microsoft account linked to your Azure subscription
-3. You'll land on the **Azure AI Foundry home page**
+2. Sign in with the Microsoft account linked to your Azure subscription
+3. Open the project your team will use
 
-> **If your facilitator has already created a Hub and Project for your team**, skip to Step 4 and connect to the existing project.
-
----
-
-## Step 2 – Create a Hub (Team Lead / First-Time Setup)
-
-A Hub is shared across your team. Typically one person creates it and others connect to it.
-
-1. In the left nav, click **Management** → **All hubs**
-2. Click **+ New hub**
-3. Fill in:
-   - **Hub name:** `hub-uoa-hackathon-<team-name>`
-   - **Subscription:** Select your subscription
-   - **Resource Group:** Use the one you created in guide 05
-   - **Location:** Australia East (or as directed)
-4. Click **Next** and review → **Create**
-
-📖 Reference: [Create an Azure AI Foundry hub](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/create-azure-ai-resource)
+📖 Reference: [Foundry portal overview](https://learn.microsoft.com/en-us/azure/foundry/what-is-foundry#foundry-portal)
 
 ---
 
-## Step 3 – Create a Project
+## Step 2 – Create a Foundry Resource and Project (If Needed)
 
-1. From your Hub, click **+ New project**
-2. Give it a name: e.g. `proj-clinical-assessment` or `proj-immunisation-adviser`
-3. Click **Create**
+If your facilitator has already provisioned these, use the existing project.
 
-Your project will have its own:
-- Model deployments
-- Connections
-- Agents
-- Evaluation runs
+1. Create or select a Foundry resource
+2. Create a project (for example: `proj-clinical-assessment`)
+3. Confirm you can open the project home page
 
----
+For hackathon teams, use the naming/location convention provided by your facilitator.
+For independent setup, choose a region that supports both Foundry and your required models.
 
-## Step 4 – Deploy a Model
-
-1. Inside your project, go to **Model catalogue** in the left nav
-2. Search for **gpt-4o**
-3. Click on the model → **Deploy**
-4. Configure:
-   - **Deployment name:** `gpt-4o` (keep it simple — this is what you use in code)
-   - **Model version:** Latest available
-   - **Tokens per minute (TPM):** Set as directed by your facilitator
-5. Click **Deploy**
-
-Once deployed, you'll see it listed under **Deployments** with an endpoint URL and API key.
-
-📖 Reference: [Deploy a model in Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/deploy-models-openai)
+📖 Reference: [Create a project](https://learn.microsoft.com/en-us/azure/foundry/how-to/create-projects)
 
 ---
 
-## Step 5 – Test in the Playground
+## Step 3 – Deploy a Model
 
-Before writing any code, test your deployed model in the Playground:
+1. In your project, open the model deployment area (Model catalog/Deployments)
+2. Pick a model supported in your region and scenario
+3. Create a deployment with a clear name (for example: `chat-main`)
+4. Use latest stable model version unless your use case requires preview features
 
-1. In the left nav, click **Playground** → **Chat**
-2. Select your `gpt-4o` deployment from the dropdown
-3. Enter a **System message** (this is the agent's instructions), e.g.:
-   ```
+Do not hard-code model family choices in planning docs. Always verify current model and region availability first.
+
+📖 Reference: [Models sold directly by Azure](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure)
+
+---
+
+## Step 4 – Test in Playground
+
+Before writing code:
+
+1. Open playground/chat in your project
+2. Select your deployment
+3. Add a simple system instruction, for example:
+
+   ```text
    You are a helpful assistant that summarises immunisation guidelines clearly and concisely.
    ```
-4. Type a question in the chat and press Enter
 
-Experiment with different system prompts to understand how they shape the model's behaviour.
+4. Send a test prompt and verify you get a response
 
 ---
 
-## Step 6 – Get Your Connection Details
+## Step 5 – Authentication Options (Use Either)
 
-To call your model from Python, you need the endpoint and API key.
+Use whichever option matches your team setup.
 
-1. Go to **Settings** → **Connections** inside your project
-2. Find your Azure OpenAI connection
-3. Note the **endpoint URL** and click **Show API key** to copy the key
+### Option A – API Key
 
-Store these in your `.env` file (as shown in guide 04):
-```
-AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
+Store these in `.env`:
+
+```env
+AZURE_OPENAI_BASE_URL=https://your-resource.openai.azure.com/openai/v1/
 AZURE_OPENAI_API_KEY=your-api-key-here
-AZURE_OPENAI_DEPLOYMENT=gpt-4o
+AZURE_OPENAI_DEPLOYMENT=chat-main
 ```
 
-> **Security reminder:** Never commit your `.env` file or paste keys into your code. Keep them in `.env` and add `.env` to `.gitignore`.
+### Option B – Microsoft Entra ID (DefaultAzureCredential)
+
+Store these in `.env`:
+
+```env
+AZURE_OPENAI_BASE_URL=https://your-resource.openai.azure.com/openai/v1/
+AZURE_OPENAI_DEPLOYMENT=chat-main
+```
+
+You also need appropriate RBAC permissions (for example, Cognitive Services OpenAI User) on the resource/project.
+
+> Security reminder: never commit `.env` or secrets. Use secure secret storage for production (for example, Azure Key Vault).
+
+📖 Reference: [Azure OpenAI v1 API lifecycle and authentication](https://learn.microsoft.com/en-us/azure/foundry/openai/api-version-lifecycle)
 
 ---
 
-## Step 7 – Call Your Model from Python
+## Step 6 – Call Your Model from Python (Current Recommended Path)
 
-With your `.env` configured and virtual environment active:
+Install dependencies:
+
+```bash
+pip install --upgrade openai azure-identity python-dotenv
+```
+
+### API key example
+
+```python
+import os
+from dotenv import load_dotenv
+from openai import OpenAI
+
+load_dotenv()
+
+client = OpenAI(
+    api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+    base_url=os.getenv("AZURE_OPENAI_BASE_URL"),
+)
+
+response = client.responses.create(
+    model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
+    input="What is Microsoft Foundry?",
+)
+
+print(response.output_text)
+```
+
+### Entra ID example
+
+```python
+import os
+from dotenv import load_dotenv
+from openai import OpenAI
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+
+load_dotenv()
+
+token_provider = get_bearer_token_provider(
+    DefaultAzureCredential(),
+    "https://ai.azure.com/.default",
+)
+
+client = OpenAI(
+    api_key=token_provider,
+    base_url=os.getenv("AZURE_OPENAI_BASE_URL"),
+)
+
+response = client.responses.create(
+    model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
+    input="What is Microsoft Foundry?",
+)
+
+print(response.output_text)
+```
+
+📖 Reference: [Use the Azure OpenAI Responses API](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/responses)
+
+---
+
+## Step 7 – Legacy Compatibility Path (Older Projects)
+
+If your existing codebase still uses older Azure OpenAI patterns, keep it only as a transition path and plan migration.
 
 ```python
 import os
@@ -138,88 +195,120 @@ load_dotenv()
 client = AzureOpenAI(
     azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
     api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-    api_version="2024-02-01"
+    api_version="2024-02-01",
 )
 
 response = client.chat.completions.create(
-    model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),  # deployment name
+    model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
     messages=[
         {"role": "system", "content": "You are a helpful AI assistant."},
-        {"role": "user", "content": "What is Azure AI Foundry?"}
-    ]
+        {"role": "user", "content": "What is Microsoft Foundry?"},
+    ],
 )
 
 print(response.choices[0].message.content)
 ```
 
-📖 Reference: [Azure OpenAI Python quickstart](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=python)
+📖 Reference: [API evolution and migration notes](https://learn.microsoft.com/en-us/azure/foundry/openai/api-version-lifecycle#api-evolution)
 
 ---
 
-## Step 8 – Build a Simple Agent with Azure AI Agent Service
+## Step 8 – Build a Simple Agent with Foundry Agent Service
 
-The Azure AI Agent Service lets you build agents that can use tools and reason over documents.
+Install dependencies:
 
-**Install the SDK:**
 ```bash
-pip install azure-ai-projects azure-identity
+pip install "azure-ai-projects>=2.0.0" azure-identity openai
 ```
 
-**Basic agent example:**
+Example (current agent pattern):
+
 ```python
 import os
-from azure.ai.projects import AIProjectClient
 from azure.identity import DefaultAzureCredential
-from dotenv import load_dotenv
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import PromptAgentDefinition
 
-load_dotenv()
-
-client = AIProjectClient.from_connection_string(
+project = AIProjectClient(
+    endpoint=os.getenv("FOUNDRY_PROJECT_ENDPOINT"),
     credential=DefaultAzureCredential(),
-    conn_str=os.getenv("AZURE_AI_PROJECT_CONNECTION_STRING")
 )
 
-agent = client.agents.create_agent(
-    model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
-    name="my-first-agent",
-    instructions="You are a helpful assistant. Answer questions clearly and concisely."
+openai_client = project.get_openai_client()
+
+agent = project.agents.create_version(
+    agent_name="my-first-agent",
+    definition=PromptAgentDefinition(
+        model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
+        instructions="You are a helpful assistant. Answer clearly and concisely.",
+    ),
 )
 
-thread = client.agents.create_thread()
-message = client.agents.create_message(
-    thread_id=thread.id,
-    role="user",
-    content="What are the key steps in building an AI agent?"
+conversation = openai_client.conversations.create(
+    items=[
+        {
+            "type": "message",
+            "role": "user",
+            "content": "What are the key steps in building an AI agent?",
+        }
+    ]
 )
 
-run = client.agents.create_and_process_run(
-    thread_id=thread.id,
-    assistant_id=agent.id
+response = openai_client.responses.create(
+    conversation=conversation.id,
+    input="Respond with 5 concise bullet points.",
+    extra_body={
+        "agent_reference": {
+            "name": agent.name,
+            "type": "agent_reference",
+        }
+    },
 )
 
-messages = client.agents.list_messages(thread_id=thread.id)
-print(messages.get_last_text_message_by_role("assistant").text.value)
+for item in response.output:
+    if item.type == "message":
+        for block in item.content:
+            print(block.text)
 ```
 
-📖 Reference: [Azure AI Agent Service quickstart](https://learn.microsoft.com/en-us/azure/ai-services/agents/quickstart)
+If you are migrating from classic agents (threads/runs/create_agent), use the migration guide.
+
+📖 References:
+
+- [What is Microsoft Foundry Agent Service?](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)
+- [Migrate to the new agents developer experience](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/migrate)
 
 ---
 
-## Step 9 – Evaluate Your Agent
+## Step 9 – Evaluate, Trace, and Monitor
 
-Azure AI Foundry includes built-in evaluation tools to measure:
-- **Groundedness** — Are responses backed by your source documents?
-- **Relevance** — Are responses relevant to the question?
-- **Coherence** — Are responses well-structured and clear?
-- **Safety** — Are responses free from harmful content?
+Use Foundry observability and evaluation together:
 
-To run an evaluation:
-1. In the left nav, click **Evaluation**
-2. Click **+ New evaluation**
-3. Select your dataset (example Q&A pairs) and the model/deployment to evaluate
-4. Review the results dashboard
+1. Trace agent runs to inspect tool calls, latency, and output behavior
+2. Run evaluations for quality and safety signals
+3. Monitor ongoing reliability and performance in dashboards
 
-📖 Reference: [Evaluate generative AI apps in Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/evaluation-approach-gen-ai)
+Common quality dimensions:
+
+- **Groundedness**
+- **Relevance**
+- **Coherence**
+- **Safety**
+
+📖 References:
+
+- [Agent tracing overview](https://learn.microsoft.com/en-us/azure/foundry/observability/concepts/trace-agent-concept)
+- [What's new in Microsoft Foundry docs](https://learn.microsoft.com/en-us/azure/foundry/whats-new-foundry)
+
+---
+
+## Regional and Compliance Notes (NZ Teams)
+
+- Confirm that your chosen region supports the model family and API features you need.
+- For Aotearoa New Zealand organisations, validate data residency and sovereignty requirements before production rollout.
+- Engage your security/compliance stakeholders early for production deployments.
+
+This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.
 
 ---
 
@@ -227,29 +316,40 @@ To run an evaluation:
 
 Before starting your use case work, confirm:
 
-- [ ] You can sign in to [ai.azure.com](https://ai.azure.com) and see your project
-- [ ] GPT-4o is deployed and visible under **Deployments**
-- [ ] You can send a chat message in the Playground and receive a response
-- [ ] Running the Python code sample above returns a response from the model
-- [ ] Your `.env` file has the endpoint, API key, and deployment name — and `.env` is in `.gitignore`
+- [ ] You can sign in to [ai.azure.com](https://ai.azure.com) and open the correct project
+- [ ] A model deployment is created and testable in playground
+- [ ] You can call the model successfully from Python using at least one auth method (API key or Entra ID)
+- [ ] If using legacy code, you have a migration plan to v1/OpenAI client patterns
+- [ ] `.env` and secrets are excluded from source control
+- [ ] You have reviewed region availability for your selected models
 
 ---
 
 ## 📚 Further Learning
 
 | Resource | Link |
-|---|---|
-| Azure AI Foundry documentation | [learn.microsoft.com/azure/ai-studio](https://learn.microsoft.com/en-us/azure/ai-studio/) |
-| Azure OpenAI Service documentation | [learn.microsoft.com/azure/ai-services/openai](https://learn.microsoft.com/en-us/azure/ai-services/openai/) |
-| Azure AI Agent Service quickstart | [learn.microsoft.com – Agents quickstart](https://learn.microsoft.com/en-us/azure/ai-services/agents/quickstart) |
+| --- | --- |
+| Microsoft Foundry overview | [learn.microsoft.com/azure/foundry](https://learn.microsoft.com/en-us/azure/foundry/what-is-foundry) |
+| Foundry Agent Service overview | [learn.microsoft.com – Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview) |
+| Agent migration guide | [learn.microsoft.com – Agent migration](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/migrate) |
+| Azure OpenAI Responses API | [learn.microsoft.com – Responses API](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/responses) |
+| Azure OpenAI API lifecycle | [learn.microsoft.com – API version lifecycle](https://learn.microsoft.com/en-us/azure/foundry/openai/api-version-lifecycle) |
+| Foundry models and region support | [learn.microsoft.com – Models by region](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure) |
 | Azure AI Search + RAG | [learn.microsoft.com – RAG overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview) |
 | Azure AI Document Intelligence | [learn.microsoft.com – Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview) |
-| Microsoft Learn – AI Foundry learning path | [learn.microsoft.com – AI Foundry skills](https://learn.microsoft.com/en-us/training/paths/create-custom-copilots-ai-studio/) |
+
+---
+
+## Disclaimer
+
+*The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Presentation Resources are provided as is with no guarantees or warranties of any kind.*
+
+API versions, model availability, SDK behavior, and portal UI can change. Re-verify official Microsoft documentation before production deployment.
 
 ---
 
 ## 🎉 You're Ready
 
-You now have everything set up to start building. Refer back to the use case documents in the `UseCases` folder for the specific requirements of each project.
+You now have the core setup to start building. Refer to the use case documents in [docs/start-here/use-cases](docs/start-here/use-cases) for specific project requirements.
 
 Good luck with the hackathon!

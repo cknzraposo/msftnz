@@ -1,4 +1,4 @@
-# Demo: Connecting VS Code to Azure AI Foundry
+# Demo: Connecting VS Code to Microsoft Foundry
 
 ## Prerequisites (have ready before the demo)
 
@@ -26,7 +26,7 @@
 
 1. Click the **Foundry icon** in the sidebar
 2. Expand your **subscription → resource group**
-3. Find your Foundry project (e.g. `prj-compsci714-team1`)
+3. Find your Foundry project (e.g. `prj-team1`)
 4. Right-click → **"Open in Foundry Extension"**
 5. The project workspace loads — models, endpoints, and playgrounds are now visible
 
@@ -39,7 +39,7 @@
 
 ## Step 5 — Get Code from the Portal (Shortcut)
 
-1. Open [Azure AI Foundry portal](https://ai.azure.com) in a browser
+1. Open [Microsoft Foundry portal](https://ai.azure.com) in a browser
 2. Navigate to your project → select a model
 3. Click **"View Code"** → **"Open in VS Code"**
 4. VS Code opens with endpoint, auth, and a working code sample pre-configured
@@ -49,41 +49,38 @@
 Install dependencies first:
 
 ```bash
-pip install openai azure-identity
+pip install --upgrade openai azure-identity python-dotenv
 ```
 
-Create your local config file from the template:
+Then in the code workspace created by **Open in VS Code**:
 
-```powershell
-copy demo-1\foundry_config.template.py demo-1\foundry_config.py
+1. Open the generated README/instructions file
+2. Set endpoint, deployment name, and authentication values as instructed
+3. Run the generated sample script (for example, `agent_run.py` or `model_run.py`)
+
+Typical values you will need:
+
+```text
+ENDPOINT=https://<your-resource>.openai.azure.com/openai/v1/
+MODEL_NAME=<your-deployment-name>
+USE_AAD_AUTH=true
 ```
 
-Then update `demo-1/foundry_config.py` with your own values:
+If you use API key auth instead of Entra ID:
 
-```python
-# demo-1/foundry_config.py
-ENDPOINT = "https://<your-resource>.services.ai.azure.com/"
-MODEL_NAME = "<your-deployment-name>"
-USE_AAD_AUTH = True
-API_KEY = ""  # only needed when USE_AAD_AUTH = False
-```
-
-Then run:
-
-```powershell
-python demo-1/query_llm.py
+```text
+USE_AAD_AUTH=false
+API_KEY=<your-api-key>
 ```
 
 ### First-Day Student Checklist
 
-1. Copy config template:
-    `copy demo-1\foundry_config.template.py demo-1\foundry_config.py`
-2. Update two values in `demo-1/foundry_config.py`:
-    `ENDPOINT` and `MODEL_NAME`
-3. Authenticate once:
-    `az login`
-4. Run the demo:
-    `python demo-1/query_llm.py`
+1. Open your project in the Foundry VS Code extension
+2. Use **View Code** → **Open in VS Code** from playground
+3. Set endpoint + deployment name in generated config
+4. Authenticate once:
+   `az login`
+5. Run the generated sample script
 
 ---
 
@@ -98,24 +95,20 @@ python demo-1/query_llm.py
 
 ## How to Run the Classroom Demo (Simple 5-Minute Flow)
 
-Use `demo-1/query_llm.py` to show how the same model responds differently with and without a system prompt.
+Use the generated sample script from **Open in VS Code** to show how the same model responds differently with and without a system prompt.
 
 ### 1. Open the demo script
 
-- Open `demo-1/query_llm.py`
-- Open `demo-1/foundry_config.template.py` and explain this is what each student copies to `demo-1/foundry_config.py`
-- Open `demo-1/foundry_config.py` and point students to:
-    - `ENDPOINT`
-    - `MODEL_NAME`
-    - `USE_AAD_AUTH` / `API_KEY`
-- Back in `demo-1/query_llm.py`, point students to `PERSONA`
+- Open the generated sample script (for example, `agent_run.py` or `model_run.py`)
+- Open the generated config/environment file and point students to `ENDPOINT`, `MODEL_NAME`, and `USE_AAD_AUTH` / `API_KEY`
+- Back in the sample script, point students to the **system instruction/persona** variable
 
 ### 2. Run once
 
 In the terminal from the repo root:
 
 ```powershell
-python demo-1/query_llm.py
+python <generated-sample-script>.py
 ```
 
 What students should notice:
@@ -125,7 +118,7 @@ What students should notice:
 
 ### 3. Live-edit the persona and run again
 
-Change `PERSONA` to something obvious, for example:
+Change the system instruction/persona to something obvious, for example:
 
 ```text
 You are a strict exam marker. Respond in exactly two short bullet points.
@@ -134,7 +127,7 @@ You are a strict exam marker. Respond in exactly two short bullet points.
 Run again:
 
 ```powershell
-python demo-1/query_llm.py
+python <generated-sample-script>.py
 ```
 
 ### 4. Wrap-up takeaway
@@ -155,3 +148,9 @@ Use this one sentence:
 - [Foundry Quickstart](https://learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code)
 - [Open in VS Code Blog](https://devblogs.microsoft.com/foundry/open-in-vscode/)
 - [MS Learn: AI Agents with Foundry + VS Code](https://learn.microsoft.com/en-us/training/modules/develop-ai-agents-azure-vs-code/)
+
+---
+
+## Disclaimer
+
+*The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Presentation Resources are provided as is with no guarantees or warranties of any kind.*
