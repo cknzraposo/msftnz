@@ -145,11 +145,6 @@ print(response.choices[0].message.content)
 
 The Azure AI Agent Service lets you build agents that can use tools and reason over documents.
 
-> **Note:** The Agent Service uses Azure role-based access control rather than the API key. Before running this code, sign in with the Azure CLI:
-> ```bash
-> az login
-> ```
-
 **Install the SDK:**
 ```bash
 pip install azure-ai-agents azure-identity
