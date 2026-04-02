@@ -146,50 +146,44 @@ The Azure AI Agent Service lets you build agents that can use tools and reason o
 
 **Install the SDK:**
 ```bash
-pip install azure-ai-agents azure-identity
+pip install "azure-ai-projects>=2.0.0" azure-identity
 ```
 
 **Basic agent example:**
 ```python
 import os
-from azure.ai.agents import AgentsClient
 from azure.identity import DefaultAzureCredential
+from azure.ai.projects import AIProjectClient
+from azure.ai.projects.models import PromptAgentDefinition
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = AgentsClient(
+project = AIProjectClient(
     endpoint=os.getenv("AZURE_AI_PROJECT_ENDPOINT"),
     credential=DefaultAzureCredential()
 )
 
-agent = client.create_agent(
-    model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
-    name="my-first-agent",
-    instructions="You are a helpful assistant. Answer questions clearly and concisely."
+agent = project.agents.create_version(
+    agent_name="my-first-agent",
+    definition=PromptAgentDefinition(
+        model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
+        instructions="You are a helpful assistant. Answer questions clearly and concisely.",
+    ),
 )
+print(f"Agent created: {agent.name} (version {agent.version})")
 
-thread = client.threads.create()
-client.messages.create(
-    thread_id=thread.id,
-    role="user",
-    content="What are the key steps in building an AI agent?"
+openai = project.get_openai_client()
+conversation = openai.conversations.create()
+
+response = openai.responses.create(
+    conversation=conversation.id,
+    extra_body={"agent_reference": {"name": "my-first-agent", "type": "agent_reference"}},
+    input="What are the key steps in building an AI agent?",
 )
+print(response.output_text)
 
-run = client.runs.create_and_process(
-    thread_id=thread.id,
-    agent_id=agent.id
-)
-
-messages = client.messages.list(thread_id=thread.id)
-for msg in messages:
-    if msg.role == "assistant":
-        for content in msg.content:
-            if hasattr(content, "text"):
-                print(content.text.value)
-        break
-
-client.delete_agent(agent.id)
+project.agents.delete(agent_name="my-first-agent")
 ```
 
 📖 Reference: [Microsoft Foundry quickstart](https://learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code)
