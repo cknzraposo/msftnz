@@ -145,50 +145,57 @@ print(response.choices[0].message.content)
 
 The Azure AI Agent Service lets you build agents that can use tools and reason over documents.
 
+> **Note:** The Agent Service uses Azure role-based access control rather than the API key. Before running this code, sign in with the Azure CLI:
+> ```bash
+> az login
+> ```
+
 **Install the SDK:**
 ```bash
-pip install azure-ai-projects azure-identity
+pip install azure-ai-agents azure-identity
 ```
 
 **Basic agent example:**
 ```python
 import os
-from azure.ai.projects import AIProjectClient
+from azure.ai.agents import AgentsClient
 from azure.identity import DefaultAzureCredential
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = AIProjectClient(
+client = AgentsClient(
     endpoint=os.getenv("AZURE_AI_PROJECT_ENDPOINT"),
     credential=DefaultAzureCredential()
 )
 
-agent = client.agents.create_agent(
+agent = client.create_agent(
     model=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
     name="my-first-agent",
     instructions="You are a helpful assistant. Answer questions clearly and concisely."
 )
 
-thread = client.agents.threads.create()
-client.agents.messages.create(
+thread = client.threads.create()
+client.messages.create(
     thread_id=thread.id,
     role="user",
     content="What are the key steps in building an AI agent?"
 )
 
-run = client.agents.runs.create_and_process(
+run = client.runs.create_and_process(
     thread_id=thread.id,
     agent_id=agent.id
 )
 
-messages = client.agents.messages.list(thread_id=thread.id)
+messages = client.messages.list(thread_id=thread.id)
 for msg in messages:
     if msg.role == "assistant":
         for content in msg.content:
             if hasattr(content, "text"):
                 print(content.text.value)
         break
+
+client.delete_agent(agent.id)
 ```
 
 📖 Reference: [Microsoft Foundry quickstart](https://learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code)
