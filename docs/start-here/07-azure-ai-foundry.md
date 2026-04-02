@@ -57,16 +57,17 @@ Your project will have its own:
 
 ## Step 3 – Deploy a Model
 
-1. Inside your project, go to **Model catalogue** in the left nav
-2. Search for **gpt-4o**
-3. Click on the model → **Deploy**
-4. Configure:
+1. In the top nav, click **Build**
+2. In the left nav, click **Models**
+3. Click **Deploy a base model**
+4. Search for and select **gpt-4o**
+5. Configure:
    - **Deployment name:** `gpt-4o` (keep it simple — this is what you use in code)
    - **Model version:** Latest available
    - **Tokens per minute (TPM):** Set as directed by your facilitator
-5. Click **Deploy**
+6. Click **Deploy**
 
-Once deployed, you'll see it listed under **Deployments** with an endpoint URL and API key.
+Once deployed, you'll see it listed under **Models** → **Deployments**.
 
 📖 Reference: [Deploy a model in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/how-to/deploy-models-openai)
 
