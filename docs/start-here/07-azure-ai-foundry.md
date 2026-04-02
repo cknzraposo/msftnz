@@ -69,7 +69,7 @@ Your project will have its own:
 
 Once deployed, you'll see it listed under **Models** → **Deployments**.
 
-📖 Reference: [Deploy a model in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/how-to/deploy-models-openai)
+📖 Reference: [Microsoft Foundry quickstart](https://learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code)
 
 ---
 
@@ -186,7 +186,7 @@ messages = client.agents.list_messages(thread_id=thread.id)
 print(messages.get_last_text_message_by_role("assistant").text.value)
 ```
 
-📖 Reference: [Azure AI Agent Service quickstart](https://learn.microsoft.com/en-us/azure/ai-services/agents/quickstart)
+📖 Reference: [Microsoft Foundry quickstart](https://learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code)
 
 ---
 
@@ -204,7 +204,7 @@ To run an evaluation:
 3. Select your dataset (example Q&A pairs) and the model/deployment to evaluate
 4. Review the results dashboard
 
-📖 Reference: [Evaluate generative AI apps in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-approach-gen-ai)
+📖 Reference: [Microsoft Foundry documentation](https://learn.microsoft.com/en-us/azure/foundry/)
 
 ---
 
@@ -226,10 +226,10 @@ Before starting your use case work, confirm:
 |---|---|
 | Microsoft Foundry documentation | [learn.microsoft.com/azure/foundry](https://learn.microsoft.com/en-us/azure/foundry/) |
 | Azure OpenAI Service documentation | [learn.microsoft.com/azure/ai-services/openai](https://learn.microsoft.com/en-us/azure/ai-services/openai/) |
-| Azure AI Agent Service quickstart | [learn.microsoft.com – Agents quickstart](https://learn.microsoft.com/en-us/azure/ai-services/agents/quickstart) |
+| Microsoft Foundry quickstart (models + agents) | [learn.microsoft.com – Foundry quickstart](https://learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code) |
 | Azure AI Search + RAG | [learn.microsoft.com – RAG overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview) |
 | Azure AI Document Intelligence | [learn.microsoft.com – Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview) |
-| Microsoft Learn – Foundry learning path | [learn.microsoft.com – Foundry skills](https://learn.microsoft.com/en-us/training/paths/create-custom-copilots-ai-studio/) |
+| Microsoft Learn – Foundry learning path | [learn.microsoft.com – Develop generative AI apps](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) |
 
 ---
 
