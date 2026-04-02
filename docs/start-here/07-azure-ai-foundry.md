@@ -10,7 +10,6 @@ Microsoft Foundry is a unified platform for enterprise AI development. It provid
 
 - **Model catalogue** — Access to GPT-4o, o1, Phi, and other foundation models
 - **Azure AI Agent Service** — Build agents that use tools, call APIs, and reason over data
-- **Azure AI Search integration** — Ground your agents in your own documents (RAG)
 - **Evaluation** — Built-in tools to measure quality, safety, and groundedness
 - **Responsible AI** — Content safety, monitoring, and audit trails
 
@@ -25,7 +24,7 @@ Microsoft Foundry is a unified platform for enterprise AI development. It provid
 | **Foundry resource** | The top-level resource for your team. Manages shared connections, deployments, and security. Already provisioned for you. |
 | **Project** | A workspace within your Foundry resource for a specific use case. Each team has their own project. Already provisioned for you. |
 | **Deployment** | A specific model (e.g. GPT-4o) made available via an endpoint in your project. |
-| **Connection** | A link to an external service (Azure AI Search, Blob Storage, etc.) used by your project. |
+| **Connection** | A link to an external service (e.g. Blob Storage) used by your project. |
 | **Agent** | An AI assistant configured with instructions, tools, and data sources. |
 
 ---
@@ -234,7 +233,6 @@ Before starting your use case work, confirm:
 | Microsoft Foundry documentation | [learn.microsoft.com/azure/foundry](https://learn.microsoft.com/en-us/azure/foundry/) |
 | Azure OpenAI Service documentation | [learn.microsoft.com/azure/ai-services/openai](https://learn.microsoft.com/en-us/azure/ai-services/openai/) |
 | Microsoft Foundry quickstart (models + agents) | [learn.microsoft.com – Foundry quickstart](https://learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code) |
-| Azure AI Search + RAG | [learn.microsoft.com – RAG overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview) |
 | Azure AI Document Intelligence | [learn.microsoft.com – Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview) |
 | Microsoft Learn – Foundry learning path | [learn.microsoft.com – Develop generative AI apps](https://learn.microsoft.com/en-us/training/paths/develop-generative-ai-apps/) |
 
