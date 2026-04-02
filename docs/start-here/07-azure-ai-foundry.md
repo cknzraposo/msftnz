@@ -77,8 +77,8 @@ Once deployed, you'll see it listed under **Models** → **Deployments**.
 
 Before writing any code, test your deployed model in the Playground:
 
-1. In the left nav, click **Playground** → **Chat**
-2. Select your `gpt-4o` deployment from the dropdown
+1. In **Models** → **Deployments**, click the hyperlink for your `gpt-4o` deployment
+2. This opens the Playground for that model
 3. Enter a **System message** (this is the agent's instructions), e.g.:
    ```
    You are a helpful assistant that summarises immunisation guidelines clearly and concisely.
