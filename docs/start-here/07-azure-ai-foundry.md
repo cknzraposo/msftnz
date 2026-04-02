@@ -123,7 +123,7 @@ load_dotenv()
 client = AzureOpenAI(
     azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
     api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-    api_version="2024-02-01"
+    api_version="2024-10-21"
 )
 
 response = client.chat.completions.create(
@@ -170,20 +170,25 @@ agent = client.agents.create_agent(
     instructions="You are a helpful assistant. Answer questions clearly and concisely."
 )
 
-thread = client.agents.create_thread()
-message = client.agents.create_message(
+thread = client.agents.threads.create()
+client.agents.messages.create(
     thread_id=thread.id,
     role="user",
     content="What are the key steps in building an AI agent?"
 )
 
-run = client.agents.create_and_process_run(
+run = client.agents.runs.create_and_process(
     thread_id=thread.id,
-    assistant_id=agent.id
+    agent_id=agent.id
 )
 
-messages = client.agents.list_messages(thread_id=thread.id)
-print(messages.get_last_text_message_by_role("assistant").text.value)
+messages = client.agents.messages.list(thread_id=thread.id)
+for msg in messages:
+    if msg.role == "assistant":
+        for content in msg.content:
+            if hasattr(content, "text"):
+                print(content.text.value)
+        break
 ```
 
 📖 Reference: [Microsoft Foundry quickstart](https://learn.microsoft.com/en-us/azure/foundry/quickstarts/get-started-code)
