@@ -13,7 +13,7 @@ Confirm: Before the hackathon begins, the following has been provisioned for **e
 |---|---|
 | **Azure Subscription** | Shared subscription dedicated to the hackathon — isolated from all other UoA systems |
 | **Resource Group** | One per team (e.g. `rg-teamA`) — contains all your team's resources |
-| **Azure AI Foundry instance** | One per team — your hub for model deployment, agents, and projects |
+| **Microsoft Foundry instance** | One per team — your hub for model deployment, agents, and projects |
 | **Blob Storage** | Pre-created and scoped to your team's Foundry — you cannot access other teams' storage |
 | **Entra ID Group** | Your team members are added as **Contributors** to your Resource Group |
 | **Diagnostics / Logging** | Enabled at subscription level — you can view logs scoped to your own resources |

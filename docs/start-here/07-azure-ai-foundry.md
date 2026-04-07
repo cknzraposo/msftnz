@@ -1,4 +1,4 @@
-# 07 – Microsoft Foundry (Azure AI Foundry)
+# 07 – Microsoft Foundry
 
 Microsoft Foundry is the platform you will use to build, deploy, and manage AI agents for this hackathon. It brings together model deployment, agent orchestration, tools, evaluation, and observability in one place.
 
@@ -353,3 +353,4 @@ API versions, model availability, SDK behavior, and portal UI can change. Re-ver
 You now have the core setup to start building. Refer to the use case documents in [docs/start-here/use-cases](docs/start-here/use-cases) for specific project requirements.
 
 Good luck with the hackathon!
+

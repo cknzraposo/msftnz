@@ -5,52 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading…</title>
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        .collection-intro {
-            background: white;
-            padding: 2rem;
-            margin-bottom: 2.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            border-left: 5px solid #0078d4;
-        }
-        .collection-intro p { margin: 0; font-size: 1.1rem; color: #444; line-height: 1.7; }
-        .category-group { margin-bottom: 2.5rem; }
-        .category-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #0078d4;
-            margin-bottom: 1rem;
-            padding-bottom: 0.4rem;
-            border-bottom: 2px solid #e8f0fe;
-        }
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.25rem;
-        }
-        .article-card {
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-            padding: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-        .article-card:hover { box-shadow: 0 4px 20px rgba(0,120,212,0.15); border-color: #0078d4; }
-        .article-card h3 { font-size: 1rem; font-weight: 600; color: #0078d4; margin: 0; line-height: 1.4; }
-        .article-card p { font-size: 0.92rem; color: #555; margin: 0; line-height: 1.55; flex: 1; }
-        .article-card .read-link { font-size: 0.85rem; color: #0078d4; font-weight: 500; margin-top: 0.25rem; }
-        .back-link { display: inline-block; margin-bottom: 1.5rem; color: #0078d4; text-decoration: none; font-size: 0.95rem; }
-        .back-link:hover { text-decoration: underline; }
-        .error-msg { background: #fff0f0; border: 1px solid #ffccc7; border-radius: 6px; padding: 1.5rem; color: #cf1322; }
-    </style>
 </head>
 <body>
     <header>
@@ -59,7 +13,7 @@
     </header>
     <main>
         <a href="index.html" class="back-link">← Back to all resources</a>
-        <div id="collection-intro" class="collection-intro" style="display:none"><p id="collection-desc"></p></div>
+        <div id="collection-intro" class="collection-intro hidden"><p id="collection-desc"></p></div>
         <div id="collections"></div>
     </main>
     <footer>
@@ -99,7 +53,7 @@
             document.getElementById('page-subtitle').textContent = col.subtitle || '';
 
             if (col.description) {
-                document.getElementById('collection-intro').style.display = 'block';
+                document.getElementById('collection-intro').classList.remove('hidden');
                 document.getElementById('collection-desc').textContent = col.description;
             }
 

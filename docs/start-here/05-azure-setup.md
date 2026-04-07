@@ -114,7 +114,7 @@ az account show
 
 ## Step 6 – Install the Azure Developer CLI (azd)
 
-The Azure Developer CLI (`azd`) makes it easy to deploy complete application templates to Azure, including AI Foundry projects.
+The Azure Developer CLI (`azd`) makes it easy to deploy complete application templates to Azure, including Microsoft Foundry projects.
 
 ### Windows
 ```powershell
@@ -169,3 +169,4 @@ Before moving on, confirm:
 ## ➡️ Next Step
 
 Head to **[06 – Your First Repository](06-first-repo.md)** to learn the Git workflow you will use every day.
+

@@ -100,11 +100,11 @@ A proof-of-concept grading agent demonstrating:
 | Extraction of structured ratings & free-text | **Azure AI Document Intelligence** – Custom Extraction | [Custom extraction models](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/concept-custom) |
 | Rubric-based grading logic & reasoning | **Azure OpenAI Service** (GPT-4o) | [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) |
 | Flagging free-text for safety/professionalism concerns | **Azure AI Content Safety** | [Azure AI Content Safety](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/overview) |
-| Agent orchestration (escalation pathways, aggregation rules) | **Azure AI Foundry – Agent Service** | [Azure AI Foundry Agent Service](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/overview) |
+| Agent orchestration (escalation pathways, aggregation rules) | **Microsoft Foundry – Agent Service** | [Microsoft Foundry Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview) |
 | Ingestion from Canvas / external digital systems | **Azure Logic Apps** or **Azure API Management** | [Azure Logic Apps](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) |
 | Secure storage of scanned forms and outputs | **Azure Blob Storage** with encryption | [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) |
-| Structured output reporting & validation | **Azure AI Foundry** + custom output schema | [Structured outputs with Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/structured-outputs) |
-| Monitoring, tracing & responsible AI | **Azure AI Foundry – Evaluation & Monitoring** | [Evaluation in Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/evaluation-approach-gen-ai) |
+| Structured output reporting & validation | **Microsoft Foundry** + custom output schema | [Structured outputs with Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/structured-outputs) |
+| Monitoring, tracing & responsible AI | **Microsoft Foundry – Evaluation & Monitoring** | [Evaluation in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluate-agent) |
 
 ### Recommended Architecture Pattern
 
@@ -118,8 +118,9 @@ Azure AI Document Intelligence  ──►  Structured JSON (fields + free-text)
 Azure OpenAI (GPT-4o)  ──►  Rubric application, grade calculation, concern detection
         │
         ▼
-Azure AI Foundry Agent  ──►  Escalation logic, aggregation, output generation
+Microsoft Foundry Agent  ──►  Escalation logic, aggregation, output generation
         │
         ▼
 Structured Output (report + grades)  ──►  Human review before release
 ```
+

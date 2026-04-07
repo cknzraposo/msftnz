@@ -12,7 +12,7 @@ Quick answers to the most common questions students ask. Each answer links back 
 - [VS Code](#vs-code)
 - [Python & Environments](#python--environments)
 - [Azure](#azure)
-- [Azure AI Foundry & Models](#azure-ai-foundry--models)
+- [Microsoft Foundry & Models](#microsoft-foundry--models)
 - [Security & Secrets](#security--secrets)
 - [Working in a Team](#working-in-a-team)
 - [Use Case Specific](#use-case-specific)
@@ -354,7 +354,7 @@ Use **Australia East** unless your facilitator specifies otherwise. It has good 
 
 Azure OpenAI requires **approved access** in some regions. If you cannot create an Azure OpenAI resource, contact your facilitator — they will either grant access to an existing shared resource or submit an access request on your behalf.
 
-→ See [07 – Azure AI Foundry](07-azure-ai-foundry.md#step-4--deploy-a-model)
+→ See [07 – Microsoft Foundry](07-azure-ai-foundry.md#step-4--deploy-a-model)
 
 ---
 
@@ -371,9 +371,9 @@ Use `az` for day-to-day resource management. Use `azd` when deploying a full pro
 
 ---
 
-## Azure AI Foundry & Models
+## Microsoft Foundry & Models
 
-### What's the difference between a Hub and a Project in Azure AI Foundry?
+### What's the difference between a Hub and a Project in Microsoft Foundry?
 
 | | Hub | Project |
 |---|---|---|
@@ -383,7 +383,7 @@ Use `az` for day-to-day resource management. Use `azd` when deploying a full pro
 
 Think of a Hub as the office building and Projects as individual rooms inside it.
 
-→ See [07 – Azure AI Foundry](07-azure-ai-foundry.md#key-concepts)
+→ See [07 – Microsoft Foundry](07-azure-ai-foundry.md#key-concepts)
 
 ---
 
@@ -393,7 +393,7 @@ Think of a Hub as the office building and Projects as individual rooms inside it
 
 Use **GPT-4o mini** if you need lower cost/latency for high-volume or lower-complexity tasks (e.g. classification, simple extraction).
 
-→ See [07 – Azure AI Foundry](07-azure-ai-foundry.md#step-4--deploy-a-model)
+→ See [07 – Microsoft Foundry](07-azure-ai-foundry.md#step-4--deploy-a-model)
 
 ---
 
@@ -405,7 +405,7 @@ Use **GPT-4o mini** if you need lower cost/latency for high-volume or lower-comp
 
 Store them in `.env` — never in your code.
 
-→ See [07 – Azure AI Foundry](07-azure-ai-foundry.md#step-6--get-your-connection-details)
+→ See [07 – Microsoft Foundry](07-azure-ai-foundry.md#step-6--get-your-connection-details)
 
 ---
 
@@ -440,7 +440,7 @@ The pattern: **Azure AI Search** indexes your documents → your agent retrieves
 
 Act immediately:
 
-1. **Revoke the key** — go to the Azure Portal or AI Foundry and regenerate the key right now
+1. **Revoke the key** — go to the Azure Portal or Microsoft Foundry and regenerate the key right now
 2. **Remove it from Git history** — contact your facilitator or use [git-filter-repo](https://github.com/newren/git-filter-repo) to scrub the commit history
 3. **Update your `.env`** with the new key
 4. **Add `.env` to `.gitignore`** so it can't happen again
@@ -509,7 +509,7 @@ Yes. The Hub owner can invite team members:
 2. **Settings** → **Users** → **Add user**
 3. Assign the **Azure AI Developer** role
 
-→ See [07 – Azure AI Foundry](07-azure-ai-foundry.md)
+→ See [07 – Microsoft Foundry](07-azure-ai-foundry.md)
 
 ---
 
@@ -519,9 +519,9 @@ Yes. The Hub owner can invite team members:
 
 | Use Case | Core Services |
 |---|---|
-| Clinical Assessment Digitisation | Azure AI Document Intelligence, Azure OpenAI, Azure AI Content Safety, Azure AI Foundry |
-| Immunisation Guidelines Adviser | Azure AI Search, Azure OpenAI (RAG), Azure AI Foundry, Azure AI Content Safety |
-| Research Contracts Adviser | Azure AI Document Intelligence, Azure AI Search, Azure OpenAI, Azure AI Foundry |
+| Clinical Assessment Digitisation | Azure AI Document Intelligence, Azure OpenAI, Azure AI Content Safety, Microsoft Foundry |
+| Immunisation Guidelines Adviser | Azure AI Search, Azure OpenAI (RAG), Microsoft Foundry, Azure AI Content Safety |
+| Research Contracts Adviser | Azure AI Document Intelligence, Azure AI Search, Azure OpenAI, Microsoft Foundry |
 
 → See the full service mappings in the [use-cases folder](use-cases/)
 
@@ -582,7 +582,7 @@ pip list
 # Check Azure CLI login status
 az account show
 
-# Check Azure AI Foundry connection string
+# Check Microsoft Foundry connection string
 echo $AZURE_AI_PROJECT_CONNECTION_STRING   # macOS/Linux
 echo %AZURE_AI_PROJECT_CONNECTION_STRING%  # Windows CMD
 
@@ -596,14 +596,15 @@ curl -I https://your-resource.openai.azure.com/
 
 | Resource | Link |
 |---|---|
-| Microsoft Learn – Azure AI Foundry | [learn.microsoft.com/azure/ai-studio](https://learn.microsoft.com/en-us/azure/ai-studio/) |
+| Microsoft Learn – Microsoft Foundry | [learn.microsoft.com/azure/foundry](https://learn.microsoft.com/en-us/azure/foundry/) |
 | Azure OpenAI documentation | [learn.microsoft.com/azure/ai-services/openai](https://learn.microsoft.com/en-us/azure/ai-services/openai/) |
 | Azure AI Search documentation | [learn.microsoft.com/azure/search](https://learn.microsoft.com/en-us/azure/search/) |
 | Azure AI Document Intelligence | [learn.microsoft.com/azure/ai-services/document-intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/) |
 | GitHub Docs | [docs.github.com](https://docs.github.com) |
 | Python packaging guide | [packaging.python.org](https://packaging.python.org) |
-| Azure AI Foundry GitHub samples | [github.com/azure-samples/azureai-samples](https://github.com/Azure-Samples/azureai-samples) |
+| Microsoft Foundry GitHub samples | [github.com/azure-samples/azureai-samples](https://github.com/Azure-Samples/azureai-samples) |
 
 ---
 
 *Can't find your question here? Ask your facilitator or raise it in your team's communication channel.*
+

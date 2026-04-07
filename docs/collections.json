@@ -96,8 +96,8 @@
         },
         {
           "slug": "07-azure-ai-foundry",
-          "title": "07 - Azure AI Foundry",
-          "description": "Create projects, deploy models, and build agents in Azure AI Foundry.",
+          "title": "07 - Microsoft Foundry",
+          "description": "Create projects, deploy models, and build agents in Microsoft Foundry.",
           "category": "Getting Started"
         },
         {
@@ -114,8 +114,8 @@
         },
         {
           "slug": "vscode-foundry-demo-guide",
-          "title": "Demo: Connecting VS Code to Azure AI Foundry",
-          "description": "Step-by-step demo guide for connecting VS Code to an Azure AI Foundry project, testing models in the playground, and running code locally.",
+          "title": "Demo: Connecting VS Code to Microsoft Foundry",
+          "description": "Step-by-step demo guide for connecting VS Code to a Microsoft Foundry project, testing models in the playground, and running code locally.",
           "category": "FAQ"
         },
         {
@@ -161,3 +161,4 @@
     }
   ]
 }
+

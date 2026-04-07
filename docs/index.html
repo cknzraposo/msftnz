@@ -5,31 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shared Resources</title>
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        .collections-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.25rem;
-            margin-top: 1.5rem;
-        }
-        .collection-card {
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-            padding: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-        .collection-card:hover { box-shadow: 0 4px 20px rgba(0,120,212,0.15); border-color: #0078d4; }
-        .collection-card .icon { font-size: 1.8rem; }
-        .collection-card h3 { font-size: 1.05rem; font-weight: 600; color: #0078d4; margin: 0; }
-        .collection-card p { font-size: 0.92rem; color: #555; margin: 0; line-height: 1.55; flex: 1; }
-        .collection-card .article-count { font-size: 0.82rem; color: #999; margin-top: 0.25rem; }
-    </style>
 </head>
 <body>
     <header>
@@ -76,8 +51,8 @@
                 const res = await fetch('./collections.json');
                 registry = await res.json();
             } catch {
-                startHereGrid.innerHTML = '<p style="color:#cf1322">Could not load collections.</p>';
-                resourcesGrid.innerHTML = '<p style="color:#cf1322">Could not load collections.</p>';
+                startHereGrid.innerHTML = '<p class="text-error">Could not load collections.</p>';
+                resourcesGrid.innerHTML = '<p class="text-error">Could not load collections.</p>';
                 return;
             }
 
@@ -99,11 +74,11 @@
             if (startHereCollection) {
                 renderCard(startHereCollection, startHereGrid);
             } else {
-                startHereGrid.innerHTML = '<p style="color:#777">Start Here collection is not available yet.</p>';
+                startHereGrid.innerHTML = '<p class="text-muted">Start Here collection is not available yet.</p>';
             }
 
             if (resourceCollections.length === 0) {
-                resourcesGrid.innerHTML = '<p style="color:#777">No additional collections are available yet.</p>';
+                resourcesGrid.innerHTML = '<p class="text-muted">No additional collections are available yet.</p>';
                 return;
             }
 

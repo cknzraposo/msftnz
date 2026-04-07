@@ -110,10 +110,10 @@ Each flag should include:
 | Parsing and reading uploaded contract documents (PDF/DOCX) | **Azure AI Document Intelligence** (Layout model) | [Azure AI Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview) |
 | Indexing UoA standard positions and contract templates | **Azure AI Search** | [Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) |
 | Clause comparison, deviation detection, risk flagging | **Azure OpenAI Service** (GPT-4o) with RAG | [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) |
-| Agent orchestration (upload → parse → compare → report) | **Azure AI Foundry – Agent Service** | [Azure AI Foundry Agent Service](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/overview) |
+| Agent orchestration (upload → parse → compare → report) | **Microsoft Foundry – Agent Service** | [Microsoft Foundry Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview) |
 | Structured output (colour-coded report) | **Azure OpenAI Structured Outputs** | [Structured outputs](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/structured-outputs) |
 | Confidential document storage | **Azure Blob Storage** (private, with RBAC) | [Azure Blob Storage security](https://learn.microsoft.com/en-us/azure/storage/blobs/security-recommendations) |
-| Monitoring, quality evaluation & responsible AI | **Azure AI Foundry – Evaluation** | [Evaluation in Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/evaluation-approach-gen-ai) |
+| Monitoring, quality evaluation & responsible AI | **Microsoft Foundry – Evaluation** | [Evaluation in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluate-agent) |
 
 ### Recommended Architecture Pattern
 
@@ -124,7 +124,7 @@ User uploads Contract (PDF/DOCX)
 Azure AI Document Intelligence  ──►  Extracted text + clause structure
         │
         ▼
-Azure AI Foundry Agent
+Microsoft Foundry Agent
         │
         ├──► Azure AI Search  ──►  Retrieves matching UoA standard positions & templates
         │
@@ -145,4 +145,5 @@ The agent should be grounded with UoA's standard contracting positions loaded in
 3. Evaluate each significant clause against those positions
 4. Output a structured JSON report that maps to the 4-flag system
 
-See: [Grounding with Azure AI Search in Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/retrieval-augmented-generation)
+See: [Grounding with Azure AI Search in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/what-is-foundry-iq)
+

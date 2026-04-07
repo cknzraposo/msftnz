@@ -89,12 +89,12 @@ A proof-of-concept adviser agent that:
 |---|---|---|
 | Indexing and searching immunisation guidance documents | **Azure AI Search** (with semantic ranking) | [Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) |
 | Retrieval-Augmented Generation (RAG) for grounded answers | **Azure OpenAI Service** (GPT-4o) + **Azure AI Search** | [RAG with Azure AI Search](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview) |
-| Agent orchestration (prompt → retrieve → summarise → cite) | **Azure AI Foundry – Agent Service** | [Azure AI Foundry Agent Service](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/overview) |
+| Agent orchestration (prompt → retrieve → summarise → cite) | **Microsoft Foundry – Agent Service** | [Microsoft Foundry Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview) |
 | Ensuring clinical safety & avoiding hallucinations | **Azure AI Content Safety** + grounding with citations | [Azure AI Content Safety](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/overview) |
 | Ingestion and chunking of guidance documents | **Azure AI Document Intelligence** + **Azure AI Search indexer** | [AI enrichment pipeline](https://learn.microsoft.com/en-us/azure/search/cognitive-search-concept-intro) |
 | Call transcript ingestion (from Amazon Connect) | **Azure Blob Storage** + **Azure AI Search indexer** | [Index blob storage](https://learn.microsoft.com/en-us/azure/search/search-howto-indexing-azure-blob-storage) |
 | CRM integration | **Azure Logic Apps** or **Azure API Management** | [Azure Logic Apps](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) |
-| Monitoring & evaluation of answer quality | **Azure AI Foundry – Evaluation** | [Evaluation in Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-studio/concepts/evaluation-approach-gen-ai) |
+| Monitoring & evaluation of answer quality | **Microsoft Foundry – Evaluation** | [Evaluation in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluate-agent) |
 
 ### Recommended Architecture Pattern
 
@@ -102,7 +102,7 @@ A proof-of-concept adviser agent that:
 Advisor Prompt (question from health professional)
         │
         ▼
-Azure AI Foundry Agent
+Microsoft Foundry Agent
         │
         ├──► Azure AI Search  ──►  Retrieves relevant guidance chunks (with citations)
         │
@@ -118,3 +118,4 @@ Azure AI Foundry Agent
 ### Key Design Principle
 
 All answers must be **grounded** in retrieved source documents. Use Azure AI Search's [semantic ranker](https://learn.microsoft.com/en-us/azure/search/semantic-search-overview) and Azure OpenAI's [grounding capabilities](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/system-message#using-system-message-to-define-the-models-output) to prevent hallucination and ensure every claim links to an authoritative source.
+

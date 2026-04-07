@@ -16,7 +16,7 @@ Work through this list from top to bottom. Each item is covered in a dedicated g
 | 4 | **Python 3.11+** | Required for all AI agent development | [04 – Python Setup](04-python-setup.md) |
 | 5 | **Azure account** | Run Azure AI services and host your agents | [05 – Azure Setup](05-azure-setup.md) |
 | 6 | **Azure CLI** | Manage Azure resources from the terminal | [05 – Azure Setup](05-azure-setup.md) |
-| 7 | **Azure AI Foundry access** | Build and deploy AI agents | [07 – Azure AI Foundry](07-azure-ai-foundry.md) |
+| 7 | **Microsoft Foundry access** | Build and deploy AI agents | [07 – Microsoft Foundry](07-azure-ai-foundry.md) |
 
 ---
 

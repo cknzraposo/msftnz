@@ -28,7 +28,7 @@ All three paths are supported for the hackathon.
 | [04 – Python Setup](04-python-setup.md) | Install Python 3.11, create virtual environments, install Azure AI packages, manage secrets |
 | [05 – Azure Setup](05-azure-setup.md) | Azure account options, Azure Portal orientation, install Azure CLI and `azd` |
 | [06 – Your First Repository](06-first-repo.md) | Clone, branch, commit, push, and open a Pull Request — the daily Git workflow |
-| [07 – Azure AI Foundry](07-azure-ai-foundry.md) | Create a project, deploy a model, test in the Playground, call from Python, build an agent |
+| [07 – Microsoft Foundry](07-azure-ai-foundry.md) | Create a project, deploy a model, test in the Playground, call from Python, build an agent |
 
 ---
 
@@ -101,3 +101,4 @@ Teams of 5 — each member has a defined role:
 ---
 
 *Questions not covered here? Check the [FAQ](08-faq.md) or ask your facilitator.*
+

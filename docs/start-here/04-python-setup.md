@@ -86,7 +86,7 @@ With your virtual environment active, install the packages you'll need across al
 pip install --upgrade pip
 
 # Azure AI core packages
-pip install azure-ai-projects          # Azure AI Foundry project client
+pip install azure-ai-projects          # Microsoft Foundry project client
 pip install azure-ai-inference         # Model inference (chat, embeddings)
 pip install azure-search-documents     # Azure AI Search
 pip install azure-ai-documentintelligence  # Document Intelligence (OCR, forms)
@@ -202,3 +202,4 @@ Before moving on, confirm:
 ## ➡️ Next Step
 
 Head to **[05 – Azure Setup](05-azure-setup.md)** to create your Azure account and configure the Azure CLI.
+

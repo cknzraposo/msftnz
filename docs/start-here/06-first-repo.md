@@ -222,4 +222,5 @@ Before moving on, confirm:
 
 ## ➡️ Next Step
 
-Head to **[07 – Azure AI Foundry](07-azure-ai-foundry.md)** to create your first AI project.
+Head to **[07 – Microsoft Foundry](07-azure-ai-foundry.md)** to create your first AI project.
+
