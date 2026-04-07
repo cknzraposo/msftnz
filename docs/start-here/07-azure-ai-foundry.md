@@ -350,7 +350,7 @@ API versions, model availability, SDK behavior, and portal UI can change. Re-ver
 
 ## 🎉 You're Ready
 
-You now have the core setup to start building. Refer to the use case documents in [docs/start-here/use-cases](docs/start-here/use-cases) for specific project requirements.
+You now have the core setup to start building. Refer to the use case documents in the [Use Cases section](README.md#use-cases) for specific project requirements.
 
 Good luck with the hackathon!
 

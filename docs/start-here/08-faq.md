@@ -523,7 +523,7 @@ Yes. The Hub owner can invite team members:
 | Immunisation Guidelines Adviser | Azure AI Search, Azure OpenAI (RAG), Microsoft Foundry, Azure AI Content Safety |
 | Research Contracts Adviser | Azure AI Document Intelligence, Azure AI Search, Azure OpenAI, Microsoft Foundry |
 
-→ See the full service mappings in the [use-cases folder](use-cases/)
+→ See the full service mappings in the [Use Cases section](README.md#use-cases)
 
 ---
 
