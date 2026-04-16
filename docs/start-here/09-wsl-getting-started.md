@@ -159,4 +159,4 @@ git config --global user.email "your-email@aucklanduni.ac.nz"
 
 ## Next Step
 
-Return to [08 - Frequently Asked Questions](08-faq.md) for troubleshooting and team workflow questions.
+Return to [08 - Frequently Asked Questions](08-faq.md) for troubleshooting and team workflow questions, or explore [10 - Optional: Foundry Local (On-Device AI)](10-foundry-local.md) to run models locally on your device.

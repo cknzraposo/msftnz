@@ -88,10 +88,11 @@ A proof-of-concept adviser agent that:
 | Capability | Azure Service | Reference |
 |---|---|---|
 | Indexing and searching immunisation guidance documents | **Azure AI Search** (with semantic ranking) | [Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) |
-| Retrieval-Augmented Generation (RAG) for grounded answers | **Azure OpenAI Service** (GPT-4o) + **Azure AI Search** | [RAG with Azure AI Search](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview) |
-| Agent orchestration (prompt → retrieve → summarise → cite) | **Microsoft Foundry – Agent Service** | [Microsoft Foundry Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview) |
-| Ensuring clinical safety & avoiding hallucinations | **Azure AI Content Safety** + grounding with citations | [Azure AI Content Safety](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/overview) |
-| Ingestion and chunking of guidance documents | **Azure AI Document Intelligence** + **Azure AI Search indexer** | [AI enrichment pipeline](https://learn.microsoft.com/en-us/azure/search/cognitive-search-concept-intro) |
+| Retrieval-Augmented Generation (RAG) for grounded answers | **Azure OpenAI in Microsoft Foundry** (e.g., GPT-4.1 or later) + **Foundry IQ** | [Foundry Models](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure) |
+| Managed knowledge base for guidance documents | **Foundry IQ** (preview) — auto-chunking, vector embeddings, agentic retrieval with citations | [Foundry IQ](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/what-is-foundry-iq) |
+| Agent orchestration (prompt → retrieve → summarise → cite) | **Microsoft Foundry – Agent Service** (prompt agent or workflow agent) | [Microsoft Foundry Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview) |
+| Ensuring clinical safety & avoiding hallucinations | **Azure AI Content Safety** + **Foundry Guardrails** + grounding with citations | [Guardrails overview](https://learn.microsoft.com/en-us/azure/foundry/guardrails/guardrails-overview) |
+| Ingestion and chunking of guidance documents | **Azure AI Document Intelligence** + **Foundry IQ indexer** (or Azure AI Search indexer) | [AI enrichment pipeline](https://learn.microsoft.com/en-us/azure/search/cognitive-search-concept-intro) |
 | Call transcript ingestion (from Amazon Connect) | **Azure Blob Storage** + **Azure AI Search indexer** | [Index blob storage](https://learn.microsoft.com/en-us/azure/search/search-howto-indexing-azure-blob-storage) |
 | CRM integration | **Azure Logic Apps** or **Azure API Management** | [Azure Logic Apps](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) |
 | Monitoring & evaluation of answer quality | **Microsoft Foundry – Evaluation** | [Evaluation in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluate-agent) |
@@ -102,11 +103,13 @@ A proof-of-concept adviser agent that:
 Advisor Prompt (question from health professional)
         │
         ▼
-Microsoft Foundry Agent
+Foundry Agent (prompt or workflow agent)
         │
-        ├──► Azure AI Search  ──►  Retrieves relevant guidance chunks (with citations)
+        ├──► Foundry IQ Knowledge Base  ──►  Agentic retrieval across guidance sources (with citations)
+        │         │
+        │         └──► Azure AI Search  ──►  Underlying indexing & semantic ranking
         │
-        └──► Azure OpenAI (GPT-4o)  ──►  Summarises answer, formats with citations
+        └──► Azure OpenAI in Foundry  ──►  Summarises answer, formats with citations
                 │
                 ▼
         Grounded Response with Source References
@@ -117,5 +120,5 @@ Microsoft Foundry Agent
 
 ### Key Design Principle
 
-All answers must be **grounded** in retrieved source documents. Use Azure AI Search's [semantic ranker](https://learn.microsoft.com/en-us/azure/search/semantic-search-overview) and Azure OpenAI's [grounding capabilities](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/system-message#using-system-message-to-define-the-models-output) to prevent hallucination and ensure every claim links to an authoritative source.
+All answers must be **grounded** in retrieved source documents. Use [Foundry IQ](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/what-is-foundry-iq) with Azure AI Search's [semantic ranker](https://learn.microsoft.com/en-us/azure/search/semantic-search-overview) for agentic retrieval — Foundry IQ decomposes complex questions into sub-queries, runs parallel searches, and returns results with extractive citations. Combined with [Foundry Guardrails](https://learn.microsoft.com/en-us/azure/foundry/guardrails/guardrails-overview), this prevents hallucination and ensures every claim links to an authoritative source.
 

@@ -126,6 +126,86 @@ Follow the prompts and choose **GitHub.com → HTTPS → Login with a web browse
 
 ---
 
+## Step 6 – Sign Up for GitHub Copilot
+
+GitHub Copilot is an AI coding assistant that provides inline code suggestions, chat-based help, and agent capabilities directly inside VS Code. For this hackathon it is an essential tool.
+
+### Get access
+
+You have two options:
+
+| Option | Cost | How to get it |
+|---|---|---|
+| **GitHub Student Developer Pack** (recommended) | Free | Apply at [education.github.com/pack](https://education.github.com/pack) using your university email. Includes Copilot Pro while you are a student. |
+| **GitHub Copilot Free** | Free (usage limits) | Already included with every GitHub account. Provides limited completions and chat messages per month. |
+
+> **💡 Tip:** If you applied for the Student Developer Pack in Step 1, Copilot Pro is already included — no separate signup needed. Approval can take a few minutes to a few days, so apply early.
+
+### Verify your Copilot access
+
+1. Go to [github.com/settings/copilot](https://github.com/settings/copilot)
+2. Confirm that Copilot is shown as **active** on your account
+3. If you see an option to enable it, toggle it on
+
+---
+
+## Step 7 – Enable GitHub Copilot in VS Code
+
+Once you have Copilot access on your GitHub account, connect it to VS Code:
+
+### Install the extensions
+
+Open VS Code and install the Copilot extensions. You can do this from the terminal:
+
+```bash
+code --install-extension GitHub.copilot
+code --install-extension GitHub.copilot-chat
+```
+
+Or search for **GitHub Copilot** and **GitHub Copilot Chat** in the Extensions panel (`Ctrl+Shift+X` / `Cmd+Shift+X`).
+
+### Sign in to GitHub in VS Code
+
+1. Click the **Accounts** icon in the bottom-left corner of VS Code (person silhouette)
+2. Select **Sign in with GitHub to use GitHub Copilot**
+3. A browser window will open — authorise VS Code to access your GitHub account
+4. Return to VS Code — you should see a Copilot icon (sparkle) in the status bar
+
+### Verify Copilot is working
+
+1. Open or create any `.py` file
+2. Start typing a function, for example:
+
+   ```python
+   def greet(name):
+   ```
+
+3. Copilot should suggest a completion in grey text — press `Tab` to accept
+
+If you see suggestions appearing, Copilot is working.
+
+### Open Copilot Chat
+
+- Press `Ctrl+Shift+I` (Windows/Linux) or `Cmd+Shift+I` (macOS) to open Copilot Chat
+- You can ask questions about your code, get explanations, or request code generation
+- Try asking: *"How do I create a virtual environment in Python?"*
+
+### Copilot keyboard shortcuts
+
+| Shortcut (Win/Linux) | Shortcut (macOS) | Action |
+|---|---|---|
+| `Tab` | `Tab` | Accept Copilot suggestion |
+| `Esc` | `Esc` | Dismiss suggestion |
+| `Alt+]` | `Option+]` | Next suggestion |
+| `Alt+[` | `Option+[` | Previous suggestion |
+| `Ctrl+Shift+I` | `Cmd+Shift+I` | Open Copilot Chat |
+
+> **💡 Tip:** Copilot works best when you write clear comments describing what you want before writing code. It uses your comments, file context, and open tabs to generate better suggestions.
+
+📖 Reference: [Getting started with GitHub Copilot](https://docs.github.com/en/copilot/getting-started-with-github-copilot)
+
+---
+
 ## ✅ Checkpoint
 
 Before moving on, confirm:
@@ -133,9 +213,12 @@ Before moving on, confirm:
 - [ ] You can open a terminal and run `git --version` without errors
 - [ ] `git config --list` shows your name and email
 - [ ] You can clone a repository from GitHub without being prompted for a password repeatedly
+- [ ] GitHub Copilot is active on your account at [github.com/settings/copilot](https://github.com/settings/copilot)
+- [ ] The Copilot icon appears in the VS Code status bar
+- [ ] Copilot suggests code completions when you type in a `.py` file
 
 ---
 
 ## ➡️ Next Step
 
-Head to **[03 – VS Code Setup](03-vscode-setup.md)** to configure your editor.
+Head to **[03 – VS Code Setup](03-vscode-setup.md)** to configure your editor and install remaining extensions.

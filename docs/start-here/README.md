@@ -65,6 +65,7 @@ The three projects available for this hackathon. Each document includes a proble
 | Guide | What it covers |
 |---|---|
 | [09 - Optional: Getting Started with WSL](09-wsl-getting-started.md) | A Linux-style setup path for Windows students who prefer Ubuntu/WSL tooling with VS Code |
+| [10 - Optional: Foundry Local (On-Device AI)](10-foundry-local.md) | Run AI models on your device — no Azure subscription required |
 
 ---
 

@@ -109,9 +109,10 @@ Each flag should include:
 |---|---|---|
 | Parsing and reading uploaded contract documents (PDF/DOCX) | **Azure AI Document Intelligence** (Layout model) | [Azure AI Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview) |
 | Indexing UoA standard positions and contract templates | **Azure AI Search** | [Azure AI Search](https://learn.microsoft.com/en-us/azure/search/search-what-is-azure-search) |
-| Clause comparison, deviation detection, risk flagging | **Azure OpenAI Service** (GPT-4o) with RAG | [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) |
-| Agent orchestration (upload → parse → compare → report) | **Microsoft Foundry – Agent Service** | [Microsoft Foundry Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview) |
-| Structured output (colour-coded report) | **Azure OpenAI Structured Outputs** | [Structured outputs](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/structured-outputs) |
+| Clause comparison, deviation detection, risk flagging | **Azure OpenAI in Microsoft Foundry** (e.g., GPT-4.1 or later) with RAG | [Foundry Models](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure) |
+| Managed knowledge base for UoA standard positions | **Foundry IQ** (preview) — indexes templates and positions for agentic retrieval with citations | [Foundry IQ](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/what-is-foundry-iq) |
+| Agent orchestration (upload → parse → compare → report) | **Microsoft Foundry – Agent Service** (prompt agent or workflow agent) | [Microsoft Foundry Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview) |
+| Structured output (colour-coded report) | **Azure OpenAI Structured Outputs** | [Structured outputs](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/structured-outputs) |
 | Confidential document storage | **Azure Blob Storage** (private, with RBAC) | [Azure Blob Storage security](https://learn.microsoft.com/en-us/azure/storage/blobs/security-recommendations) |
 | Monitoring, quality evaluation & responsible AI | **Microsoft Foundry – Evaluation** | [Evaluation in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/evaluate-agent) |
 
@@ -124,11 +125,13 @@ User uploads Contract (PDF/DOCX)
 Azure AI Document Intelligence  ──►  Extracted text + clause structure
         │
         ▼
-Microsoft Foundry Agent
+Foundry Agent (prompt or workflow agent)
         │
-        ├──► Azure AI Search  ──►  Retrieves matching UoA standard positions & templates
+        ├──► Foundry IQ Knowledge Base  ──►  Retrieves matching UoA standard positions & templates
+        │         │
+        │         └──► Azure AI Search  ──►  Underlying indexing & semantic ranking
         │
-        └──► Azure OpenAI (GPT-4o)  ──►  Compares clauses, assigns flag categories
+        └──► Azure OpenAI in Foundry  ──►  Compares clauses, assigns flag categories
                 │
                 ▼
         Structured Review Report (Green / Amber / Red / Blue flags)
@@ -139,11 +142,11 @@ Microsoft Foundry Agent
 
 ### Suggested Prompt Design
 
-The agent should be grounded with UoA's standard contracting positions loaded into **Azure AI Search**, and the system prompt should instruct the model to:
+The agent should be grounded with UoA's standard contracting positions loaded into a **Foundry IQ knowledge base** (backed by **Azure AI Search**), and the system prompt should instruct the model to:
 1. Identify the contract type
 2. Retrieve the relevant UoA positions for that contract type
 3. Evaluate each significant clause against those positions
 4. Output a structured JSON report that maps to the 4-flag system
 
-See: [Grounding with Azure AI Search in Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/what-is-foundry-iq)
+See: [Foundry IQ — managed knowledge for agents](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/what-is-foundry-iq)
 

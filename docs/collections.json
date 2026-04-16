@@ -125,6 +125,12 @@
           "category": "Optional Reading"
         },
         {
+          "slug": "10-foundry-local",
+          "title": "10 - Optional: Foundry Local (On-Device AI)",
+          "description": "Run AI models locally on your device with no cloud dependency using Foundry Local.",
+          "category": "Optional Reading"
+        },
+        {
           "slug": "use-cases/clinical-assessment-digitisation-agent",
           "title": "Clinical Assessment Digitisation Agent",
           "description": "Use case for digitising paper clinical assessments with extraction, grading, and escalation.",

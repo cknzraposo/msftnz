@@ -337,6 +337,7 @@ Before starting your use case work, confirm:
 | Foundry models and region support | [learn.microsoft.com – Models by region](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure) |
 | Azure AI Search + RAG | [learn.microsoft.com – RAG overview](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview) |
 | Azure AI Document Intelligence | [learn.microsoft.com – Document Intelligence](https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/overview) |
+| Foundry Local (on-device AI) | [learn.microsoft.com – Foundry Local](https://learn.microsoft.com/en-us/azure/foundry-local/what-is-foundry-local) |
 
 ---
 
