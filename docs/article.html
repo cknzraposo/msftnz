@@ -106,7 +106,7 @@
                     ${data.author ? ` &middot; ${data.author}` : ''}
                 </div>`;
 
-            if (hasLegalContent(content)) {
+            if (dir === 'cloud' && hasLegalContent(content)) {
                 const d = document.getElementById('disclaimer');
                 d.classList.remove('hidden');
                 d.textContent = 'This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.';
