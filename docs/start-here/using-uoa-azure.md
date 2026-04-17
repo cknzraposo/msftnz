@@ -18,7 +18,6 @@ Before the hackathon begins, the following has been provisioned for **each team*
 | **Team Blob Storage** | A storage account in your team's resource group — your team has `Storage Blob Data Contributor` access |
 | **Shared hackathon data** | A read-only blob container (`shared-hackathon-data`) in a shared admin storage account — every team gets `Reader` + `Storage Blob Data Reader` |
 | **Entra ID Group access** | Your team members are added as **Azure AI Owner** on your team's resource group |
-| **Monthly Budget** | $200/month per resource group with email alerts at 50%, 80%, and 100% |
 | **Whitelisted models** | 3 GPT models of different sizes pre-approved for use by all teams |
 
 > **Key point:** Your team's Entra ID security group has **Azure AI Owner** scoped to your team's resource group only. You cannot see or access other teams' resources. The only asset outside your resource group that you can see is the shared `shared-hackathon-data` container, which is read-only for all teams.
