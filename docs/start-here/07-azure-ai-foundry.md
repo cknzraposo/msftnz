@@ -92,6 +92,8 @@ Before writing code:
 
 Use whichever option matches your team setup.
 
+See [04 – Python Setup – Step 5: Use a `.env` File for Secrets](04-python-setup.md#step-5--use-a-env-file-for-secrets) for how to create and load a `.env` file.
+
 ### Option A – API Key
 
 Store these in `.env`:
@@ -221,6 +223,8 @@ Install dependencies:
 pip install "azure-ai-projects>=2.0.0" azure-identity openai
 ```
 
+> **Code-first vs. portal-first agents:** The example below creates the agent definition directly in code via `project.agents.create_version(...)`. This is convenient for reproducible setup and source control. Alternatively, you can **pre-create the agent in the Foundry portal** (ai.azure.com → your project → Agents) with its instructions, model, and tools, then just reference it by name from code — skip the `create_version` call and use the agent name you defined in the portal when setting `agent_reference.name` below. Portal-first is useful when non-developers need to author or tune agent instructions, or when you want to separate agent configuration from application deployment.
+
 Example (current agent pattern):
 
 ```python
@@ -236,6 +240,9 @@ project = AIProjectClient(
 
 openai_client = project.get_openai_client()
 
+# Option 1: Create the agent from code (shown here).
+# Option 2: Pre-create the agent in the Foundry portal and skip this block —
+# just use its name in the agent_reference below.
 agent = project.agents.create_version(
     agent_name="my-first-agent",
     definition=PromptAgentDefinition(
