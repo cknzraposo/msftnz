@@ -164,6 +164,21 @@
           "category": "Copilot Fundamentals"
         }
       ]
+    },
+    {
+      "dir": "azure-app-services",
+      "title": "Azure App Services",
+      "subtitle": "Hosting Web Apps & APIs on Azure — New Zealand",
+      "description": "Plain-language guides on Azure App Service for New Zealand organisations — hosting models, networking, data residency in the NZ North region, pricing, and deployment patterns.",
+      "icon": "🌐",
+      "articles": [
+        {
+          "slug": "getting-started",
+          "title": "Getting Started with Azure App Service",
+          "description": "A plain-language introduction to Azure App Service: what it is, hosting tiers, networking, data residency in NZ North, pricing, and common architecture patterns.",
+          "category": "App Services"
+        }
+      ]
     }
   ]
 }
