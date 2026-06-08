@@ -19,11 +19,11 @@
         <div id="related-section"></div>
     </main>
     <footer>
-        <p>Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Resources are provided as is with no guarantees or warranties of any kind.</p>
-        <p>Sharing knowledge, building communities</p>
+        <p id="footer-disclaimer">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Resources are provided as is with no guarantees or warranties of any kind.</p>
+        <p id="footer-tagline">Sharing knowledge, building communities</p>
         <div class="footer-links">
-            <a href="https://github.com/cknzraposo/">My GitHub Profile</a>
-            <a href="https://chandima.substack.com/">Read my Substack</a>
+            <a id="footer-github" href="https://github.com/cknzraposo/">My GitHub Profile</a>
+            <a id="footer-substack" href="https://chandima.substack.com/">Read my Substack</a>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -50,6 +50,14 @@
             return /privacy act|sovereignty|legal|law|compliance|cloud act/i.test(content);
         }
 
+        function parseYamlList(yamlBlock, key) {
+            const listMatch = yamlBlock.match(new RegExp(key + ':\\s*\\n((?:[ \\t]+-[ \\t]+.+\\n?)*)'));
+            if (!listMatch) return [];
+            return listMatch[1]
+                .match(/- "?([^"\n]+)"?/g)
+                ?.map(item => item.replace(/^-\s+"?/, '').replace(/"$/, '').trim()) || [];
+        }
+
         async function init() {
             const params = new URLSearchParams(window.location.search);
             const dir = params.get('dir');
@@ -66,6 +74,16 @@
             try {
                 const res = await fetch('./collections.json');
                 registry = await res.json();
+                const site = registry.site || {};
+                if (site.disclaimer) {
+                    document.getElementById('footer-disclaimer').textContent = site.disclaimer.footer || document.getElementById('footer-disclaimer').textContent;
+                    document.getElementById('footer-tagline').textContent = site.disclaimer.tagline || document.getElementById('footer-tagline').textContent;
+                }
+                if (site.links) {
+                    if (site.links.github) document.getElementById('footer-github').href = site.links.github;
+                    if (site.links.substack) document.getElementById('footer-substack').href = site.links.substack;
+                }
+
                 // Build cross-collection slug→dir map for link rewriting
                 registry.collections.forEach(c => {
                     c.articles.forEach(a => { globalSlugMap[a.slug] = c.dir; });
@@ -93,6 +111,9 @@
             }
 
             const { data, content } = parseFrontmatter(raw);
+            const frontmatterMatch = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
+            const frontmatterBlock = frontmatterMatch ? frontmatterMatch[1] : '';
+            const disclaimerFlags = parseYamlList(frontmatterBlock, 'disclaimers').map(value => value.toLowerCase());
             const title = data.title || slugMap[slug]?.title || slug;
 
             document.title = `${title} — Resources`;
@@ -105,7 +126,12 @@
                     ${data.author ? ` &middot; ${data.author}` : ''}
                 </div>`;
 
-            if (dir === 'cloud' && hasLegalContent(content)) {
+            const requiresLegalDisclaimer =
+                disclaimerFlags.includes('legal-compliance') ||
+                disclaimerFlags.includes('not-legal-advice') ||
+                (dir === 'cloud' && hasLegalContent(content));
+
+            if (requiresLegalDisclaimer) {
                 const d = document.getElementById('disclaimer');
                 d.classList.remove('hidden');
                 d.textContent = 'This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.';

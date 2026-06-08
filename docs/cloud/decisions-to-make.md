@@ -2,20 +2,22 @@
 title: "Data Residency vs Data Sovereignty — Decisions to Make"
 description: "An objective comparison of data residency and data sovereignty postures for New Zealand organisations adopting public cloud, covering trade-offs, risks, cost implications, alternatives, and innovation considerations."
 date: 2026-03-09
-lastmod: 2026-03-09
-author: "NA"
+lastmod: 2026-06-08
+author: "Chandima Kulathilake"
 tags: ["data-residency", "data-sovereignty", "public-cloud", "new-zealand", "cloud-strategy", "risk", "innovation"]
 category: "Cloud Strategy"
 slug: "decisions-to-make"
 layout: "page"
 draft: true
+disclaimers:
+  - "legal-compliance"
+  - "not-legal-advice"
 related:
-  - "/summary"
   - "/data-residency-summary"
   - "/data-residency-detail"
-  - "/data-residency-faq"
+  - "/cloud-faq"
   - "/nz-cloud-region"
-  - "/nz-cloud-region-faq"
+  - "/service-availability"
 ---
 
 # Data Residency vs Data Sovereignty — Decisions to Make
@@ -249,9 +251,10 @@ For most New Zealand organisations, **residency with enhanced controls** provide
 
 ## Related pages
 
-- [Data Sovereignty & Data Residency — Overview](/summary)
 - [Data Residency — Summary](/data-residency-summary)
 - [Data Residency — Detail](/data-residency-detail)
-- [Data Residency — FAQ](/data-residency-faq)
+- [Cloud Residency, Sovereignty, and NZ North — FAQ](/cloud-faq)
 - [Azure NZ North — Region Dossier](/nz-cloud-region)
-- [Azure NZ North — FAQ](/nz-cloud-region-faq)
+- [Azure Services in Use — NZ North Availability Assessment](/service-availability)
+
+

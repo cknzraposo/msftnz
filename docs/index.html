@@ -8,58 +8,66 @@
 </head>
 <body>
     <header>
-        <h1>Presentation Resources &amp; Links</h1>
+        <h1 id="site-title">Presentation Resources &amp; Links</h1>
     </header>
 
     <main>
         <section class="content-section">
-            <h2>Welcome</h2>
-            <p>
+            <h2 id="welcome-heading">Welcome</h2>
+            <p id="welcome-text">
                 This repository includes various resources and links shared in my presentations.
                 Here you will find useful materials, code samples, and references that complement
                 the topics covered in my talks and workshops.
             </p>
         </section>
 
-        <section class="content-section">
-            <h2>Start Here</h2>
-            <p>Begin with the hackathon setup path, UoA Azure environment guidance, and use-case briefings.</p>
-            <div id="start-here-grid" class="collections-grid"></div>
-        </section>
-
-        <section class="content-section">
-            <h2>Resources</h2>
-            <div id="resources-grid" class="collections-grid"></div>
-        </section>
+        <div id="sections-container"></div>
     </main>
 
     <footer>
-        <p>Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Presentation Resources are provided as is with no guarantees or warranties of any kind.</p>
-        <p>Sharing knowledge, building communities</p>
+        <p id="footer-disclaimer">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Presentation Resources are provided as is with no guarantees or warranties of any kind.</p>
+        <p id="footer-tagline">Sharing knowledge, building communities</p>
         <div class="footer-links">
-            <a href="https://github.com/cknzraposo/">My GitHub Profile</a>
-            <a href="https://chandima.substack.com/">Read my Substack</a>
+            <a id="footer-github" href="https://github.com/cknzraposo/">My GitHub Profile</a>
+            <a id="footer-substack" href="https://chandima.substack.com/">Read my Substack</a>
         </div>
     </footer>
 
     <script>
         async function init() {
-            const startHereGrid = document.getElementById('start-here-grid');
-            const resourcesGrid = document.getElementById('resources-grid');
+            const sectionsContainer = document.getElementById('sections-container');
             let registry;
             try {
                 const res = await fetch('./collections.json');
                 registry = await res.json();
             } catch {
-                startHereGrid.innerHTML = '<p class="text-error">Could not load collections.</p>';
-                resourcesGrid.innerHTML = '<p class="text-error">Could not load collections.</p>';
+                sectionsContainer.innerHTML = '<p class="text-error">Could not load collections.</p>';
                 return;
             }
 
-            const startHereCollection = registry.collections.find(col => col.dir === 'start-here');
-            const resourceCollections = registry.collections.filter(col => col.dir !== 'start-here');
+            const site = registry.site || {};
+            const sections = Array.isArray(site.sections) ? site.sections : [];
+            const collections = Array.isArray(registry.collections) ? registry.collections : [];
+
+            document.getElementById('site-title').textContent = site.title || 'Presentation Resources & Links';
+            document.title = site.title || 'Shared Resources';
+            document.getElementById('welcome-heading').textContent = site.welcomeHeading || 'Welcome';
+            document.getElementById('welcome-text').textContent = site.welcomeText ||
+                'This repository includes various resources and links shared in my presentations.';
+
+            if (site.disclaimer) {
+                document.getElementById('footer-disclaimer').textContent = site.disclaimer.footer || document.getElementById('footer-disclaimer').textContent;
+                document.getElementById('footer-tagline').textContent = site.disclaimer.tagline || document.getElementById('footer-tagline').textContent;
+            }
+            if (site.links) {
+                if (site.links.github) document.getElementById('footer-github').href = site.links.github;
+                if (site.links.substack) document.getElementById('footer-substack').href = site.links.substack;
+            }
 
             function renderCard(col, targetGrid) {
+                const count = Array.isArray(col.articles) ? col.articles.length : 0;
+                const audience = col.audience ? '<p class="text-muted">Audience: ' + col.audience + '</p>' : '';
+
                 const card = document.createElement('a');
                 card.href = 'collection.html?dir=' + col.dir;
                 card.className = 'collection-card';
@@ -67,22 +75,45 @@
                     (col.icon ? '<div class="icon">' + col.icon + '</div>' : '') +
                     '<h3>' + col.title + '</h3>' +
                     '<p>' + col.description + '</p>' +
-                    '<span class="article-count">' + col.articles.length + ' article' + (col.articles.length !== 1 ? 's' : '') + '</span>';
+                    audience +
+                    '<span class="article-count">' + count + ' article' + (count !== 1 ? 's' : '') + '</span>';
                 targetGrid.appendChild(card);
             }
 
-            if (startHereCollection) {
-                renderCard(startHereCollection, startHereGrid);
-            } else {
-                startHereGrid.innerHTML = '<p class="text-muted">Start Here collection is not available yet.</p>';
-            }
-
-            if (resourceCollections.length === 0) {
-                resourcesGrid.innerHTML = '<p class="text-muted">No additional collections are available yet.</p>';
+            if (sections.length === 0) {
+                sectionsContainer.innerHTML = '<p class="text-muted">No sections are configured.</p>';
                 return;
             }
 
-            resourceCollections.forEach(col => renderCard(col, resourcesGrid));
+            sections.forEach(section => {
+                const sectionCollections = collections.filter(col => col.section === section.id);
+                const sectionEl = document.createElement('section');
+                sectionEl.className = 'content-section';
+
+                const heading = document.createElement('h2');
+                heading.textContent = section.title;
+                sectionEl.appendChild(heading);
+
+                if (section.description) {
+                    const description = document.createElement('p');
+                    description.textContent = section.description;
+                    sectionEl.appendChild(description);
+                }
+
+                if (sectionCollections.length === 0) {
+                    const emptyMsg = document.createElement('p');
+                    emptyMsg.className = 'text-muted';
+                    emptyMsg.textContent = section.emptyMessage || 'No collections available in this section yet.';
+                    sectionEl.appendChild(emptyMsg);
+                } else {
+                    const grid = document.createElement('div');
+                    grid.className = 'collections-grid';
+                    sectionCollections.forEach(col => renderCard(col, grid));
+                    sectionEl.appendChild(grid);
+                }
+
+                sectionsContainer.appendChild(sectionEl);
+            });
         }
         init();
     </script>

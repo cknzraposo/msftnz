@@ -2,18 +2,21 @@
 title: "Data Residency & Data Sovereignty — Summary"
 description: "A summary of data residency and data sovereignty options for Azure and Microsoft 365, tailored for New Zealand organisations."
 date: 2026-03-09
-lastmod: 2026-03-09
-author: "NA"
+lastmod: 2026-06-08
+author: "Chandima Kulathilake"
 tags: ["data-residency", "data-sovereignty", "azure", "microsoft-365", "new-zealand"]
 category: "Cloud Strategy"
 slug: "data-residency-summary"
 layout: "page"
 draft: true
+disclaimers:
+  - "legal-compliance"
+  - "not-legal-advice"
 related:
   - "/data-residency-detail"
-  - "/data-residency-faq"
+  - "/cloud-faq"
   - "/nz-cloud-region"
-  - "/nz-cloud-region-faq"
+  - "/decisions-to-make"
 ---
 
 # Data Residency & Data Sovereignty — Summary
@@ -53,6 +56,8 @@ Microsoft provides a range of options to help organisations control where their 
 ## Related pages
 
 - [Data Residency — Detail](/data-residency-detail) — full breakdown of M365, Azure, sovereignty controls, NZ timeline, and legal considerations
-- [Data Residency — FAQ](/data-residency-faq) — common questions about data residency and sovereignty
+- [Cloud Residency, Sovereignty, and NZ North — FAQ](/cloud-faq) — common questions about data residency, sovereignty, and the NZ region
 - [Azure NZ North — Region Dossier](/nz-cloud-region) — available services, service rings, DR architecture, compliance, pricing
-- [Azure NZ North — FAQ](/nz-cloud-region-faq) — common questions about the New Zealand North region
+- [Data Residency vs Data Sovereignty — Decisions to Make](/decisions-to-make) — trade-offs and decision framework for leaders
+
+

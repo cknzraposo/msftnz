@@ -1,4 +1,37 @@
 {
+  "site": {
+    "title": "Cloud Adoption Guide for Aotearoa New Zealand",
+    "welcomeHeading": "Welcome",
+    "welcomeText": "Plain-language resources for New Zealand organisations adopting Azure and Microsoft 365, with practical guidance on data residency, sovereignty, and the Azure New Zealand North region.",
+    "sections": [
+      {
+        "id": "primary",
+        "title": "Cloud Guidance",
+        "description": "Enterprise and government-focused cloud governance and architecture resources.",
+        "emptyMessage": "No primary guidance collections are available yet."
+      },
+      {
+        "id": "secondary",
+        "title": "Learning Resources",
+        "description": "Broader technical learning content for developers and architects.",
+        "emptyMessage": "No secondary learning collections are available yet."
+      },
+      {
+        "id": "programmes",
+        "title": "University Programmes",
+        "description": "Time-bound academic support material for COMPSCI 714 teams.",
+        "emptyMessage": "No programme collections are available yet."
+      }
+    ],
+    "disclaimer": {
+      "footer": "Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Presentation Resources are provided as is with no guarantees or warranties of any kind.",
+      "tagline": "Sharing knowledge, building communities"
+    },
+    "links": {
+      "github": "https://github.com/cknzraposo/",
+      "substack": "https://chandima.substack.com/"
+    }
+  },
   "collections": [
     {
       "dir": "cloud",
@@ -6,13 +39,9 @@
       "subtitle": "Azure & Microsoft Cloud — New Zealand",
       "description": "Plain-language guides on Azure and Microsoft cloud topics for New Zealand organisations — data residency, data sovereignty, the Azure New Zealand North region, and more.",
       "icon": "☁️",
+      "audience": "Enterprise and Government",
+      "section": "primary",
       "articles": [
-        {
-          "slug": "summary",
-          "title": "Data Sovereignty & Data Residency — What They Mean in the Public Cloud",
-          "description": "A plain-language guide to data sovereignty and data residency from a public cloud perspective, with New Zealand-specific context.",
-          "category": "Cloud Strategy"
-        },
         {
           "slug": "data-residency-summary",
           "title": "Data Residency & Data Sovereignty — Summary",
@@ -26,22 +55,16 @@
           "category": "Cloud Strategy"
         },
         {
-          "slug": "data-residency-faq",
-          "title": "Data Residency & Data Sovereignty — FAQ",
-          "description": "Frequently asked questions about data residency and data sovereignty for Azure and Microsoft 365 in New Zealand.",
-          "category": "Cloud Strategy"
-        },
-        {
           "slug": "nz-cloud-region",
           "title": "Azure New Zealand North — Cloud Region Dossier",
           "description": "A comprehensive dossier of the Azure New Zealand North region including available services, service rings, disaster recovery, compliance, latency, and pricing.",
           "category": "Cloud Infrastructure"
         },
         {
-          "slug": "nz-cloud-region-faq",
-          "title": "Azure New Zealand North — FAQ",
-          "description": "Frequently asked questions about the Azure New Zealand North cloud region, covering services, availability zones, pricing, compliance, and data sovereignty.",
-          "category": "Cloud Infrastructure"
+          "slug": "cloud-faq",
+          "title": "Cloud Residency, Sovereignty, and NZ North — FAQ",
+          "description": "A unified FAQ for New Zealand organisations covering data residency, sovereignty, and the Azure New Zealand North region.",
+          "category": "Cloud Strategy"
         },
         {
           "slug": "decisions-to-make",
@@ -57,6 +80,8 @@
       "subtitle": "Masters of AI Hackathon Setup Guides",
       "description": "Step-by-step setup guides, UoA environment instructions, FAQs, and project use cases for COMPSCI 714 teams.",
       "icon": "🚀",
+      "audience": "University Programmes",
+      "section": "programmes",
       "articles": [
         {
           "slug": "01-prerequisites",
@@ -156,6 +181,8 @@
       "subtitle": "Getting Started with GitHub Copilot",
       "description": "A practical learning path for GitHub Copilot — what it is, how to set it up, and how to get the most out of AI-assisted development.",
       "icon": "🤖",
+      "audience": "Developers",
+      "section": "secondary",
       "articles": [
         {
           "slug": "what-is-github-copilot",
@@ -171,6 +198,8 @@
       "subtitle": "Hosting Web Apps & APIs on Azure — New Zealand",
       "description": "Plain-language guides on Azure App Service for New Zealand organisations — hosting models, networking, data residency in the NZ North region, pricing, and deployment patterns.",
       "icon": "🌐",
+      "audience": "Developers and Architects",
+      "section": "secondary",
       "articles": [
         {
           "slug": "getting-started",

@@ -2,18 +2,21 @@
 title: "Azure New Zealand North — Cloud Region Dossier"
 description: "A comprehensive dossier of the Azure New Zealand North region including available services, service rings, disaster recovery, compliance, latency, and pricing."
 date: 2026-03-09
-lastmod: 2026-03-09
+lastmod: 2026-06-08
 author: "Chandima Kulathilake"
 tags: ["azure", "new-zealand-north", "cloud-region", "services", "compliance", "disaster-recovery", "pricing"]
 category: "Cloud Infrastructure"
 slug: "nz-cloud-region"
 layout: "page"
 draft: true
+disclaimers:
+  - "legal-compliance"
+  - "not-legal-advice"
 related:
-  - "/nz-cloud-region-faq"
+  - "/cloud-faq"
   - "/data-residency-summary"
   - "/data-residency-detail"
-  - "/data-residency-faq"
+  - "/decisions-to-make"
 ---
 
 # Azure New Zealand North — Cloud Region Dossier
@@ -123,7 +126,9 @@ Microsoft has committed to working with Māori communities on data governance, a
 
 ## Related pages
 
-- [Azure NZ North — FAQ](/nz-cloud-region-faq) — common questions about the New Zealand North region
+- [Cloud Residency, Sovereignty, and NZ North — FAQ](/cloud-faq) — common questions about region capabilities and compliance
 - [Data Residency — Summary](/data-residency-summary) — one-page overview of data residency and sovereignty options
 - [Data Residency — Detail](/data-residency-detail) — full breakdown of M365, Azure, sovereignty controls, and legal considerations
-- [Data Residency — FAQ](/data-residency-faq) — common questions about data residency and sovereignty
+- [Data Residency vs Data Sovereignty — Decisions to Make](/decisions-to-make) — trade-offs and decision framework for leaders
+
+

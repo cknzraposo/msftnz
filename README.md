@@ -53,3 +53,17 @@ docs/             ← GitHub Pages site root (served from main)
 ```
 
 > *The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Presentation Resources are provided as is with no guarantees or warranties of any kind.*
+
+## Content Validation
+
+Use the validator before pushing to `main` to catch registry-to-file mismatches early.
+
+```powershell
+pwsh ./scripts/validate-content.ps1 -RepoRoot .
+```
+
+To validate only specific collections during focused changes:
+
+```powershell
+pwsh ./scripts/validate-content.ps1 -RepoRoot . -CollectionDirs cloud,copilot-learning,azure-app-services
+```

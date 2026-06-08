@@ -2,18 +2,21 @@
 title: "Data Residency & Data Sovereignty — Detail"
 description: "A detailed guide to data residency and sovereignty options across Microsoft 365 and Azure, with New Zealand context, legal considerations, and practical steps."
 date: 2026-03-09
-lastmod: 2026-03-09
-author: "NA"
+lastmod: 2026-06-08
+author: "Chandima Kulathilake"
 tags: ["data-residency", "data-sovereignty", "azure", "microsoft-365", "new-zealand", "cloud-act", "adr", "multi-geo"]
 category: "Cloud Strategy"
 slug: "data-residency-detail"
 layout: "page"
 draft: true
+disclaimers:
+  - "legal-compliance"
+  - "not-legal-advice"
 related:
   - "/data-residency-summary"
-  - "/data-residency-faq"
+  - "/cloud-faq"
   - "/nz-cloud-region"
-  - "/nz-cloud-region-faq"
+  - "/decisions-to-make"
 ---
 
 # Data Residency & Data Sovereignty — Detail
@@ -41,7 +44,8 @@ When a Microsoft 365 tenant is provisioned, core customer data at rest is stored
 ### Advanced Data Residency (ADR)
 
 [ADR](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency) is an add-on that extends data residency commitments beyond the core workloads. Contact your Microsoft account team for details on ADR coverage and eligibility.
-
+
+
 
 ### Multi-Geo
 
@@ -132,6 +136,8 @@ Data residency and data sovereignty are not the same thing, and technology alone
 ## Related pages
 
 - [Data Residency — Summary](/data-residency-summary) — one-page overview with at-a-glance table
-- [Data Residency — FAQ](/data-residency-faq) — common questions about data residency and sovereignty
+- [Cloud Residency, Sovereignty, and NZ North — FAQ](/cloud-faq) — common questions about data residency, sovereignty, and the NZ region
 - [Azure NZ North — Region Dossier](/nz-cloud-region) — available services, service rings, DR architecture, compliance, pricing
-- [Azure NZ North — FAQ](/nz-cloud-region-faq) — common questions about the New Zealand North region
+- [Data Residency vs Data Sovereignty — Decisions to Make](/decisions-to-make) — trade-offs and decision framework for leaders
+
+

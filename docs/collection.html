@@ -17,11 +17,11 @@
         <div id="collections"></div>
     </main>
     <footer>
-        <p>Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Resources are provided as is with no guarantees or warranties of any kind.</p>
-        <p>Sharing knowledge, building communities</p>
+        <p id="footer-disclaimer">Disclaimer: The opinions expressed herein are my own personal opinions and do not represent my employer's view in any way. Resources are provided as is with no guarantees or warranties of any kind.</p>
+        <p id="footer-tagline">Sharing knowledge, building communities</p>
         <div class="footer-links">
-            <a href="https://github.com/cknzraposo/">My GitHub Profile</a>
-            <a href="https://chandima.substack.com/">Read my Substack</a>   
+            <a id="footer-github" href="https://github.com/cknzraposo/">My GitHub Profile</a>
+            <a id="footer-substack" href="https://chandima.substack.com/">Read my Substack</a>   
         </div>
     </footer>
     <script>
@@ -34,6 +34,16 @@
             try {
                 const res = await fetch('./collections.json');
                 registry = await res.json();
+
+                const site = registry.site || {};
+                if (site.disclaimer) {
+                    document.getElementById('footer-disclaimer').textContent = site.disclaimer.footer || document.getElementById('footer-disclaimer').textContent;
+                    document.getElementById('footer-tagline').textContent = site.disclaimer.tagline || document.getElementById('footer-tagline').textContent;
+                }
+                if (site.links) {
+                    if (site.links.github) document.getElementById('footer-github').href = site.links.github;
+                    if (site.links.substack) document.getElementById('footer-substack').href = site.links.substack;
+                }
             } catch {
                 document.getElementById('collections').innerHTML =
                     '<div class="error-msg">Could not load collections registry.</div>';

@@ -2,8 +2,8 @@
 title: "Azure Services in Use — NZ North Availability Assessment"
 description: "A service-by-service assessment of Azure resources currently deployed, comparing availability across Australia East, New Zealand North, and Global, with migration readiness notes."
 date: 2026-03-09
-lastmod: 2026-03-09
-author: "NA"
+lastmod: 2026-06-08
+author: "Chandima Kulathilake"
 tags: ["azure", "new-zealand-north", "australia-east", "service-availability", "migration"]
 category: "Cloud Infrastructure"
 slug: "service-availability"
@@ -11,7 +11,7 @@ layout: "page"
 draft: true
 related:
   - "/nz-cloud-region"
-  - "/nz-cloud-region-faq"
+  - "/cloud-faq"
   - "/data-residency-summary"
   - "/decisions-to-make"
 ---
@@ -176,6 +176,8 @@ Services that must remain in Australia East (Automation, Databricks) or that are
 ## Related pages
 
 - [Azure NZ North — Region Dossier](/nz-cloud-region) — DR architecture, compliance, connectivity
-- [Azure NZ North — FAQ](/nz-cloud-region-faq) — common questions about the region
+- [Azure NZ North — FAQ](/cloud-faq) — common questions about the region
 - [Data Residency vs Sovereignty — Decisions to Make](/decisions-to-make) — trade-offs, risks, and alternatives
 - [Data Residency — Summary](/data-residency-summary) — one-page overview of residency options
+
+
