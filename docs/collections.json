@@ -15,12 +15,6 @@
         "title": "Learning Resources",
         "description": "Broader technical learning content for developers and architects.",
         "emptyMessage": "No secondary learning collections are available yet."
-      },
-      {
-        "id": "programmes",
-        "title": "University Programmes",
-        "description": "Time-bound academic support material for COMPSCI 714 teams.",
-        "emptyMessage": "No programme collections are available yet."
       }
     ],
     "disclaimer": {
@@ -110,4 +104,5 @@
     }
   ]
 }
+
 

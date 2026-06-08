@@ -17,7 +17,6 @@ Primary site positioning in `docs/collections.json`:
 
 - **Cloud Guidance** (primary)
 - **Learning Resources** (secondary)
-- **University Programmes** (TBC)
 
 ### Content Collections
 
