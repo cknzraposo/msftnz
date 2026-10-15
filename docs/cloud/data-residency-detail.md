@@ -19,6 +19,7 @@ related:
   - "/cloud-faq"
   - "/nz-cloud-region"
   - "/decisions-to-make"
+  - "/azure-local-vs-azure-cloud"
 ---
 
 # Data Residency & Data Sovereignty — Detail
@@ -108,7 +109,7 @@ Data residency and data sovereignty are not the same thing, and technology alone
 |----------|-------------|
 | **Contractual controls** | Write data residency requirements explicitly into your agreements — do not rely on assumptions |
 | **Customer-managed encryption** | Review whether the service supports customer-managed keys and what data paths, key access, and operational duties are in scope. Key control alone does not determine provider access or jurisdiction. |
-| **Customer-managed infrastructure** | Assess the supported Azure Local workloads, connectivity, operational responsibilities, and residual legal and supply-chain risks. It does not automatically make a deployment air-gapped. |
+| **Customer-managed infrastructure** | Assess the supported Azure Local workloads, connectivity, operational responsibilities, and residual legal and supply-chain risks. It does not automatically make a deployment air-gapped. See the [Azure Local vs Azure Cloud comparison](/azure-local-vs-azure-cloud) before choosing this operating model. |
 | **Legal review** | Involve your legal team in all sovereignty decisions — the technical, contractual, and legal dimensions must be addressed together |
 
 ---
@@ -128,3 +129,4 @@ Data residency and data sovereignty are not the same thing, and technology alone
 - [Azure New Zealand North — Start Here](/nz-cloud-region) — region facts, resilience, and next steps
 - [NZ North Service Availability — Verification Guide](/service-availability) — how to check service and workload support
 - [Data Residency vs Data Sovereignty — Decisions to Make](/decisions-to-make) — trade-offs and decision framework for leaders
+- [Azure Local vs Azure Cloud](/azure-local-vs-azure-cloud) — local infrastructure trade-offs, data flows, and evidence required before approval

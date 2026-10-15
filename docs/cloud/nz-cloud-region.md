@@ -20,6 +20,7 @@ related:
   - "/data-residency-summary"
   - "/data-residency-detail"
   - "/decisions-to-make"
+  - "/azure-local-vs-azure-cloud"
 ---
 
 # Azure New Zealand North — Start Here
@@ -37,6 +38,7 @@ related:
 - **Plan resilience:** use the [disaster recovery guidance](#disaster-recovery-architecture) below. NZ North has no paired region; each service has its own replication and recovery options.
 - **Check Microsoft 365 data location:** use the tenant-specific Data Location card in the Microsoft 365 admin centre and Microsoft's [service data location documentation](https://learn.microsoft.com/en-us/microsoft-365/enterprise/o365-data-locations).
 - **Compare residency and governance options:** see the [data residency summary](/data-residency-summary), [detailed guide](/data-residency-detail), and [decision framework](/decisions-to-make).
+- **Decide whether infrastructure must be local:** read [Azure Local vs Azure Cloud](/azure-local-vs-azure-cloud). Evaluate suitable cloud services first; require evidence before taking on a local platform's operating responsibilities.
 
 ## Region Overview
 
@@ -136,3 +138,4 @@ Measure latency and throughput from the locations and networks your users and wo
 - [Data Residency — Summary](/data-residency-summary) — one-page overview of data residency and sovereignty options
 - [Data Residency — Detail](/data-residency-detail) — full breakdown of M365, Azure, sovereignty controls, and legal considerations
 - [Data Residency vs Data Sovereignty — Decisions to Make](/decisions-to-make) — trade-offs and decision framework for leaders
+- [Azure Local vs Azure Cloud](/azure-local-vs-azure-cloud) — justified use cases, core caveats, and why Local should be an exception

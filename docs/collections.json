@@ -49,6 +49,12 @@
           "category": "Start Here"
         },
         {
+          "slug": "azure-local-vs-azure-cloud",
+          "title": "Azure Local vs Azure Cloud — Why Local Should Be an Exception",
+          "description": "Compare benefits, operational duties, service gaps, costs, resilience, and NZ data flows. Use Azure Local where a documented requirement justifies it, not as the default.",
+          "category": "Cloud Strategy"
+        },
+        {
           "slug": "data-residency-summary",
           "title": "Data Residency & Data Sovereignty — Summary",
           "description": "A summary of data residency and data sovereignty options for Azure and Microsoft 365, tailored for New Zealand organisations.",
@@ -110,4 +116,3 @@
     }
   ]
 }
-

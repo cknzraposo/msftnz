@@ -20,6 +20,7 @@ related:
   - "/cloud-faq"
   - "/nz-cloud-region"
   - "/service-availability"
+  - "/azure-local-vs-azure-cloud"
 ---
 
 # Data Residency vs Data Sovereignty — Decisions to Make
@@ -52,9 +53,11 @@ Most conversations frame this as "residency or sovereignty." In practice, organi
 | **Data residency** | Data location and any applicable service-specific commitments | Deploying supported Azure resources to NZ North; confirm Microsoft 365 tenant and workload location in Microsoft's documentation and the tenant's Data Location card |
 | **Enhanced residency** | Residency plus additional workload coverage, encryption controls, and policy enforcement | [ADR](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency) add-on + [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) restricting regions + [customer-managed keys](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models) |
 | **Sovereign public cloud** | Public-cloud services combined with governance and technical controls; capabilities and commitments depend on the service and customer arrangement | [Microsoft Cloud for Sovereignty](https://learn.microsoft.com/en-us/industry/sovereignty/cloud-for-sovereignty) and [Sovereign Landing Zone](https://learn.microsoft.com/en-us/industry/sovereignty/slz-overview) |
-| **Sovereign private cloud** | Cloud services running on infrastructure you own and control, potentially air-gapped | [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/overview) in your own data centre |
+| **Sovereign private cloud** | Supported services on customer-managed infrastructure, with a specifically designed connected or disconnected operating model | [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/overview); local hardware alone does not establish sovereignty or isolation |
 
-Each step adds control. Each step also adds cost, complexity, and constraints on what services and innovation capabilities are available.
+These postures change the controls, responsibilities, costs, and service constraints. More local infrastructure does not automatically produce a better security or sovereignty outcome.
+
+**Evaluate suitable Azure cloud services first.** Azure Local should be a workload-specific exception supported by evidence of a local execution, continuity, or isolation requirement. See [Azure Local vs Azure Cloud](/azure-local-vs-azure-cloud) for the full comparison, connectivity and data-location caveats, cost model, and approval gates.
 
 ---
 
@@ -96,7 +99,7 @@ Each step adds control. Each step also adds cost, complexity, and constraints on
 
 - Reduced service availability — not all Azure services run on Azure Local; sovereign controls may limit which features are accessible
 - Higher operational complexity — customer is responsible for infrastructure management, patching, and capacity planning in private deployments
-- Higher cost — Azure Local requires hardware investment, facilities, and operational staff; sovereign add-ons carry additional licensing
+- Additional cost categories — Azure Local requires hardware, facilities, platform subscription, and operational capability. Compare total lifecycle costs; neither local nor public cloud is universally cheaper.
 - Service availability and update cadence depend on the selected private-cloud products and operating model; verify the exact requirements before choosing this approach.
 - DR is harder — air-gapped environments cannot replicate to public cloud regions without breaking the air gap
 
@@ -173,7 +176,7 @@ Use NZ North for workloads that require it and support it. If another region is 
 
 ### 3. Sovereign enclave
 
-Run the most sensitive workloads on Azure Local within your own facilities, while keeping general-purpose workloads in public cloud NZ North. Use network segmentation and identity controls to maintain separation.
+Use Azure Local only for workloads with a documented requirement for local execution or an assessed isolation requirement that suitable public-cloud controls cannot meet. Sensitivity alone is not a reason to move a workload on premises. Keep other workloads in suitable public-cloud services, including NZ North where supported. Use network segmentation and identity controls, and assess the selected connected or disconnected operating model.
 
 **Best for:** Organisations with workloads that require isolation and that can operate and assure the selected private-cloud design.
 
@@ -254,3 +257,4 @@ Choose a posture from the organisation's documented requirements, service-specif
 - [Cloud Residency, Sovereignty, and NZ North — FAQ](/cloud-faq)
 - [Azure New Zealand North — Start Here](/nz-cloud-region)
 - [NZ North Service Availability — Verification Guide](/service-availability)
+- [Azure Local vs Azure Cloud](/azure-local-vs-azure-cloud)
