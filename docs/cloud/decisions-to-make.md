@@ -51,13 +51,15 @@ Most conversations frame this as "residency or sovereignty." In practice, organi
 |---------|--------------|---------|
 | **Default cloud** | Data location and controls depend on service, tenant, and configuration | An existing Azure resource or Microsoft 365 tenant whose current location and terms have not yet been checked |
 | **Data residency** | Data location and any applicable service-specific commitments | Deploying supported Azure resources to NZ North; confirm Microsoft 365 tenant and workload location in Microsoft's documentation and the tenant's Data Location card |
-| **Enhanced residency** | Residency plus additional workload coverage, encryption controls, and policy enforcement | [ADR](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency) add-on + [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) restricting regions + [customer-managed keys](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models) |
+| **Enhanced residency** | Residency plus additional workload coverage, encryption controls, and policy enforcement | For Microsoft 365, assess the eligible [ADR](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-overview) add-on; Education tenants must distinguish standard ADR from [ADR-E](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-compare-offerings). For Azure, [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) can restrict resource regions; [customer-managed keys](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models) apply only to supported services. |
 | **Sovereign public cloud** | Public-cloud services combined with governance and technical controls; capabilities and commitments depend on the service and customer arrangement | [Microsoft Cloud for Sovereignty](https://learn.microsoft.com/en-us/industry/sovereignty/cloud-for-sovereignty) and [Sovereign Landing Zone](https://learn.microsoft.com/en-us/industry/sovereignty/slz-overview) |
 | **Sovereign private cloud** | Supported services on customer-managed infrastructure, with a specifically designed connected or disconnected operating model | [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/overview); local hardware alone does not establish sovereignty or isolation |
 
 These postures change the controls, responsibilities, costs, and service constraints. More local infrastructure does not automatically produce a better security or sovereignty outcome.
 
 **Evaluate suitable Azure cloud services first.** Azure Local should be a workload-specific exception supported by evidence of a local execution, continuity, or isolation requirement. See [Azure Local vs Azure Cloud](/azure-local-vs-azure-cloud) for the full comparison, connectivity and data-location caveats, cost model, and approval gates.
+
+For Microsoft 365 Education, do not infer a residency commitment from A3/A5 subscriptions or EES alone. Confirm whether the tenant qualifies for ADR-E, its narrower covered workload set, the applicable 100% seat-coverage rule, and its EES SKU availability. See the [Education ADR and ADR-E caveat](/data-residency-detail).
 
 ---
 

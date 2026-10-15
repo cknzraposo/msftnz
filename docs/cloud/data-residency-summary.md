@@ -40,6 +40,7 @@ Microsoft provides a range of options to help organisations control where their 
 - **Azure New Zealand North** (Auckland) — live since December 2024. You can deploy Azure resources locally and enforce this with policy.
 - **Microsoft 365 data location** — check your tenant's Data Location card and the current [service data location documentation](https://learn.microsoft.com/en-us/microsoft-365/enterprise/o365-data-locations). Applicable commitments depend on the service, tenant, Product Terms, and any eligible add-on.
 - **[Advanced Data Residency (ADR)](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-overview)** — for eligible customers, ADR provides defined commitments for listed workloads and prioritized tenant migration services. Check current eligibility, licensing, and coverage.
+- **Education A3/A5 caveat** — Microsoft lists Microsoft 365 A3/A5 and paid Office 365 A1/A3/A5 as qualifying education subscriptions, but an A3/A5 licence by itself does not provide an ADR commitment. Education customers should distinguish standard ADR from the separate paid **ADR for Education (ADR-E)** add-on, available only through Volume Licensing/EES; see the [education licensing and coverage details](/data-residency-detail).
 - **[Microsoft Cloud for Sovereignty](https://learn.microsoft.com/en-us/industry/sovereignty/cloud-for-sovereignty)** — a set of cloud capabilities and guidance; assess the specific controls, services, and customer commitments rather than treating it as a regional data-location guarantee.
 
 ### At a glance
@@ -47,7 +48,7 @@ Microsoft provides a range of options to help organisations control where their 
 | What you need | Microsoft 365 | Azure |
 |---------------|---------------|-------|
 | Verify data location | Check the tenant's Data Location card and service-specific commitments | Check the service's data-location documentation; a resource region alone may not describe all processing or dependencies |
-| Additional residency commitments | Check [ADR eligibility and coverage](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-overview) and current Product Terms | Check service-specific options and contracts |
+| Additional residency commitments | Check [ADR eligibility and coverage](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-overview) and current Product Terms. Education customers must distinguish ADR-E eligibility, licensing coverage, and service scope. | Check service-specific options and contracts |
 | Regional placement | [Multi-Geo](https://learn.microsoft.com/en-us/microsoft-365/enterprise/microsoft-365-multi-geo) subject to its terms and supported workloads | Region selection per supported resource |
 | Governance controls | Microsoft Purview capabilities and tenant controls, subject to service scope | [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) can restrict resource locations; it does not govern every data flow |
 | Infrastructure location | Confirm the relevant Microsoft 365 service and tenant commitments | [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/overview) runs supported workloads on customer-managed infrastructure; assess its connectivity and operational model |

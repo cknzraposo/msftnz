@@ -44,6 +44,32 @@ For a durable commitment, review the current [Microsoft Product Terms](https://w
 
 [ADR](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-overview) provides eligible customers with defined data-location commitments for listed Microsoft 365 services and prioritized tenant migration services. Eligibility includes tenant geography, qualifying subscriptions, and licensing requirements. Review the current [ADR service commitments](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-commitments) and [requirements](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-overview) before relying on it.
 
+### Microsoft 365 Education: A3/A5, ADR and ADR-E
+
+**An A3 or A5 subscription is not, by itself, a Microsoft 365 data-residency commitment.** Microsoft lists Microsoft 365 A3/A5 and paid Office 365 A1/A3/A5 among the qualifying Education subscriptions for the ADR programme. New Zealand is listed as an eligible Local Region Geography. Eligibility still depends on the tenant's Default Geography, the precise subscription and add-on, the applicable agreement, and the licensing coverage rules.
+
+Microsoft distinguishes these paid add-ons:
+
+| Offering | Education relevance | Microsoft 365 data scope |
+|----------|---------------------|--------------------------|
+| **ADR — standard Advanced Data Residency** | The broader ADR offer includes qualifying commercial, public-sector, and mixed commercial/Education subscriptions. In a mixed tenant, Microsoft's license-management guidance says paid commercial and paid Education A3/A5 seats must be covered by ADR; free subscriptions aren't required under that mixed-tenant rule. | Core services plus expanded services, including Microsoft 365 Copilot, Copilot Chat, Defender for Office P1, Exchange Online Protection, Office for the web, Viva Connections, and select Purview services. Check the current service list and commitments. |
+| **ADR-E — Advanced Data Residency for Education** | A separate paid Education add-on. Microsoft says it is available only to Volume Licensing / EES customers. Its guidance directs customers to their Microsoft account representative for the Education SKU; availability and ordering are not guaranteed just because the organisation has A3/A5 or an EES agreement. | The current comparison lists Exchange Online, SharePoint, OneDrive, and Teams. It does **not** list Copilot, Copilot Chat, or ADR's expanded services as ADR-E covered workloads. |
+
+**Seat coverage differs by tenant type.** Microsoft's current ADR license-management guidance states that an Education ADR-E tenant must cover 100% of eligible Microsoft 365 seats, including paid and unpaid/free seats. The mixed Commercial + Education ADR rule instead requires 100% of eligible paid seats; free Education seats are not required under that mixed-tenant rule. Coverage is based on eligible seats available/purchased in the tenant, not merely the number assigned to users. Do not apply the education-only rule to a mixed tenant, or the mixed-tenant rule to an Education-only tenant, without confirming the tenant's classification with Microsoft.
+
+**EES qualification and ADR-E qualification are separate checks.** Microsoft's EES guidance describes eligibility for primary/secondary and higher-education institutions, with a 1,000 Education Qualified User organization-wide minimum and organization-wide licensing requirements for Education Platform Products. The EES agreement, enrollment, product list, use rights, and Qualified Educational User definition govern the institution's actual licensing. Separately, ADR-E is a paid add-on whose eligibility and availability must be confirmed for the tenant, agreement, geography, SKU, and sales channel. An EES enrollment or A3/A5 purchase does not automatically include ADR-E.
+
+After purchase, a Global Administrator must complete the applicable opt-in for migration; buying the add-on alone does not start migration. Check the tenant's Data Location card, current Product Terms, Microsoft Learn eligibility and service tables, and the EES agreement with the licensing partner or Microsoft representative before making a commitment.
+
+Microsoft sources:
+
+- [ADR overview and requirements](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-overview) — qualifying subscriptions, New Zealand geography, and Volume Licensing/EES availability for ADR Education.
+- [Compare Microsoft 365 Data Residency offerings](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-compare-offerings) — ADR vs ADR-E service scope, eligibility, coverage, and geography.
+- [ADR license management](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-license-management) — Education and mixed-tenant seat coverage rules.
+- [Enrollment for Education Solutions (EES)](https://learn.microsoft.com/en-us/volume-licensing-central/learning/contracting/enrollment-for-education-solutions) — qualifying institution and organization-wide requirements.
+- [Microsoft Product Terms — Microsoft 365, EES](https://www.microsoft.com/licensing/terms/productoffering/Microsoft365/EES) — current programme-specific terms, prerequisites, and availability caveats.
+- [ADR migration initiation](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-initiate-migration) — administrator opt-in and migration process.
+
 ### Multi-Geo
 
 [Multi-Geo](https://learn.microsoft.com/en-us/microsoft-365/enterprise/microsoft-365-multi-geo) allows organisations to specify, on a per-user basis, where Microsoft 365 data is stored across multiple regions within a single tenant.

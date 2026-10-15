@@ -51,7 +51,7 @@ No. Existing Azure resources remain in their original region unless you migrate 
 
 ### Do I need Advanced Data Residency (ADR)?
 
-ADR provides defined commitments for listed workloads and prioritized tenant migration services for eligible customers. Check Microsoft's [ADR eligibility and coverage](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-overview), the current service commitments, and your licensing before deciding whether it meets your requirements.
+ADR provides defined commitments for listed workloads and prioritized tenant migration services for eligible customers. Education customers should distinguish standard ADR from the separate **ADR for Education (ADR-E)** add-on. A3/A5 subscriptions do not by themselves provide an ADR commitment: Microsoft lists them as qualifying education subscriptions, but ADR-E is available only through Volume Licensing/EES, requires 100% coverage of eligible paid and unpaid/free seats for an Education tenant, and currently covers Exchange Online, SharePoint, OneDrive, and Teams—not ADR's broader service set. Mixed Commercial + Education tenants have a different rule. Check Microsoft's [ADR vs ADR-E comparison](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-compare-offerings), [license coverage rules](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-license-management), and [EES terms](https://www.microsoft.com/licensing/terms/productoffering/Microsoft365/EES), then see the [detailed education caveat](/data-residency-detail).
 
 ---
 
