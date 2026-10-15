@@ -2,7 +2,9 @@
 title: "Data Residency vs Data Sovereignty — Decisions to Make"
 description: "An objective comparison of data residency and data sovereignty postures for New Zealand organisations adopting public cloud, covering trade-offs, risks, cost implications, alternatives, and innovation considerations."
 date: 2026-03-09
-lastmod: 2026-06-08
+lastmod: 2026-10-16
+verifiedOn: 2026-10-16
+reviewBy: 2027-01-14
 author: "Chandima Kulathilake"
 tags: ["data-residency", "data-sovereignty", "public-cloud", "new-zealand", "cloud-strategy", "risk", "innovation"]
 category: "Cloud Strategy"
@@ -34,7 +36,7 @@ related:
 
 Organisations moving to or operating in public cloud face a spectrum of choices about where their data sits and who has authority over it. These choices are not binary — they range from accepting default cloud provider settings through to fully air-gapped sovereign deployments.
 
-This document frames the trade-offs objectively. It is grounded in the New Zealand context: a small, open economy with strong privacy law, a [Cloud First government policy](https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/cloud-services/), Māori data sovereignty obligations under Te Tiriti o Waitangi, and a new local Azure region.
+This document frames the trade-offs objectively. It is grounded in the New Zealand context: privacy regulation, a [Cloud First government policy](https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/cloud-services/), Māori data sovereignty and Te Tiriti o Waitangi considerations, and a local Azure region.
 
 The goal is to help decision-makers understand what they gain, what they give up, and what risks they carry at each point on the spectrum.
 
@@ -46,10 +48,10 @@ Most conversations frame this as "residency or sovereignty." In practice, organi
 
 | Posture | What it means | Example |
 |---------|--------------|---------|
-| **Default cloud** | Data stored wherever the provider assigns, no explicit controls | Legacy Azure or M365 tenants defaulting to Australia East |
-| **Data residency** | Data at rest stays in a specified country or region | Deploying to Azure NZ North; M365 default residency for NZ tenants |
+| **Default cloud** | Data location and controls depend on service, tenant, and configuration | An existing Azure resource or Microsoft 365 tenant whose current location and terms have not yet been checked |
+| **Data residency** | Data location and any applicable service-specific commitments | Deploying supported Azure resources to NZ North; confirm Microsoft 365 tenant and workload location in Microsoft's documentation and the tenant's Data Location card |
 | **Enhanced residency** | Residency plus additional workload coverage, encryption controls, and policy enforcement | [ADR](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency) add-on + [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) restricting regions + [customer-managed keys](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models) |
-| **Sovereign public cloud** | Full public cloud with local personnel authorisation, transparency logs, and regulatory policy mappings | [Microsoft Cloud for Sovereignty](https://learn.microsoft.com/en-us/industry/sovereignty/cloud-for-sovereignty) with [Sovereign Landing Zone](https://learn.microsoft.com/en-us/industry/sovereignty/slz-overview) |
+| **Sovereign public cloud** | Public-cloud services combined with governance and technical controls; capabilities and commitments depend on the service and customer arrangement | [Microsoft Cloud for Sovereignty](https://learn.microsoft.com/en-us/industry/sovereignty/cloud-for-sovereignty) and [Sovereign Landing Zone](https://learn.microsoft.com/en-us/industry/sovereignty/slz-overview) |
 | **Sovereign private cloud** | Cloud services running on infrastructure you own and control, potentially air-gapped | [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/overview) in your own data centre |
 
 Each step adds control. Each step also adds cost, complexity, and constraints on what services and innovation capabilities are available.
@@ -62,21 +64,19 @@ Each step adds control. Each step also adds cost, complexity, and constraints on
 
 **Pros**
 
-- Data at rest stays in New Zealand — satisfies most regulatory and policy expectations
-- Full access to the Azure and M365 service catalogue (70+ services GA in NZ North)
-- Low latency for NZ-based users (~25–30ms improvement over Australia East)
-- Zone-redundant high availability within Auckland (3 [availability zones](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview))
-- Compatible with government [Cloud First policy](https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/cloud-services/) and [NZISM](https://nzism.gcsb.govt.nz/) alignment
-- No additional licensing cost beyond standard Azure and M365 subscriptions
-- 100% renewable energy — aligns with sustainability objectives
+- Supported Azure services can be deployed in New Zealand, subject to service, SKU, feature, capacity, and subscription availability.
+- A region-level list of three [availability zones](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview) enables zone-aware designs where the individual service supports them.
+- The region may help meet an organisation's data-location requirements when the selected services and data flows support them.
+- Compare measured application performance and current pricing for the actual design; neither is guaranteed by region selection.
+- Microsoft's launch announcement describes a renewable-energy agreement for the region; see the [announcement](https://news.microsoft.com/en-nz/2024/12/12/new-zealands-first-hyperscale-cloud-is-open-for-business/) for its scope.
 
 **Cons**
 
-- Does not address jurisdictional questions — data stored in NZ may still be subject to foreign legal instruments such as the [CLOUD Act](https://www.congress.gov/bill/115th-congress/house-bill/4943) if the provider is headquartered overseas
-- Not all services are available locally (e.g., [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview) is not yet GA in NZ North — requires Australia East)
-- No paired region for disaster recovery — cross-region DR to Australia East means data leaves NZ
+- Does not resolve jurisdictional questions — assess applicable laws, provider, data, contracts, and circumstances with qualified legal advisers.
+- Not every service, model, SKU, feature, or deployment type is available locally. Check [Azure products by region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) and service-specific documentation.
+- NZ North is nonpaired. Cross-region recovery options depend on the service; replication to another country can have data-location and legal implications.
 - The provider's operational staff may be located outside New Zealand
-- Does not inherently satisfy Māori data sovereignty obligations, which require governance arrangements beyond geographic storage
+- Does not by itself address Māori data sovereignty governance expectations and responsibilities beyond geographic storage
 
 ---
 
@@ -84,23 +84,21 @@ Each step adds control. Each step also adds cost, complexity, and constraints on
 
 **Pros**
 
-- Stronger legal and governance posture — limits who can access data and under what authority
-- Customer-managed encryption keys mean the provider cannot decrypt data without your involvement
-- Transparency logs provide visibility into any provider engineer access
-- Sovereign Landing Zone automates regulatory policy mapping, accelerating compliance
-- Air-gapped deployments (Azure Local) eliminate foreign jurisdictional reach entirely
-- Better positioned to address [Māori data sovereignty](https://www.temanararaunga.maori.nz/) principles through co-designed governance frameworks
-- Meets the highest bar for defence, intelligence, and critical national infrastructure workloads
+- Additional governance and technical controls may change access paths and risks; they do not by themselves determine legal authority or guarantee an outcome.
+- Customer-managed keys can add control over key management for supported services, but do not alone prove that a provider cannot access data or that all processing remains in a chosen location.
+- Access logging, transparency, and personnel controls depend on the service, configuration, and customer eligibility.
+- Sovereign Landing Zone provides architecture and policy guidance; it does not by itself establish compliance.
+- A genuinely disconnected deployment can reduce some remote-access paths, but does not by itself resolve every legal, operational, supply-chain, or governance question.
+- Can be combined with governance arrangements developed with the people and communities concerned, including consideration of [Te Mana Raraunga](https://www.temanararaunga.maori.nz/) principles.
+- May be appropriate for workloads with strict isolation requirements when its controls, operating model, assurance, and residual risks meet the organisation's requirements.
 
 **Cons**
 
 - Reduced service availability — not all Azure services run on Azure Local; sovereign controls may limit which features are accessible
 - Higher operational complexity — customer is responsible for infrastructure management, patching, and capacity planning in private deployments
 - Higher cost — Azure Local requires hardware investment, facilities, and operational staff; sovereign add-ons carry additional licensing
-- Slower access to innovation — new AI, analytics, and platform services typically launch in public cloud regions first and may take months or years to reach sovereign environments
-- Smaller talent pool — operating sovereign infrastructure requires specialised skills that are scarce in the NZ market
+- Service availability and update cadence depend on the selected private-cloud products and operating model; verify the exact requirements before choosing this approach.
 - DR is harder — air-gapped environments cannot replicate to public cloud regions without breaking the air gap
-- National partner cloud (the strongest sovereignty model) is not yet available in New Zealand or Australia
 
 ---
 
@@ -108,13 +106,13 @@ Each step adds control. Each step also adds cost, complexity, and constraints on
 
 | Risk | Residency posture | Sovereignty posture |
 |------|-------------------|---------------------|
-| **Foreign government data access** | Possible — provider may be compelled to produce data under foreign law (e.g., CLOUD Act). Provider has committed to challenging inappropriate requests and publishes [transparency reports](https://www.microsoft.com/en-us/corporate-responsibility/reports-hub) | Significantly reduced — customer-managed keys raise the barrier; air-gapped deployments eliminate remote access entirely |
-| **Data breach** | Provider manages security at scale with global threat intelligence; customer controls access via identity and policy | Customer carries more responsibility for infrastructure security; may lack the same depth of threat intelligence |
-| **Service outage** | Zone-redundant HA within NZ North; DR to Australia East is available but data crosses border | HA depends on your own infrastructure design; DR options are more constrained |
-| **Regulatory non-compliance** | Meets most NZ regulatory expectations; may not satisfy agencies with strict sovereignty mandates | Meets the highest compliance bar; but maintaining compliance is operationally intensive |
+| **Foreign government data access** | Assess applicable law, contracts, provider jurisdiction, data type, and access controls with qualified counsel; physical location alone does not resolve the question | Controls such as customer-managed keys or network isolation can change access paths and risks, but do not by themselves establish a legal outcome |
+| **Data breach** | Shared responsibilities depend on the service and configuration; assess provider and customer controls for the workload | Responsibilities depend on the selected platform and operating model; assess the controls and skills available |
+| **Service outage** | Zone support and cross-region recovery depend on the service, SKU, and design; cross-border recovery may move data outside NZ | Recovery depends on the design, connectivity, recovery site, and tested procedures |
+| **Regulatory non-compliance** | Assess the specific law, policy, contract, service scope, and workload; a region selection is not a compliance determination | Additional controls may help address requirements but do not guarantee compliance; assurance and operating responsibilities remain |
 | **Vendor lock-in** | Standard cloud risk; mitigated by open standards, multi-cloud strategy, and exit planning | Higher lock-in to specific hardware and deployment model; exit may be more complex |
-| **Innovation lag** | Minimal — NZ North receives Foundational and Mainstream services within 90 days of GA | Significant — sovereign and air-gapped environments receive new capabilities last, if at all |
-| **Māori data sovereignty** | Not addressed by technology alone — requires governance overlay regardless of posture | Better positioned if governance frameworks are co-designed, but technology does not guarantee compliance with tikanga |
+| **Innovation lag** | Depends on the service, SKU, feature, and region. Microsoft's category policy is not a specific availability commitment for every workload. | Depends on the products, deployment model, and release process; verify the required capabilities directly. |
+| **Māori data sovereignty** | Technology alone does not establish appropriate governance | Governance arrangements should be developed with the people and communities concerned; technology does not guarantee alignment with tikanga |
 
 ---
 
@@ -124,38 +122,34 @@ Cost differences between postures are real but vary significantly depending on s
 
 | Cost factor | Residency (NZ North) | Enhanced residency | Sovereign private cloud |
 |-------------|----------------------|-------------------|------------------------|
-| **Compute and storage** | Standard cloud pricing for NZ North | Same as residency | Hardware capital expenditure + ongoing maintenance |
-| **Licensing add-ons** | None beyond standard subscriptions | ADR add-on required for extended M365 workload coverage | Azure Local licensing + sovereign add-ons |
-| **Encryption** | Included (platform-managed keys) | Customer-managed keys via [Azure Key Vault](https://learn.microsoft.com/en-us/azure/key-vault/general/overview) — minor additional cost | Customer-managed — included in private deployment |
-| **Operational staff** | Managed by provider | Managed by provider | Customer responsibility — requires skilled staff or managed service partner |
-| **Facilities** | Not applicable | Not applicable | Data centre space, power, cooling, physical security |
-| **DR architecture** | [Azure Site Recovery](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview) to Australia East — cloud-native, consumption-based | Same | Customer-designed — may require secondary physical site |
-| **Compliance and audit** | Leverage provider certifications (SOC, ISO, IRAP) | Same, with additional transparency logs | Customer must achieve and maintain certifications independently |
+| **Compute and storage** | Model the required services, region, usage, and data transfer in the current pricing tools | Depends on selected services and options | Include infrastructure, support, facilities, and operations |
+| **Licensing** | Check current subscription and service terms | ADR and other add-ons have eligibility and licensing conditions | Check the selected Azure Local configuration and support terms |
+| **Encryption** | Key-management options vary by service | Customer-managed keys may involve key-management and operational costs | Depends on the selected platform and operating model |
+| **Operational staff** | Shared responsibilities vary by service | Shared responsibilities vary by service | Account for deployment, maintenance, monitoring, and recovery responsibilities |
+| **Facilities** | Not applicable to customer-hosted workloads | Not applicable to customer-hosted workloads | Include required space, power, cooling, connectivity, and physical security |
+| **DR architecture** | Select a service-supported design and price its secondary resources, data transfer, and testing | Same | Price the recovery site, connectivity, operational process, and testing |
+| **Compliance and audit** | Check reports and assessments for the actual service, region, and scope | Same; confirm any additional controls and commitments in scope | Assess assurance requirements and evidence for the actual deployment |
 
-**Key takeaway:** Residency is operationally cheaper and scales elastically. Sovereignty adds fixed costs (hardware, facilities, people) that do not scale down. For most NZ organisations — including government agencies operating at RESTRICTED or below — residency with enhanced controls is likely the most cost-effective posture that still meets regulatory expectations.
+**Key takeaway:** Compare the full costs and responsibilities for the chosen services and operating model. No single residency or sovereignty posture can be assumed to meet an organisation's legal, policy, or assurance requirements; make that assessment with the relevant specialists.
 
 ---
 
 ## Innovation trade-offs
 
-This is the least discussed but potentially most consequential dimension. Cloud providers invest heavily in new capabilities — AI, advanced analytics, developer tooling, security automation — and these services launch in public cloud regions first.
+Service availability, deployment options, update cadence, and data processing vary by platform and product. Verify the capabilities that matter to the workload rather than assuming a fixed difference between cloud models.
 
-**What is available in NZ North today:**
-- 70+ Azure services across compute, networking, storage, databases, AI, analytics, security, and integration
-- M365 with default data residency for core workloads
-- [ExpressRoute](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction) for private hybrid connectivity
+**What to verify for NZ North:**
+- Check the exact Azure service, SKU, model, feature, deployment type, and region in [Azure products by region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) and product documentation.
+- For AI, confirm both model availability and the deployment type's data-processing location. Microsoft's [deployment types guidance](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/deployment-types) distinguishes regional, data-zone, and global processing.
+- For Microsoft 365, check the tenant-specific Data Location card and applicable service commitments; do not infer tenant placement from the Azure region announcement.
 
-**What requires a cross-region approach today:**
-- Azure OpenAI Service — available in Australia East (~30–40ms latency), not yet GA in NZ North
-- Some Strategic-ring services that are demand-driven and may take time to reach NZ North
+**For customer-managed or isolated deployments, verify:**
+- Which Azure Local services, hardware configurations, and features are supported for the intended workload.
+- Whether required AI models, accelerators, and data-processing locations meet the design requirements.
+- How software updates, security servicing, support, and dependency management work in the chosen operating model.
+- Whether third-party products and integrations support the required network and isolation boundaries.
 
-**What is not available in sovereign private deployments:**
-- Most PaaS and SaaS innovation — Azure Local supports core IaaS and select PaaS workloads, but the breadth of services is significantly narrower than public cloud
-- AI and machine learning services — large language models, cognitive services, and GPU-accelerated workloads require public cloud infrastructure at scale
-- Rapid iteration — sovereign environments require manual updates and cannot benefit from continuous deployment of new features
-- Ecosystem integration — third-party ISV solutions built on public cloud may not function in air-gapped environments
-
-**The practical question:** If an organisation adopts a strict sovereignty posture today, will it be able to adopt AI-driven productivity tools, advanced threat detection, and data analytics capabilities at the same pace as organisations using public cloud? In most cases, no. The gap is not permanent — capabilities migrate to sovereign environments over time — but the delay can be measured in quarters to years.
+**The practical question:** Does the selected operating model support the services, data handling, recovery objectives, and assurance the organisation needs? Check current product documentation rather than assuming a fixed capability gap or roadmap.
 
 For New Zealand's education sector and public service, where digital transformation and AI adoption are active priorities, this trade-off deserves explicit attention in strategy discussions.
 
@@ -169,11 +163,11 @@ Most organisations will not sit at either extreme. The following patterns repres
 
 Deploy the majority of workloads to Azure NZ North with standard controls. Apply sovereign controls (customer-managed keys, Azure Policy, Sovereign Landing Zone) only to workloads that carry the highest classification or sensitivity.
 
-**Best for:** Government agencies operating a mix of UNCLASSIFIED and RESTRICTED workloads.
+**Best for:** Organisations whose classification and risk processes support differentiated workload controls.
 
 ### 2. Split-region with policy guardrails
 
-Use NZ North as the primary region for all data-resident workloads. Use Australia East for services not yet available in NZ North (e.g., Azure OpenAI), with Azure Policy preventing deployment to any other region.
+Use NZ North for workloads that require it and support it. If another region is needed for a service or recovery design, identify the specific data flows and controls, then configure Azure Policy to allow only the approved locations.
 
 **Best for:** Organisations that need AI capabilities today and accept controlled cross-border processing for specific workloads.
 
@@ -181,7 +175,7 @@ Use NZ North as the primary region for all data-resident workloads. Use Australi
 
 Run the most sensitive workloads on Azure Local within your own facilities, while keeping general-purpose workloads in public cloud NZ North. Use network segmentation and identity controls to maintain separation.
 
-**Best for:** Defence, intelligence, or critical infrastructure organisations with a small number of highly classified workloads alongside a larger body of standard work.
+**Best for:** Organisations with workloads that require isolation and that can operate and assure the selected private-cloud design.
 
 ### 4. Governance-led sovereignty
 
@@ -195,15 +189,15 @@ Rather than solving sovereignty through infrastructure alone, establish governan
 
 These questions are designed to surface the real constraints and priorities:
 
-1. **What is the actual classification of your data?** Most government data is UNCLASSIFIED or IN-CONFIDENCE — residency in NZ North is sufficient for these levels.
+1. **What is the actual classification and applicable policy?** Confirm the organisation's own requirements with its security and risk authorities; region choice alone does not establish suitability.
 
-2. **Is there a specific legal or regulatory requirement for sovereignty, or is it a perceived expectation?** The [Privacy Act 2020](https://www.legislation.govt.nz/act/public/2020/0031/latest/LMS23223.html) does not require data to be stored in New Zealand. Cloud First policy supports public cloud adoption.
+2. **What legal, contractual, or policy requirements apply?** Ask legal and privacy advisers to interpret the [Privacy Act 2020](https://www.legislation.govt.nz/act/public/2020/0031/latest/LMS23223.html), government policy, and applicable contracts for the specific use case.
 
-3. **What is the cost of delayed innovation?** If your organisation is investing in AI, automation, or data-driven decision-making, a restrictive sovereignty posture may slow adoption by quarters or years.
+3. **Which specific capabilities must be available?** Compare required services, models, features, updates, and integrations against the documented support for each proposed operating model.
 
-4. **Do you hold data about Māori communities?** If so, Māori data sovereignty is a distinct obligation that requires governance arrangements — not just infrastructure decisions.
+4. **Do you hold data about Māori communities?** If so, include Māori data sovereignty and Te Tiriti considerations in governance arrangements, alongside the technical design.
 
-5. **What is your DR tolerance?** If data cannot leave New Zealand under any circumstances, your DR options are limited to zone-to-zone within NZ North. Is that acceptable?
+5. **What are your recovery objectives and location constraints?** Verify service-specific recovery options. If data cannot leave New Zealand, confirm that the chosen design can meet recovery requirements within that boundary.
 
 6. **Do you have the operational capability to run sovereign infrastructure?** Azure Local requires skilled staff, facilities, and ongoing investment. If you don't have this today, the cost and risk of building it may outweigh the sovereignty benefit.
 
@@ -215,18 +209,18 @@ These questions are designed to surface the real constraints and priorities:
 
 | Dimension | Residency | Enhanced residency | Sovereign (private) |
 |-----------|-----------|-------------------|---------------------|
-| **Data location** | NZ North | NZ North | Your facilities |
-| **Foreign legal exposure** | Present | Reduced (encryption) | Eliminated (air-gapped) |
-| **Service breadth** | Full | Full | Limited |
-| **Innovation access** | Current | Current | Delayed |
-| **Operational cost** | Low (cloud-native) | Low–Medium | High (fixed) |
+| **Data location** | Confirm for each service and data flow | Confirm service commitments, configuration, and data flows | Depends on deployment topology, connectivity, and operating practices |
+| **Jurisdiction and access risk** | Requires legal and service-specific assessment | Requires legal and service-specific assessment; controls may reduce particular risks | Requires legal, operational, and supply-chain assessment; isolation does not itself guarantee a legal outcome |
+| **Service breadth** | Varies by service, SKU, and feature | Varies by service, configuration, and eligibility | Depends on the private-cloud product and supported workloads |
+| **Innovation access** | Verify required service, feature, and model availability | Verify required service, feature, and model availability | Verify supported products, updates, and integrations |
+| **Operational cost** | Estimate for the workload | Estimate service, licence, and control costs | Estimate infrastructure, staffing, support, and facilities |
 | **Māori data sovereignty** | Requires governance overlay | Requires governance overlay | Requires governance overlay |
-| **DR flexibility** | Zone + cross-region | Zone + cross-region | Zone only (if air-gapped) |
-| **Suitability** | Most organisations | Regulated industries | Defence, intelligence, CNI |
+| **DR flexibility** | Service-specific; validate zone and cross-region options | Service-specific; validate zone and cross-region options | Depends on connectivity and recovery-site design |
+| **Suitability** | Depends on workload requirements and risk assessment | Depends on controls, commitments, eligibility, and risk assessment | Depends on isolation requirements and the ability to operate and assure the platform |
 
 The right answer depends on your data classification, regulatory obligations, innovation priorities, operational capability, and — for organisations holding Māori data — your commitment to governance frameworks that honour Te Tiriti o Waitangi.
 
-For most New Zealand organisations, **residency with enhanced controls** provides the strongest balance of compliance, capability, and cost. Sovereignty should be pursued deliberately where the risk profile demands it — not as a default posture driven by assumption.
+Choose a posture from the organisation's documented requirements, service-specific evidence, risk assessment, and operating capability. Revisit the choice when the workload, terms, or available services change.
 
 ---
 
@@ -244,6 +238,10 @@ For most New Zealand organisations, **residency with enhanced controls** provide
 - [Advanced Data Residency (ADR)](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency)
 - [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/overview)
 - [Azure Products by Region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/)
+- [Azure regions and nonpaired regions](https://learn.microsoft.com/en-us/azure/reliability/regions-paired)
+- [Azure service categories and regional availability policy](https://learn.microsoft.com/en-us/azure/reliability/availability-service-by-category)
+- [Microsoft 365 services data locations](https://learn.microsoft.com/en-us/microsoft-365/enterprise/o365-data-locations)
+- [Azure Storage redundancy](https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy)
 - [New Zealand Information Security Manual (NZISM)](https://nzism.gcsb.govt.nz/)
 - [Protective Security Requirements (PSR)](https://www.protectivesecurity.govt.nz/)
 
@@ -254,7 +252,5 @@ For most New Zealand organisations, **residency with enhanced controls** provide
 - [Data Residency — Summary](/data-residency-summary)
 - [Data Residency — Detail](/data-residency-detail)
 - [Cloud Residency, Sovereignty, and NZ North — FAQ](/cloud-faq)
-- [Azure NZ North — Region Dossier](/nz-cloud-region)
-- [Azure Services in Use — NZ North Availability Assessment](/service-availability)
-
-
+- [Azure New Zealand North — Start Here](/nz-cloud-region)
+- [NZ North Service Availability — Verification Guide](/service-availability)

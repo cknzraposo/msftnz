@@ -2,7 +2,7 @@
 title: "Getting Started with Azure App Service — A Guide for New Zealand Organisations"
 description: "A plain-language introduction to Azure App Service: what it is, how it works, key features, pricing tiers, and what New Zealand organisations need to know before adopting it."
 date: 2026-05-04
-lastmod: 2026-05-04
+lastmod: 2026-10-16
 author: "Chandima Kulathilake"
 tags: ["azure", "app-service", "web-apps", "paas", "new-zealand", "hosting", "devops"]
 category: "App Services"
@@ -36,18 +36,18 @@ Azure App Service is a fully managed platform-as-a-service (PaaS) for building, 
 
 ## Why it matters for New Zealand organisations
 
-Before Azure's New Zealand North region launched in December 2024, hosting a public-cloud web application with data residency in New Zealand was not straightforward. Teams typically chose Australia East (Sydney) or Australia Southeast (Melbourne) as the nearest option.
+Before Azure's New Zealand North region launched in December 2024, organisations commonly deployed Azure workloads in Australia. A New Zealand region now provides a local deployment option for services and configurations supported there.
 
-The NZ North region changes this:
+For App Service, verify the required plan, feature, and availability in your subscription using Microsoft's [Azure products by region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) catalogue and the [NZ North service availability guide](/service-availability).
 
 | Consideration | Before NZ North | With NZ North |
 |---|---|---|
-| **Data residency** | Data at rest in Australia | Data at rest in Auckland |
-| **Latency (NZ users)** | ~30–40 ms (Sydney) | ~5–10 ms (Auckland) |
-| **Privacy Act alignment** | Data offshore by default | Data stored in Aotearoa New Zealand |
-| **Regulatory discussion** | More complex for public sector | Simpler for many agencies |
+| **Deployment location** | Azure services deployed in an available Australian region | App Service can be considered where the required plan and features are available in NZ North |
+| **Latency** | Measure from the users and networks that matter | Measure from the users and networks that matter; region choice is not a latency guarantee |
+| **Data location** | Check the selected service and its dependencies | Check App Service, application data, monitoring, backup, and dependencies separately |
+| **Regulatory assessment** | Assess the requirements for the workload | A local region may support data-location requirements but does not by itself establish compliance |
 
-App Service is a **Mainstream-ring service**, meaning it is available in NZ North as a priority alongside other core services.
+Microsoft classifies App Service as a [mainstream service](https://learn.microsoft.com/en-us/azure/reliability/availability-service-by-category). This describes general regional deployment policy; it does not guarantee that every App Service plan, feature, quota, or capacity is available in New Zealand North.
 
 ---
 
@@ -69,7 +69,7 @@ For most New Zealand enterprise or government workloads, **Standard** or **Premi
 
 ### Deployment slots
 
-Standard tier and above support **deployment slots** — additional named environments (e.g., staging, UAT) that run alongside your production slot. You can swap traffic between slots with no downtime. This is the recommended approach for zero-downtime deployments.
+Standard tier and above support **deployment slots** — additional named environments (e.g., staging, UAT) that run alongside your production slot. Swapping slots can reduce deployment downtime, but application warm-up, session state, dependencies, and swap settings affect the result; test the process for your app.
 
 ### Scaling
 
@@ -90,7 +90,7 @@ Premium v3 plans support outbound VNet Integration, allowing your app to reach r
 
 ### Private Endpoints
 
-Private Endpoints allow inbound traffic to your app to flow entirely within a Virtual Network, so the app is never reachable from the public internet. This is the correct model for internal-facing systems with strict network controls.
+Private Endpoints provide inbound access to your app through a private IP address in a Virtual Network. Configure the app's public network access and access restrictions separately if it must not be reachable through its public endpoint.
 
 ### Managed Identity
 
@@ -140,14 +140,14 @@ Logs are available through **Log Analytics Workspace** and can be queried with K
 
 ## Data residency in the NZ North region
 
-When you create an App Service Plan in the `newzealandnorth` region:
+If the required App Service plan and features are available to your subscription in `newzealandnorth`, you can deploy the plan and app there. Check the data handling of each related resource separately:
 
-- **App code and configuration** are stored and executed in Auckland
-- **Log data** sent to a Log Analytics Workspace in the same region stays in NZ
-- **Application Insights data** — configure the Application Insights resource in NZ North to keep telemetry in-region
-- **Backups** — configure backup storage to an Azure Storage account in NZ North
+- **Application code and runtime** — the app runs with the plan in its selected region; review service documentation and deployment dependencies.
+- **Application data and files** — choose supported data services and regions separately; app code location does not place connected databases or storage automatically.
+- **Logs and telemetry** — select supported locations for Application Insights and Log Analytics, then check each service's data-location documentation and any cross-region processing.
+- **Backups** — check the backup feature's supported storage, redundancy, and secondary-region behaviour before relying on a data-location assumption.
 
-If you use a paired or secondary region for disaster recovery, data written to that region is subject to that region's data residency (e.g., Australia East). Document this explicitly in your data management plan if residency is a compliance requirement.
+New Zealand North has no paired region. If you design recovery in another region, confirm App Service and dependency support, the recovery process, and where replicated or backed-up data is stored. Document any cross-border data flows if location is a requirement.
 
 ---
 
@@ -204,13 +204,14 @@ GitHub repo → GitHub Actions → Azure Container Registry
 
 ## Getting started — next steps
 
-1. **Create an App Service Plan** in the `newzealandnorth` region at the tier appropriate for your workload
-2. **Create a Web App** under that plan, selecting your runtime or container
-3. **Connect your repository** via GitHub Actions or Azure DevOps for automated deployments
-4. **Enable a Managed Identity** and wire it to Key Vault for secrets management
-5. **Enable Application Insights** and point it to a Log Analytics Workspace in NZ North
-6. **Define your scaling rules** before go-live based on expected traffic patterns
-7. **Review your networking model** — if the app handles sensitive data, evaluate VNet Integration and Private Endpoints
+1. **Check regional support and quota** for the App Service plan and features your workload needs
+2. **Create an App Service Plan** in `newzealandnorth` if the required configuration is available and appropriate
+3. **Create a Web App** under that plan, selecting your runtime or container
+4. **Connect your repository** via GitHub Actions or Azure DevOps for automated deployments
+5. **Enable a Managed Identity** and wire it to Key Vault for secrets management
+6. **Enable Application Insights** and select supported locations for telemetry resources
+7. **Define your scaling rules** before go-live based on expected traffic patterns
+8. **Review your networking model** — if the app handles sensitive data, evaluate VNet Integration, Private Endpoints, and public network access settings
 
 ---
 
@@ -218,7 +219,8 @@ GitHub repo → GitHub Actions → Azure Container Registry
 
 - [Azure App Service documentation](https://learn.microsoft.com/en-us/azure/app-service/)
 - [App Service pricing](https://azure.microsoft.com/en-au/pricing/details/app-service/windows/)
-- [Azure New Zealand North region overview](collection.html?dir=cloud)
+- [Azure New Zealand North — Start Here](/nz-cloud-region)
+- [NZ North Service Availability — Verification Guide](/service-availability)
 - [App Service networking features](https://learn.microsoft.com/en-us/azure/app-service/networking-features)
 - [Deploy to App Service using GitHub Actions](https://learn.microsoft.com/en-us/azure/app-service/deploy-github-actions)
 - [Application Insights overview](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview)

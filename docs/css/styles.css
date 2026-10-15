@@ -273,6 +273,12 @@ main {
     color: var(--color-text-muted);
 }
 
+.article-verification {
+    margin-top: 0.25rem;
+    font-size: 0.82rem;
+    color: var(--color-text-soft);
+}
+
 .article-body {
     padding: 2rem 2.5rem;
     margin-bottom: 2rem;

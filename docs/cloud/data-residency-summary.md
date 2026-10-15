@@ -2,7 +2,9 @@
 title: "Data Residency & Data Sovereignty — Summary"
 description: "A summary of data residency and data sovereignty options for Azure and Microsoft 365, tailored for New Zealand organisations."
 date: 2026-03-09
-lastmod: 2026-06-08
+lastmod: 2026-10-16
+verifiedOn: 2026-10-16
+reviewBy: 2027-01-14
 author: "Chandima Kulathilake"
 tags: ["data-residency", "data-sovereignty", "azure", "microsoft-365", "new-zealand"]
 category: "Cloud Strategy"
@@ -31,33 +33,32 @@ related:
 
 Microsoft provides a range of options to help organisations control where their data is stored and how it is governed across Azure and Microsoft 365.
 
-**Data residency** is the commitment that your data at rest stays in a geographic region you choose. **Data sovereignty** goes further — it means your data is subject only to the laws and governance of the country where it resides, with controls over who can access it and under what authority.
+**Data residency** describes where specified data is stored, subject to the service's terms and documentation. **Data sovereignty** involves broader questions of jurisdiction, authority, governance, and control. A storage location or technical setting alone does not determine legal jurisdiction or establish sovereignty.
 
 ### What's available today for New Zealand
 
 - **Azure New Zealand North** (Auckland) — live since December 2024. You can deploy Azure resources locally and enforce this with policy.
-- **Microsoft 365 data residency** — new NZ tenants store core workload data (Exchange, SharePoint, OneDrive, Teams) in New Zealand by default. Contact your Microsoft account team to discuss data location options for existing tenants.
-- **[Advanced Data Residency (ADR)](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency)** — an add-on that extends residency commitments to additional workloads including Copilot, Defender, and Purview.
-- **[Microsoft Cloud for Sovereignty](https://learn.microsoft.com/en-us/industry/sovereignty/cloud-for-sovereignty)** — additional controls for regulated industries, available across all Azure regions.
+- **Microsoft 365 data location** — check your tenant's Data Location card and the current [service data location documentation](https://learn.microsoft.com/en-us/microsoft-365/enterprise/o365-data-locations). Applicable commitments depend on the service, tenant, Product Terms, and any eligible add-on.
+- **[Advanced Data Residency (ADR)](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-overview)** — for eligible customers, ADR provides defined commitments for listed workloads and prioritized tenant migration services. Check current eligibility, licensing, and coverage.
+- **[Microsoft Cloud for Sovereignty](https://learn.microsoft.com/en-us/industry/sovereignty/cloud-for-sovereignty)** — a set of cloud capabilities and guidance; assess the specific controls, services, and customer commitments rather than treating it as a regional data-location guarantee.
 
 ### At a glance
 
 | What you need | Microsoft 365 | Azure |
 |---------------|---------------|-------|
-| Data stays in NZ | Default residency (NZ North) | Deploy to NZ North region |
-| Extended workload coverage | [ADR](https://learn.microsoft.com/en-us/microsoft-365/enterprise/advanced-data-residency) add-on | [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) (allowed regions) |
-| Per-user regional placement | [Multi-Geo](https://learn.microsoft.com/en-us/microsoft-365/enterprise/microsoft-365-multi-geo) | Region selection per resource |
-| Compliance controls | [Purview](https://learn.microsoft.com/en-us/purview/purview) compliance boundaries | [Sovereign Landing Zone](https://learn.microsoft.com/en-us/industry/sovereignty/slz-overview) |
-| Maximum isolation | M365 Local (air-gapped) | [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/overview) (on-premises) |
-| Encryption you control | [Customer Key](https://learn.microsoft.com/en-us/microsoft-365/compliance/customer-key-overview) for M365 | [Customer-managed keys](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models) ([Key Vault](https://learn.microsoft.com/en-us/azure/key-vault/general/overview)) |
+| Verify data location | Check the tenant's Data Location card and service-specific commitments | Check the service's data-location documentation; a resource region alone may not describe all processing or dependencies |
+| Additional residency commitments | Check [ADR eligibility and coverage](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-adr-overview) and current Product Terms | Check service-specific options and contracts |
+| Regional placement | [Multi-Geo](https://learn.microsoft.com/en-us/microsoft-365/enterprise/microsoft-365-multi-geo) subject to its terms and supported workloads | Region selection per supported resource |
+| Governance controls | Microsoft Purview capabilities and tenant controls, subject to service scope | [Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) can restrict resource locations; it does not govern every data flow |
+| Infrastructure location | Confirm the relevant Microsoft 365 service and tenant commitments | [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/overview) runs supported workloads on customer-managed infrastructure; assess its connectivity and operational model |
+| Encryption controls | Review [Customer Key](https://learn.microsoft.com/en-us/microsoft-365/compliance/customer-key-overview) scope and prerequisites | Review [customer-managed key](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models) support for the specific service and configuration |
 
 ---
 
 ## Related pages
 
-- [Data Residency — Detail](/data-residency-detail) — full breakdown of M365, Azure, sovereignty controls, NZ timeline, and legal considerations
+- [Data Residency — Detail](/data-residency-detail) — workload, commitment, and control details for Microsoft 365 and Azure
 - [Cloud Residency, Sovereignty, and NZ North — FAQ](/cloud-faq) — common questions about data residency, sovereignty, and the NZ region
-- [Azure NZ North — Region Dossier](/nz-cloud-region) — available services, service rings, DR architecture, compliance, pricing
+- [Azure New Zealand North — Start Here](/nz-cloud-region) — region facts, resilience, and next steps
+- [NZ North Service Availability — Verification Guide](/service-availability) — how to check service and workload support
 - [Data Residency vs Data Sovereignty — Decisions to Make](/decisions-to-make) — trade-offs and decision framework for leaders
-
-

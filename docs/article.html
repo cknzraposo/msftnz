@@ -118,13 +118,27 @@
 
             document.title = `${title} — Resources`;
 
-            document.getElementById('article-header').innerHTML = `
-                <h1>${title}</h1>
-                <div class="article-meta">
-                    ${data.category ? `<span>${data.category}</span>` : ''}
-                    ${data.lastmod || data.date ? ` &middot; Updated ${data.lastmod || data.date}` : ''}
-                    ${data.author ? ` &middot; ${data.author}` : ''}
-                </div>`;
+            const articleHeader = document.getElementById('article-header');
+            const titleElement = document.createElement('h1');
+            titleElement.textContent = title;
+
+            const articleMeta = document.createElement('div');
+            articleMeta.className = 'article-meta';
+            const metadata = [
+                data.category,
+                data.lastmod || data.date ? `Updated ${data.lastmod || data.date}` : '',
+                data.author
+            ].filter(Boolean);
+            articleMeta.textContent = metadata.join(' · ');
+
+            if (data.verifiedOn) {
+                const verification = document.createElement('div');
+                verification.className = 'article-verification';
+                verification.textContent = `Sources checked ${data.verifiedOn}${data.reviewBy ? ` · Review by ${data.reviewBy}` : ''}`;
+                articleMeta.appendChild(verification);
+            }
+
+            articleHeader.replaceChildren(titleElement, articleMeta);
 
             const requiresLegalDisclaimer =
                 disclaimerFlags.includes('legal-compliance') ||

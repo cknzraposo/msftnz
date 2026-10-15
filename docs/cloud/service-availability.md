@@ -1,14 +1,19 @@
 ---
-title: "Azure Services in Use — NZ North Availability Assessment"
-description: "A service-by-service assessment of Azure resources currently deployed, comparing availability across Australia East, New Zealand North, and Global, with migration readiness notes."
+title: "NZ North Service Availability — Verification Guide"
+description: "A practical guide for checking whether an Azure service, SKU, feature, and deployment type is currently supported in New Zealand North."
 date: 2026-03-09
-lastmod: 2026-06-08
+lastmod: 2026-10-16
+verifiedOn: 2026-10-16
+reviewBy: 2027-01-14
 author: "Chandima Kulathilake"
-tags: ["azure", "new-zealand-north", "australia-east", "service-availability", "migration"]
+tags: ["azure", "new-zealand-north", "service-availability", "architecture"]
 category: "Cloud Infrastructure"
 slug: "service-availability"
 layout: "page"
 draft: true
+disclaimers:
+  - "legal-compliance"
+  - "not-legal-advice"
 related:
   - "/nz-cloud-region"
   - "/cloud-faq"
@@ -16,168 +21,70 @@ related:
   - "/decisions-to-make"
 ---
 
-# Azure Services in Use — NZ North Availability Assessment
+# NZ North Service Availability — Verification Guide
 
 ---
 
-*This document is shared for discussion purposes only. It does not constitute a binding commitment or commercial offer. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.*
+*This guide is for planning, not a deployment or migration commitment. Availability changes, and a regional listing does not guarantee that every SKU, feature, capacity, or subscription is available to your workload.*
 
 ---
 
-## Purpose
+## Start with the exact deployment
 
-This document maps every Azure service currently deployed in the environment against its availability in the **New Zealand North** region. It is intended to support planning for workload migration from Australia East to NZ North by identifying which services can move today, which have caveats, and which cannot move yet.
+Azure availability is not a simple yes/no attribute of a product name. Before approving a design or migration, verify all of the following for the target **New Zealand North** region:
 
-**Source data:** Azure Resource Graph export (October 2025).
+1. **Service and resource provider** — identify the exact Azure service and resource type, rather than relying on a broad inventory label.
+2. **SKU and hardware** — check the required tier, VM family, accelerator, storage type, database configuration, and quota.
+3. **Feature and deployment type** — confirm that the specific feature, model, API version, and deployment option is supported in that region.
+4. **Availability zones** — verify the service's zone support separately; three zones in the region does not mean every service is zone-enabled.
+5. **Capacity and access** — check subscription eligibility, quota, capacity, preview requirements, and any service-specific restrictions in the portal or with Microsoft.
+6. **Data handling** — distinguish the resource's deployment region from where its data is stored, replicated, backed up, or processed.
+7. **Migration and recovery** — confirm whether the resource can be moved, must be redeployed, or needs a service-specific export, replication, or recovery procedure.
 
-**Important:** Service availability changes regularly. Always verify against the official [Azure Products by Region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) page before making deployment decisions.
+## Authoritative sources
 
----
+- [Azure products by region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) — use the current regional catalogue to search for a service. Check the service's own documentation for SKU, feature, and deployment-type limits.
+- [Azure regions list](https://learn.microsoft.com/en-us/azure/reliability/regions-list) — confirm the region identifier, physical location, pairing, and zone support.
+- [Availability-zone support by service](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-service-support) — check whether a service and its features support zones in the target region.
+- **Azure portal** — confirm the actual SKU, quota, subscription, and capacity available to your workload at the time of deployment.
+- **Microsoft service documentation and release notes** — check preview status, feature exclusions, and service-specific deployment or migration requirements.
 
-## Summary
+If these sources do not establish support for the exact configuration, mark it **unconfirmed** and get confirmation before making a production commitment. A missing listing is not, on its own, proof that a service is unavailable.
 
-| Status | Services | Resources |
-|--------|----------|-----------|
-| ✅ Available in NZ North | 28 | 3,539 |
-| ✅* Available with caveats | 1 | 7 |
-| ⏳ Expected soon | 2 | 8 |
-| ❌ Not available (strategic/deprecated) | 4 | 19 |
-| 🌐 Global service (region not applicable) | 5 | 63 |
-| ❓ Requires clarification | 3 | 102 |
-| **Total** | **43** | **3,738** |
+## Examples of why a product-name check is not enough
 
-**Key finding:** ~95% of deployed resources (by count) are services that are available in NZ North today.
+### Azure File Sync
 
----
+Microsoft's [Azure Files and Azure File Sync release notes](https://learn.microsoft.com/en-us/azure/storage/files/files-whats-new) list New Zealand North as a region where Azure File Sync became available in the fourth quarter of 2025. Use the current region list and service prerequisites to confirm support for the exact deployment.
 
-## ✅ Available in NZ North
+### Microsoft Fabric
 
-These services are generally available in NZ North and can be deployed or migrated. They represent the vast majority of the current footprint.
+Microsoft's [Fabric region availability table](https://learn.microsoft.com/en-us/fabric/admin/region-availability) lists New Zealand North for Power BI and Fabric workloads. The table also identifies feature exceptions; for example, Fabric App (preview) is listed as unavailable in the region. Check the specific workload and feature rather than treating the overall Fabric listing as universal support.
 
-| Service | Description | Current Region | Resources | Available in NZ | Official Docs |
-|---------|-------------|----------------|-----------|-----------------|---------------|
-| Azure API Management | Publish, secure, and analyse APIs | Australia East | 7 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/api-management/api-management-key-concepts) |
-| Azure App Service | Web apps, API apps, mobile backends | Australia East | 103 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/app-service/overview) |
-| Azure Arc-enabled Servers | Manage on-premises servers in Azure | Australia East | 444 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/azure-arc/servers/overview) |
-| Azure Backup | Backup and disaster recovery | Australia East | 1 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/backup/backup-overview) |
-| Azure Backup & Site Recovery | Backup and DR orchestration | Australia East | 10 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview) |
-| Azure CDN | Content delivery network | Australia East, Global | 33 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/cdn/cdn-overview) |
-| Azure Cache for Redis | In-memory data store and cache | Australia East | 7 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-overview) |
-| Azure Compute | Virtual machines and scale sets | Australia East, AU Southeast | 1,149 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/virtual-machines/overview) |
-| Azure Container Registry | Private Docker container registry | Australia East | 18 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-intro) |
-| Azure Cosmos DB | Globally distributed NoSQL database | Australia East | 2 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/cosmos-db/introduction) |
-| Azure Data Factory | Cloud data integration service | Australia East | 21 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/data-factory/introduction) |
-| Azure Database for MySQL | Managed MySQL database | Australia East | 1 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/mysql/single-server/overview) |
-| Azure Database for PostgreSQL | Managed PostgreSQL database | Australia East | 4 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/overview) |
-| Azure Event Grid | Event routing for reactive apps | Australia East | 44 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/event-grid/overview) |
-| Azure Key Vault | Secrets, keys, and certificate management | Australia East | 81 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/key-vault/general/overview) |
-| Azure Kubernetes Service (AKS) | Managed Kubernetes clusters | Australia East | 4 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/aks/what-is-aks) |
-| Azure Log Analytics | Log data collection and analysis | Australia East, AU Southeast | 61 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview) |
-| Azure Logic Apps | Workflow automation (no-code) | Australia East | 30 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) |
-| Azure Maintenance | Planned maintenance control | Australia East | 5 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/virtual-machines/maintenance-configurations) |
-| Azure Managed Identities | Identity for Azure resources | Australia East, AU Southeast | 78 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) |
-| Azure Migrate | Discover, assess, migrate workloads | Australia East | 3 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/migrate/migrate-services-overview) |
-| Azure Monitor | Monitoring and diagnostics platform | Australia East, Global | 837 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/azure-monitor/overview) |
-| Azure Network | VNets, load balancers, firewalls | AU East, AU Southeast, Global | 1,680 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/networking/fundamentals/networking-overview) |
-| Azure Portal Dashboards | Custom dashboards and reports | Australia East, Central US | 28 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboards) |
-| Azure SQL Database | Managed relational database | Australia East | 76 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview) |
-| Azure SQL Virtual Machines | SQL Server on VMs | Australia East | 23 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview) |
-| Azure Service Bus | Enterprise messaging and relays | Australia East | 3 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview) |
-| Azure Storage | Blob, file, queue, table storage | AU East, AU Southeast, SE Asia | 163 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction) |
-| Microsoft App (Container Apps) | Containerised web apps | Australia East | 131 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/azure/container-apps/overview) |
-| Microsoft Graph Services | Microsoft 365 data connectivity | Global | 1 | ✅ Yes | [Docs](https://learn.microsoft.com/en-us/graph/overview) |
+### Azure AI models and inference
 
----
+Model availability and data processing depend on the model, deployment type, and region. Microsoft's [deployment types documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/deployment-types) distinguishes regional, data-zone, and global processing. A resource deployed in a region does not, by itself, prove that inference processing is restricted to that country. Verify the current model/region matrix and the processing location required by your design.
 
-## ✅* Available with caveats
+## Keep a reviewable evidence record
 
-These services are available in NZ North but with architectural considerations.
+For each workload, record the verification date and the evidence used:
 
-| Service | Description | Current Region | Resources | Available in NZ | Caveat | Official Docs |
-|---------|-------------|----------------|-----------|-----------------|--------|---------------|
-| Azure Virtual Desktop | Virtual desktop infrastructure | Australia East | 7 | ✅ Yes* | Global service — connectivity is geo-deployed but host pools are region-specific. Host pools can be placed in NZ North; control plane remains global. | [Docs](https://learn.microsoft.com/en-us/azure/virtual-desktop/overview) |
+| Field | Record |
+|-------|--------|
+| Service and resource type | Exact Azure product and resource provider |
+| Region | `newzealandnorth` |
+| SKU and features | Tier, hardware, model, feature, and deployment type |
+| Availability evidence | Microsoft source URL and relevant page/table or portal check |
+| Capacity and eligibility | Subscription, quota, capacity, preview, and access checks |
+| Data handling | Storage, replication, backup, and processing locations |
+| Migration and recovery | Supported migration path, dependencies, and tested recovery steps |
+| Verified on / review by | Date evidence was checked and the next review date |
 
----
-
-## ⏳ Expected soon (not yet GA in NZ North)
-
-These services are not yet generally available in NZ North but have published ETAs.
-
-| Service | Description | Current Region | Resources | Available in NZ | ETA | Official Docs |
-|---------|-------------|----------------|-----------|-----------------|-----|---------------|
-| Azure File Sync | On-premises file server sync | Australia East | 5 | ⏳ Not yet | Q4 CY25 | [Docs](https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-introduction) |
-| Microsoft Fabric | End-to-end analytics solution | Australia East | 3 | ⏳ Not yet | Q4 CY25 | [Docs](https://learn.microsoft.com/en-us/fabric/get-started/microsoft-fabric-overview) |
-
-> **Note:** These ETAs are based on information available as of October 2025 and may have changed. Verify current status with your Microsoft account team or the [Azure Products by Region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) page.
-
----
-
-## ❌ Not available in NZ North
-
-These services are not available in NZ North and are unlikely to become available due to strategic classification or deprecation.
-
-| Service | Description | Current Region | Resources | Available in NZ | Reason | Official Docs |
-|---------|-------------|----------------|-----------|-----------------|--------|---------------|
-| Azure Automation | Process automation with runbooks | Australia East | 57 | ❌ No | Not available in NZ North. Consider [Azure Logic Apps](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview) or [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) as alternatives. | [Docs](https://learn.microsoft.com/en-us/azure/automation/overview) |
-| Azure Databricks | Apache Spark-based analytics platform | Australia East | 8 | ❌ No | Strategic service — deployed to select regions based on demand. Remains in Australia East for now. | [Docs](https://learn.microsoft.com/en-us/azure/databricks/introduction/) |
-| Azure DevTest Labs | Rapid dev/test environment provisioning | Australia East | 6 | ❌ No | Not being deployed to new regions. Consider [Microsoft Dev Box](https://learn.microsoft.com/en-us/azure/dev-box/overview-what-is-microsoft-dev-box) or [Azure Deployment Environments](https://learn.microsoft.com/en-us/azure/deployment-environments/overview-what-is-azure-deployment-environments) as alternatives. | [Docs](https://learn.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview) |
-| Azure Migrate (Classic) | Legacy migration tools | Australia East | 2 | ❌ No | Deprecated. Use [Azure Migrate](https://learn.microsoft.com/en-us/azure/migrate/migrate-services-overview) (current version), which is available in NZ North. | [Docs](https://learn.microsoft.com/en-us/azure/migrate/migrate-services-overview) |
-
----
-
-## 🌐 Global services (region not applicable)
-
-These services operate globally or at the geo level. They are not tied to a specific Azure region, so the concept of "moving to NZ North" does not apply. Data handling varies by service.
-
-| Service | Description | Current Region | Resources | Available in NZ | Notes | Official Docs |
-|---------|-------------|----------------|-----------|-----------------|-------|---------------|
-| Azure Active Directory B2C | Consumer identity and access management | Australia (geo) | 3 | 🌐 N/A | Not a regional service. B2C is being deprecated in favour of [Microsoft Entra External ID](https://learn.microsoft.com/en-us/entra/external-id/customers/overview-customers-ciam). | [Docs](https://learn.microsoft.com/en-us/azure/active-directory-b2c/overview) |
-| Azure Alerts Management | Centralised alert processing and routing | Global | 26 | 🌐 N/A | Part of Azure Monitor — global service. | [Docs](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview) |
-| Azure Communication Services | Voice, video, chat, SMS APIs | Global | 5 | 🌐 N/A | Global service deployed to geos. | [Docs](https://learn.microsoft.com/en-us/azure/communication-services/overview) |
-| Azure DevOps | CI/CD, boards, repos | Australia East | 2 | 🌐 N/A | Global service deployed to geos. Data residency follows the organisation's geo selection. | [Docs](https://learn.microsoft.com/en-us/azure/devops/user-guide/what-is-azure-devops) |
-| Azure SaaS Applications | Third-party SaaS resource references | Global | 1 | 🌐 N/A | Marketplace references — requires clarification on which specific applications are in use. | [Docs](https://learn.microsoft.com/en-us/marketplace/azure-marketplace-overview) |
-
----
-
-## ❓ Requires clarification
-
-These services need further investigation to confirm NZ North availability or current usage.
-
-| Service | Description | Current Region | Resources | Available in NZ | Question | Official Docs |
-|---------|-------------|----------------|-----------|-----------------|----------|---------------|
-| Azure Elastic | Elasticsearch-compatible search and analytics | Australia East | 2 | ❓ Unconfirmed | NZ North availability not confirmed in source data. Verify against [Azure Products by Region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/). | [Docs](https://learn.microsoft.com/en-us/azure/partner-solutions/elastic/overview) |
-| Azure Operations Management | IT operations suite | Australia East, AU Southeast | 99 | ❓ Unconfirmed | Likely refers to the legacy OMS, which has been superseded by [Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/overview). Confirm whether these resources have been migrated. | [Docs](https://learn.microsoft.com/en-us/azure/azure-monitor/overview) |
-| Azure SaaS Applications | Third-party SaaS resource references | Global | 1 | ❓ Unconfirmed | Clarify which SaaS applications are referenced. Availability depends on the specific ISV. | [Docs](https://learn.microsoft.com/en-us/marketplace/azure-marketplace-overview) |
-
----
-
-## Migration readiness snapshot
-
-Based on this assessment, the environment's migration posture is:
-
-```
-  ✅ Ready to move          — 3,546 resources (95%)
-  ⏳ Waiting on NZ North GA —     8 resources  (<1%)
-  ❌ Must stay or rearchitect—    19 resources  (<1%)
-  🌐 Global (no move needed) —    63 resources  (2%)
-  ❓ Needs clarification     —   102 resources  (3%)
-```
-
-The vast majority of the footprint — including the largest consumers (Compute, Network, Monitor, Storage, Arc) — is ready for NZ North today.
-
-Services that must remain in Australia East (Automation, Databricks) or that are deprecated (DevTest Labs, Migrate Classic) represent a small fraction of the estate. These should be evaluated individually for alternative approaches or accepted as cross-region dependencies.
-
----
-
-*This document is shared for discussion purposes only. It does not constitute a binding commitment or commercial offer. Service availability is subject to change. Always verify against the official [Azure Products by Region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) page before making deployment or migration decisions.*
-
----
+Recheck before procurement, architecture approval, production deployment, or migration. For an existing estate, build the service list from a fresh inventory and assess each resource against the actual configuration. Do not use an old resource count or a general region catalogue as proof that a workload is ready to move.
 
 ## Related pages
 
-- [Azure NZ North — Region Dossier](/nz-cloud-region) — DR architecture, compliance, connectivity
-- [Azure NZ North — FAQ](/cloud-faq) — common questions about the region
-- [Data Residency vs Sovereignty — Decisions to Make](/decisions-to-make) — trade-offs, risks, and alternatives
-- [Data Residency — Summary](/data-residency-summary) — one-page overview of residency options
-
-
+- [Azure New Zealand North — Start Here](/nz-cloud-region) — region facts, resilience, and the next steps
+- [Cloud Residency, Sovereignty, and NZ North — FAQ](/cloud-faq) — common New Zealand cloud questions
+- [Data Residency & Data Sovereignty — Summary](/data-residency-summary) — short comparison of options
+- [Data Residency vs Data Sovereignty — Decisions to Make](/decisions-to-make) — questions and trade-offs for decision-makers

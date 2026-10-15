@@ -1,10 +1,12 @@
 ---
-title: "Azure New Zealand North — Cloud Region Dossier"
-description: "A comprehensive dossier of the Azure New Zealand North region including available services, service rings, disaster recovery, compliance, latency, and pricing."
+title: "Azure New Zealand North — Start Here"
+description: "A Microsoft-source-backed guide to the Azure New Zealand North region, service availability, resilience, and data location for New Zealand organisations."
 date: 2026-03-09
-lastmod: 2026-06-08
+lastmod: 2026-10-16
+verifiedOn: 2026-10-16
+reviewBy: 2027-01-14
 author: "Chandima Kulathilake"
-tags: ["azure", "new-zealand-north", "cloud-region", "services", "compliance", "disaster-recovery", "pricing"]
+tags: ["azure", "new-zealand-north", "cloud-region", "services", "compliance", "disaster-recovery"]
 category: "Cloud Infrastructure"
 slug: "nz-cloud-region"
 layout: "page"
@@ -14,12 +16,13 @@ disclaimers:
   - "not-legal-advice"
 related:
   - "/cloud-faq"
+  - "/service-availability"
   - "/data-residency-summary"
   - "/data-residency-detail"
   - "/decisions-to-make"
 ---
 
-# Azure New Zealand North — Cloud Region Dossier
+# Azure New Zealand North — Start Here
 
 ---
 
@@ -27,108 +30,109 @@ related:
 
 ---
 
+## Start here
+
+- **Check whether a product is available:** use Microsoft's [Azure products by region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) catalogue and the product's own regional limits. Availability can differ by SKU, feature, deployment type, subscription, and capacity.
+- **Check a workload already in use:** follow the [NZ North service availability verification guide](/service-availability). It explains what to confirm before treating a resource as deployable or migratable.
+- **Plan resilience:** use the [disaster recovery guidance](#disaster-recovery-architecture) below. NZ North has no paired region; each service has its own replication and recovery options.
+- **Check Microsoft 365 data location:** use the tenant-specific Data Location card in the Microsoft 365 admin centre and Microsoft's [service data location documentation](https://learn.microsoft.com/en-us/microsoft-365/enterprise/o365-data-locations).
+- **Compare residency and governance options:** see the [data residency summary](/data-residency-summary), [detailed guide](/data-residency-detail), and [decision framework](/decisions-to-make).
+
 ## Region Overview
 
 | Attribute | Detail |
 |-----------|--------|
 | **Region name** | New Zealand North |
+| **Azure region identifier** | `newzealandnorth` |
 | **Location** | Auckland, Aotearoa New Zealand |
-| **Launched** | December 2024 |
-| **Availability Zones** | 3 (sub-2ms inter-zone latency) |
-| **Paired region** | None — customers must architect their own DR strategy |
-| **Recommended DR target** | Australia East (Sydney), ~30–40ms latency |
-| **Energy** | 100% renewable (solar, wind, hydro) |
-| **[ExpressRoute](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction)** | Supported — private, dedicated connectivity to Auckland DCs |
-| **Global backbone** | Connected to Microsoft's global WAN |
+| **Opened** | December 2024 ([Microsoft announcement](https://news.microsoft.com/en-nz/2024/12/12/new-zealands-first-hyperscale-cloud-is-open-for-business/)) |
+| **Availability zones** | 3. This is a region-level capability; individual services, SKUs, and features can have different zone support. Check Microsoft's [availability-zone service support](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-service-support). |
+| **Paired region** | None. Microsoft lists New Zealand North as a nonpaired region. |
+| **Energy** | Microsoft says the region is supported by a 10-year agreement for renewable attributes from Contact Energy's Te Huka 3 geothermal station. This is not a claim that the facility is physically supplied only by a particular generation source. |
 
 ---
 
-## Service Rings — How Azure Rolls Out Services
+## Service availability
 
-Azure categorises every service into one of three deployment rings. These determine how quickly a service appears in a new region like NZ North.
+Microsoft groups services as foundational, mainstream, or strategic. These categories describe Microsoft's general regional deployment policy; they are not a live catalogue or a guarantee that a particular feature, SKU, model, or quota is available.
 
-| Ring | What it means | Deployment commitment | Examples |
-|------|--------------|----------------------|----------|
-| **Foundational** | Essential, widely used, stable services that form the base of any cloud deployment | Deployed to all recommended regions within 90 days of region GA, or at region launch | Virtual Machines, Blob Storage, Virtual Network, Azure Key Vault |
-| **Mainstream** | Broadly adopted services with wide appeal | Deployed to all recommended regions within 90 days of region GA; alternate regions are demand-driven | Azure Functions, AKS, Cosmos DB, Azure SQL Database |
-| **Strategic** (formerly Specialized) | Niche, industry-focused, or hardware-dependent services; may be early-stage or have specific constraints | Demand-driven — starts in select regions, expands based on customer need | Azure OpenAI Service, Quantum Computing, some IoT services |
+| Category | Microsoft's general policy |
+|----------|-----------------------------|
+| **Foundational** | Available in recommended and alternate regions when the region is generally available, or within 90 days after a new foundational service becomes generally available. |
+| **Mainstream** | Available in recommended regions within 90 days of region general availability. Availability in alternate regions is demand-driven. |
+| **Strategic** | Targeted offerings, often industry-specific or dependent on specialised hardware; availability is demand-driven. |
 
-Services typically progress from Strategic → Mainstream → Foundational as adoption grows. NZ North is a **recommended region**, so it receives Foundational and Mainstream services as a priority.
+Categories can change over time. A category does not establish the availability of every service configuration in New Zealand North. Verify the exact product in [Azure products by region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) and the relevant product documentation before committing to an architecture.
 
 ---
 
 ## Disaster Recovery Architecture
 
-Since NZ North has **no paired region**, you need to design your own DR strategy.
+New Zealand North is a **nonpaired region**. A paired region is not required for every multi-region design: some services support replication between customer-selected regions, while others need a separate deployment and recovery process. Plan and test recovery for each service against its documented capabilities and your recovery objectives.
 
-### Option 1: Zone-to-zone (within NZ North)
+### Availability zones
 
-- Use [availability zones](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview) for high availability within Auckland
-- Sub-2ms latency between zones
-- Protects against single-DC failure
-- Does not protect against region-wide events
+- Use zones only where the specific service and SKU support them. Review Microsoft's [availability-zone service support](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-service-support).
+- Zone-redundant designs can help withstand some datacentre or zone failures. They do not, by themselves, provide recovery from a region-wide outage.
+- Confirm the application's failover behaviour, dependencies, capacity, recovery time objective, and recovery point objective.
 
-### Option 2: Region-to-region (NZ North → Australia East)
+### Cross-region recovery
 
-- Use [Azure Site Recovery](https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview) for VM replication
-- Use [geo-redundant storage (GRS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy) — select Australia East as the replication target
-- ~30–40ms latency Auckland ↔ Sydney
-- Protects against region-wide events but data leaves NZ
+- Choose a secondary region only after checking support for the service, SKU, replication mode, and recovery workflow. Australia East may be an option for some architectures; it is not a universal or automatically configured target.
+- For Azure Storage, the secondary region used by GRS is determined by the primary region's Microsoft-defined pairing and cannot be selected by the customer. New Zealand North is nonpaired. Check the current [Azure Storage redundancy documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy) and regional support before selecting a redundancy option; do not assume Australia East can be chosen as a GRS target.
+- Other services may support replication to a customer-selected region, service-native backup, or a separately deployed recovery environment. Follow that service's reliability guide and test the full recovery process.
+- Cross-border replication or failover can move or expose data outside New Zealand. Assess the data-location implications, contractual requirements, egress charges, latency, and operational dependencies.
 
-### Recommended approach
+### Recovery planning checklist
 
-Combine both: zone-redundant deployments within NZ North for HA, with Australia East as a DR target for business continuity. Ensure this architecture aligns with your data residency obligations — if data cannot leave NZ under any circumstances, zone-to-zone DR within NZ North is the only option.
+1. Define business-approved recovery time and recovery point objectives for each workload.
+2. Identify service-specific zone and cross-region recovery options from Microsoft documentation.
+3. Document what data is replicated, where it is stored, and how failover is initiated.
+4. Confirm quotas, capacity, identity, networking, DNS, and dependencies in the recovery region.
+5. Run recovery exercises and record the actual results.
 
 ---
 
-## Compliance and Certifications
+## Compliance and assurance
 
-| Certification | Scope |
-|---------------|-------|
-| SOC 1, SOC 2, SOC 3 | Security, availability, processing integrity, confidentiality |
-| ISO/IEC 27001 | Information security management |
-| ISO/IEC 27017 | Cloud security controls |
-| ISO/IEC 27018 | Cloud privacy |
-| ISO 9001 | Quality management |
-| PCI-DSS | Payment card industry |
-| IRAP (PROTECTED) | Australian government security benchmark — widely referenced in NZ |
-| NZISM alignment | New Zealand Information Security Manual |
+Do not treat a region name, a Microsoft compliance page, or a certification label as evidence that every Azure service in New Zealand North is in scope. Check the current Microsoft compliance documentation and Service Trust Portal reports for the exact service, region, boundary, assessment period, and customer responsibilities.
+
+- [Microsoft Azure compliance documentation](https://learn.microsoft.com/en-us/azure/compliance/)
+- [Microsoft Service Trust Portal](https://servicetrust.microsoft.com/)
+- [New Zealand Information Security Manual (NZISM)](https://nzism.gcsb.govt.nz/)
+
+An Australian government assessment such as IRAP is not, by itself, evidence of an assessment of New Zealand North. Organisations remain responsible for their own risk assessment, assurance, and authorisation decisions.
 
 ### Māori Data Sovereignty
 
-Microsoft has committed to working with Māori communities on data governance, aligning with the principles of [Te Mana Raraunga](https://www.temanararaunga.maori.nz/) (the Māori Data Sovereignty Network). This includes co-design with iwi and Māori organisations for governance oversight. Frameworks are being formalised — engage with Microsoft NZ for current status and partnership details.
+Physical data location alone does not establish appropriate governance of data about Māori. Organisations should engage the people and communities concerned and consider [Te Mana Raraunga](https://www.temanararaunga.maori.nz/) principles and Te Tiriti o Waitangi obligations when defining stewardship, access, permitted use, and accountability.
 
 ---
 
-## Connectivity and Latency
+## Connectivity and performance
 
-| Route | Expected latency |
-|-------|-----------------|
-| Within NZ North (AZ-to-AZ) | < 2ms |
-| NZ North ↔ Australia East | ~30–40ms |
-| NZ North ↔ Southeast Asia | ~120–150ms |
-| NZ North ↔ US West | ~150–180ms |
+Check the current [Azure products by region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) catalogue and [ExpressRoute documentation](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction) for service and peering availability. ExpressRoute connectivity depends on the selected peering location, circuit provider, and network design; it does not guarantee a specific end-to-end latency or performance outcome.
 
-**ExpressRoute** is available for private, dedicated connectivity from on-premises to the Auckland data centres. This bypasses the public internet, providing lower latency and higher security for hybrid deployments.
+Measure latency and throughput from the locations and networks your users and workloads will actually use. Treat third-party measurements as observations for their test conditions, not Microsoft service commitments.
 
 ---
 
 ## Key References
 
-- [Azure Products by Region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) — live service availability
-- [Azure Region Pairs and DR](https://learn.microsoft.com/en-us/azure/reliability/regions-paired) — disaster recovery guidance
-- [NZ Cloud Region Customer Playbook](https://info.microsoft.com/rs/157-GQE-382/images/EN-CNTNT-eBook-SRGCM12351.pdf) — Microsoft's planning guide
-- [Azure Compliance Documentation](https://learn.microsoft.com/en-us/azure/compliance/) — certifications and standards
-- [AzureCharts Region Scope](https://azurecharts.com/regions) — third-party service comparison tool
-- [NZ North Latency Testing](https://luke.geek.nz/azure/nz-north-latency-testing/) — independent latency benchmarks
+- [Azure regions list](https://learn.microsoft.com/en-us/azure/reliability/regions-list) — region identifiers, locations, paired regions, and zone support
+- [Azure regions and nonpaired regions](https://learn.microsoft.com/en-us/azure/reliability/regions-paired) — region-pair guidance
+- [Available services by region type and category](https://learn.microsoft.com/en-us/azure/reliability/availability-service-by-category) — general service deployment policy
+- [Azure products by region](https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/) — current regional product availability
+- [Azure Storage redundancy](https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy) — storage redundancy options and secondary-region behaviour
+- [Azure reliability guidance](https://learn.microsoft.com/en-us/azure/reliability/overview-reliability-guidance) — service-specific resiliency information
+- [Microsoft New Zealand region announcement](https://news.microsoft.com/en-nz/2024/12/12/new-zealands-first-hyperscale-cloud-is-open-for-business/) — launch and sustainability statements
 
 ---
 
 ## Related pages
 
 - [Cloud Residency, Sovereignty, and NZ North — FAQ](/cloud-faq) — common questions about region capabilities and compliance
+- [NZ North Service Availability — Verification Guide](/service-availability) — how to confirm service and workload support
 - [Data Residency — Summary](/data-residency-summary) — one-page overview of data residency and sovereignty options
 - [Data Residency — Detail](/data-residency-detail) — full breakdown of M365, Azure, sovereignty controls, and legal considerations
 - [Data Residency vs Data Sovereignty — Decisions to Make](/decisions-to-make) — trade-offs and decision framework for leaders
-
-
