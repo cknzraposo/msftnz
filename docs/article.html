@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading…</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1 id="collection-title">Resources</h1>
+        <p id="collection-subtitle"></p>
+    </header>
+    <main>
+        <a id="back-link" href="index.html" class="back-link">← Back</a>
+        <div id="article-header" class="article-header"></div>
+        <div id="disclaimer" class="disclaimer-box hidden"></div>
+        <div id="article-body" class="article-body"></div>
+        <div id="related-section"></div>
+    </main>
+    <footer>
+        <p id="footer-disclaimer">This site provides independent guidance for general information and learning. The views expressed are those of the author and do not represent Microsoft or any other employer. Content is provided as is, without warranties of accuracy, completeness, or suitability for a particular purpose. Product capabilities, availability, and terms may change; verify current official documentation and seek appropriate professional advice before making decisions.</p>
+        <p id="footer-tagline">Sharing knowledge, building communities</p>
+        <div class="footer-links">
+            <a id="footer-github" href="https://github.com/cknzraposo/">My GitHub Profile</a>
+            <a id="footer-substack" href="https://chandima.substack.com/">Read my Substack</a>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        function parseFrontmatter(text) {
+            const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+            if (!match) return { data: {}, content: text };
+            const yamlBlock = match[1];
+            const data = {};
+            yamlBlock.split('\n').forEach(line => {
+                const kv = line.match(/^([\w-]+)\s*:\s*"?([^"\n]+?)"?\s*$/);
+                if (kv) data[kv[1]] = kv[2].trim();
+            });
+            const relatedMatch = yamlBlock.match(/related:\s*\n((?:[ \t]+-[ \t]+.+\n?)*)/);
+            if (relatedMatch) {
+                data.related = relatedMatch[1]
+                    .match(/- "?([^"\n]+)"?/g)
+                    ?.map(r => r.replace(/^-\s+"?/, '').replace(/"$/, '').replace(/^\//, '').trim()) || [];
+            }
+            return { data, content: match[2] };
+        }
+
+        function hasLegalContent(content) {
+            return /privacy act|sovereignty|legal|law|compliance|cloud act/i.test(content);
+        }
+
+        function parseYamlList(yamlBlock, key) {
+            const listMatch = yamlBlock.match(new RegExp(key + ':\\s*\\n((?:[ \\t]+-[ \\t]+.+\\n?)*)'));
+            if (!listMatch) return [];
+            return listMatch[1]
+                .match(/- "?([^"\n]+)"?/g)
+                ?.map(item => item.replace(/^-\s+"?/, '').replace(/"$/, '').trim()) || [];
+        }
+
+        async function init() {
+            const params = new URLSearchParams(window.location.search);
+            const dir = params.get('dir');
+            const slug = params.get('doc');
+
+            if (!dir || !slug) {
+                document.getElementById('article-body').innerHTML =
+                    '<div class="error-msg">Missing parameters. <a href="index.html">Back to all resources →</a></div>';
+                return;
+            }
+
+            // Load registry for metadata, back-link label, and internal link resolution
+            let registry, col, slugMap = {}, globalSlugMap = {};
+            try {
+                const res = await fetch('./collections.json');
+                registry = await res.json();
+                const site = registry.site || {};
+                if (site.disclaimer) {
+                    document.getElementById('footer-disclaimer').textContent = site.disclaimer.footer || document.getElementById('footer-disclaimer').textContent;
+                    document.getElementById('footer-tagline').textContent = site.disclaimer.tagline || document.getElementById('footer-tagline').textContent;
+                }
+                if (site.links) {
+                    if (site.links.github) document.getElementById('footer-github').href = site.links.github;
+                    if (site.links.substack) document.getElementById('footer-substack').href = site.links.substack;
+                }
+
+                // Build cross-collection slug→dir map for link rewriting
+                registry.collections.forEach(c => {
+                    c.articles.forEach(a => { globalSlugMap[a.slug] = c.dir; });
+                });
+                col = registry.collections.find(c => c.dir === dir);
+                if (col) {
+                    slugMap = Object.fromEntries(col.articles.map(a => [a.slug, a]));
+                    document.getElementById('collection-title').textContent = col.title;
+                    document.getElementById('collection-subtitle').textContent = col.subtitle || '';
+                    document.getElementById('back-link').href = `collection.html?dir=${dir}`;
+                    document.getElementById('back-link').textContent = `← Back to ${col.title}`;
+                }
+            } catch { /* non-fatal — article still renders without registry */ }
+
+            // Fetch and render markdown
+            let raw;
+            try {
+                const res = await fetch(`./${dir}/${slug}.md`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                raw = await res.text();
+            } catch {
+                document.getElementById('article-body').innerHTML =
+                    `<div class="error-msg">Could not load "<strong>${slug}</strong>". <a href="collection.html?dir=${dir}">Back to collection →</a></div>`;
+                return;
+            }
+
+            const { data, content } = parseFrontmatter(raw);
+            const frontmatterMatch = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
+            const frontmatterBlock = frontmatterMatch ? frontmatterMatch[1] : '';
+            const disclaimerFlags = parseYamlList(frontmatterBlock, 'disclaimers').map(value => value.toLowerCase());
+            const title = data.title || slugMap[slug]?.title || slug;
+
+            document.title = `${title} — Resources`;
+
+            const articleHeader = document.getElementById('article-header');
+            const titleElement = document.createElement('h1');
+            titleElement.textContent = title;
+
+            const articleMeta = document.createElement('div');
+            articleMeta.className = 'article-meta';
+            const metadata = [
+                data.category,
+                data.lastmod || data.date ? `Updated ${data.lastmod || data.date}` : '',
+                data.author
+            ].filter(Boolean);
+            articleMeta.textContent = metadata.join(' · ');
+
+            if (data.verifiedOn) {
+                const verification = document.createElement('div');
+                verification.className = 'article-verification';
+                verification.textContent = `Sources checked ${data.verifiedOn}${data.reviewBy ? ` · Review by ${data.reviewBy}` : ''}`;
+                articleMeta.appendChild(verification);
+            }
+
+            articleHeader.replaceChildren(titleElement, articleMeta);
+
+            const requiresLegalDisclaimer =
+                disclaimerFlags.includes('legal-compliance') ||
+                disclaimerFlags.includes('not-legal-advice') ||
+                (dir === 'cloud' && hasLegalContent(content));
+
+            if (requiresLegalDisclaimer) {
+                const d = document.getElementById('disclaimer');
+                d.classList.remove('hidden');
+                d.textContent = 'This document is intended as a guide for clarity and shared understanding. It is not legal advice. Organisations should consult legal counsel for specific compliance and sovereignty decisions.';
+            }
+
+            function normalizeSegments(input) {
+                const out = [];
+                input.split('/').forEach(seg => {
+                    if (!seg || seg === '.') return;
+                    if (seg === '..') {
+                        out.pop();
+                        return;
+                    }
+                    out.push(seg);
+                });
+                return out;
+            }
+
+            function resolveRelativeMdSlug(currentSlug, relativePath) {
+                const base = currentSlug.includes('/') ? currentSlug.slice(0, currentSlug.lastIndexOf('/') + 1) : '';
+                const joined = base + relativePath;
+                const normalized = normalizeSegments(joined).join('/');
+                return normalized.replace(/\.md$/i, '');
+            }
+
+            // Rewrite internal links to article routes after rendering
+            marked.use({ gfm: true, breaks: false });
+            let html = marked.parse(content);
+            const temp = document.createElement('div');
+            temp.innerHTML = html;
+
+            temp.querySelectorAll('a[href]').forEach(link => {
+                const href = link.getAttribute('href');
+                if (!href || href.startsWith('#')) return;
+                if (/^(https?:|mailto:|tel:|\/\/)/i.test(href)) return;
+
+                const hashIndex = href.indexOf('#');
+                const queryIndex = href.indexOf('?');
+                let suffixIndex = -1;
+                if (hashIndex !== -1 && queryIndex !== -1) suffixIndex = Math.min(hashIndex, queryIndex);
+                else suffixIndex = Math.max(hashIndex, queryIndex);
+                const suffix = suffixIndex === -1 ? '' : href.slice(suffixIndex);
+
+                if (href.startsWith('/')) {
+                    const slugOnly = href.slice(1).split('#')[0].split('?')[0];
+                    if (globalSlugMap[slugOnly]) {
+                        link.setAttribute('href', `article.html?dir=${globalSlugMap[slugOnly]}&doc=${slugOnly}${suffix}`);
+                    }
+                    return;
+                }
+
+                const localPath = href.split('#')[0].split('?')[0];
+                if (!/\.md$/i.test(localPath)) return;
+
+                const resolvedSlug = resolveRelativeMdSlug(slug, localPath);
+                const targetDir = globalSlugMap[resolvedSlug] || dir;
+                link.setAttribute('href', `article.html?dir=${targetDir}&doc=${resolvedSlug}${suffix}`);
+            });
+            document.getElementById('article-body').innerHTML = temp.innerHTML;
+
+            // Related articles
+            if (data.related?.length > 0) {
+                const related = data.related.map(s => slugMap[s]).filter(Boolean);
+                if (related.length > 0) {
+                    document.getElementById('related-section').innerHTML = `
+                        <div class="related-section">
+                            <h2>Related Articles</h2>
+                            <div class="related-grid">
+                                ${related.map(a => `
+                                <a href="article.html?dir=${dir}&doc=${a.slug}" class="related-card">
+                                    <h3>${a.title}</h3>
+                                    <p>${a.description}</p>
+                                </a>`).join('')}
+                            </div>
+                        </div>`;
+                }
+            }
+        }
+        init();
+    </script>
+</body>
+</html>

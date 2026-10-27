@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ entry.title }}{% if entry.type != "home" %} &mdash; Resources{% endif %}</title>
+    <meta name="description" content="{{ entry.description }}">
+    <link rel="stylesheet" href="{{ siteData.basePath }}css/styles.css">
+    <link rel="stylesheet" href="{{ siteData.basePath }}css/static.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+        {% if entry.type == "article" %}
+        <p class="site-heading">{{ entry.collection.title }}</p>
+        <p>{{ entry.collection.subtitle }}</p>
+        {% elif entry.type == "collection" %}
+        <h1>{{ entry.title }}</h1>
+        <p>{{ entry.subtitle }}</p>
+        {% else %}
+        <h1>{{ siteData.site.title }}</h1>
+        {% endif %}
+    </header>
+    <main id="main">{{ content | safe }}</main>
+    <footer>
+        <p id="footer-disclaimer">{{ siteData.site.disclaimer.footer }}</p>
+        <p>{{ siteData.site.disclaimer.tagline }}</p>
+        <div class="footer-links">
+            <a href="{{ siteData.site.links.github }}">My GitHub Profile</a>
+            <a href="{{ siteData.site.links.substack }}">Read my Substack</a>
+        </div>
+    </footer>
+    {% if entry.type == "legacy" %}<script src="{{ siteData.basePath }}legacy.js" defer></script>{% endif %}
+</body>
+</html>

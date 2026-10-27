@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading…</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1 id="page-title">Resources</h1>
+        <p id="page-subtitle"></p>
+    </header>
+    <main>
+        <a href="index.html" class="back-link">← Back to all resources</a>
+        <div id="collection-intro" class="collection-intro hidden"><p id="collection-desc"></p></div>
+        <div id="collections"></div>
+    </main>
+    <footer>
+        <p id="footer-disclaimer">This site provides independent guidance for general information and learning. The views expressed are those of the author and do not represent Microsoft or any other employer. Content is provided as is, without warranties of accuracy, completeness, or suitability for a particular purpose. Product capabilities, availability, and terms may change; verify current official documentation and seek appropriate professional advice before making decisions.</p>
+        <p id="footer-tagline">Sharing knowledge, building communities</p>
+        <div class="footer-links">
+            <a id="footer-github" href="https://github.com/cknzraposo/">My GitHub Profile</a>
+            <a id="footer-substack" href="https://chandima.substack.com/">Read my Substack</a>   
+        </div>
+    </footer>
+    <script>
+        async function init() {
+            const params = new URLSearchParams(window.location.search);
+            const dir = params.get('dir');
+            if (!dir) { window.location.replace('index.html'); return; }
+
+            let registry;
+            try {
+                const res = await fetch('./collections.json');
+                registry = await res.json();
+
+                const site = registry.site || {};
+                if (site.disclaimer) {
+                    document.getElementById('footer-disclaimer').textContent = site.disclaimer.footer || document.getElementById('footer-disclaimer').textContent;
+                    document.getElementById('footer-tagline').textContent = site.disclaimer.tagline || document.getElementById('footer-tagline').textContent;
+                }
+                if (site.links) {
+                    if (site.links.github) document.getElementById('footer-github').href = site.links.github;
+                    if (site.links.substack) document.getElementById('footer-substack').href = site.links.substack;
+                }
+            } catch {
+                document.getElementById('collections').innerHTML =
+                    '<div class="error-msg">Could not load collections registry.</div>';
+                return;
+            }
+
+            const col = registry.collections.find(c => c.dir === dir);
+            if (!col) {
+                document.getElementById('collections').innerHTML =
+                    `<div class="error-msg">Collection "<strong>${dir}</strong>" not found. <a href="index.html">Back to all resources →</a></div>`;
+                return;
+            }
+
+            document.title = `${col.title} — Resources`;
+            document.getElementById('page-title').textContent = col.title;
+            document.getElementById('page-subtitle').textContent = col.subtitle || '';
+
+            if (col.description) {
+                document.getElementById('collection-intro').classList.remove('hidden');
+                document.getElementById('collection-desc').textContent = col.description;
+            }
+
+            const grouped = {};
+            col.articles.forEach(a => {
+                const cat = a.category || 'Articles';
+                if (!grouped[cat]) grouped[cat] = [];
+                grouped[cat].push(a);
+            });
+
+            const container = document.getElementById('collections');
+            Object.entries(grouped).forEach(([category, items]) => {
+                const section = document.createElement('div');
+                section.className = 'category-group';
+                section.innerHTML = `
+                    <div class="category-label">${category}</div>
+                    <div class="articles-grid">
+                        ${items.map(a => `
+                        <a href="article.html?dir=${dir}&doc=${a.slug}" class="article-card">
+                            <h3>${a.title}</h3>
+                            <p>${a.description}</p>
+                            <span class="read-link">Read →</span>
+                        </a>`).join('')}
+                    </div>`;
+                container.appendChild(section);
+            });
+        }
+        init();
+    </script>
+</body>
+</html>

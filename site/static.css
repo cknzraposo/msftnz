@@ -1,0 +1,110 @@
+/* Keep migration-specific styles separate from the currently published site. */
+.site-heading {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.article-body {
+    overflow-wrap: anywhere;
+}
+
+.article-body h1 {
+    display: block;
+    font-size: 1.6rem;
+    margin: 1.8rem 0 0.6rem;
+}
+
+.article-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+.table-scroll {
+    overflow-x: auto;
+    overflow-wrap: normal;
+    margin: 1.25rem 0;
+}
+
+.table-scroll table {
+    margin: 0;
+}
+
+.table-scroll th,
+.table-scroll td,
+.table-scroll th:first-child,
+.table-scroll td:first-child {
+    min-width: 12rem;
+}
+
+.table-scroll th:first-child,
+.table-scroll td:first-child {
+    min-width: 16rem;
+}
+
+.article-body pre {
+    overflow-wrap: normal;
+}
+
+[id] {
+    scroll-margin-top: 1rem;
+}
+
+.skip-link {
+    position: absolute;
+    top: -5rem;
+    left: 1rem;
+    padding: 0.75rem;
+    background: var(--color-bg-soft);
+    color: var(--color-primary);
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+@media print {
+    header,
+    .back-link,
+    .related-section,
+    .skip-link,
+    .footer-links {
+        display: none;
+    }
+
+    main,
+    .article-body,
+    .article-header {
+        padding: 0;
+        max-width: none;
+        box-shadow: none;
+    }
+
+    .table-scroll {
+        overflow: visible;
+    }
+
+    .table-scroll th,
+    .table-scroll td {
+        min-width: 0;
+    }
+
+    pre {
+        white-space: pre-wrap;
+    }
+
+    h2,
+    h3 {
+        break-after: avoid;
+    }
+
+    footer {
+        background: none;
+        color: var(--color-text);
+        padding: 1rem 0;
+    }
+}

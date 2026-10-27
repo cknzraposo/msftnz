@@ -1,0 +1,88 @@
+---
+pagination:
+  data: siteData.pages
+  size: 1
+  alias: entry
+permalink: "{{ entry.output }}"
+layout: base.njk
+eleventyExcludeFromCollections: true
+---
+{% if entry.type == "home" %}
+    <section class="content-section">
+        <h2>{{ siteData.site.welcomeHeading }}</h2>
+        <p>{{ siteData.site.welcomeText }}</p>
+    </section>
+    {% for section in entry.sections %}
+    <section class="content-section">
+        <h2>{{ section.title }}</h2>
+        <p>{{ section.description }}</p>
+        <div class="collections-grid">
+        {% for collection in section.collections %}
+            <a class="collection-card" href="{{ collection.url }}">
+                {% if collection.icon %}<div class="icon" aria-hidden="true">{{ collection.icon }}</div>{% endif %}
+                <h3>{{ collection.title }}</h3>
+                <p>{{ collection.description }}</p>
+                <p class="text-muted">Audience: {{ collection.audience }}</p>
+                <span class="article-count">{{ collection.articles.length }} article{% if collection.articles.length != 1 %}s{% endif %}</span>
+            </a>
+        {% else %}
+            <p>{{ section.emptyMessage }}</p>
+        {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+{% elif entry.type == "collection" %}
+    <a class="back-link" href="{{ siteData.basePath }}">Back to all resources</a>
+    <div class="collection-intro"><p>{{ entry.description }}</p></div>
+    {% for group in entry.groups %}
+    <section class="category-group">
+        <h2 class="category-label">{{ group.category }}</h2>
+        <div class="articles-grid">
+        {% for article in group.articles %}
+            <a class="article-card" href="{{ article.url }}">
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.description }}</p>
+                <span class="read-link">Read &rarr;</span>
+            </a>
+        {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+{% elif entry.type == "article" %}
+    <a class="back-link" href="{{ entry.collection.url }}">Back to {{ entry.collection.title }}</a>
+    <article>
+        <div class="article-header">
+            <h1{% if entry.headingId %} id="{{ entry.headingId }}"{% endif %}>{{ entry.title }}</h1>
+            <div class="article-meta">{{ entry.category }} &middot; Updated {{ entry.lastmod }} &middot; {{ entry.author }}</div>
+            {% if entry.verifiedOn %}
+            <div class="article-verification">Sources checked {{ entry.verifiedOn }}{% if entry.reviewBy %} &middot; Review by {{ entry.reviewBy }}{% endif %}</div>
+            {% endif %}
+        </div>
+        {% if entry.legal %}<aside class="disclaimer-box">{{ siteData.legalDisclaimer }}</aside>{% endif %}
+        <div class="article-body">{{ entry.body | safe }}</div>
+    </article>
+    {% if entry.related.length %}
+    <section class="related-section">
+        <h2>Related Articles</h2>
+        <div class="related-grid">
+        {% for article in entry.related %}
+            <a class="related-card" href="{{ article.url }}">
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.description }}</p>
+            </a>
+        {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+{% elif entry.type == "legacy" %}
+    <h1>{{ entry.title }}</h1>
+    <p id="route-status">Choose a current page below. An existing bookmark will redirect automatically when JavaScript is enabled.</p>
+    <nav aria-label="Current pages">
+        <ul>
+        {% for key, url in entry.routes %}
+            <li><a data-legacy-key="{{ key }}" href="{{ url }}">{{ key }}</a></li>
+        {% endfor %}
+        </ul>
+    </nav>
+    <p><a href="{{ siteData.basePath }}">All resources</a></p>
+{% endif %}
