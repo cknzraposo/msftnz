@@ -1,0 +1,157 @@
+{
+  "collection": "sovereignty-framework",
+  "checkedOn": "2026-10-28",
+  "reviewBy": "2027-01-26",
+  "purpose": "Editorial claim-and-evidence register. A source review is not legal approval, tenant validation, or a customer commitment. This file is not a publication source.",
+  "framing": {
+    "basis": "Independent contextual adaptation of supplied ANZ and New Zealand framing material; user confirmed clearance for contextual use. Original PDFs are excluded from Git and generated output.",
+    "sourceDocuments": [
+      {
+        "title": "Sovereign By Design: Balancing Control, Security, and Resilience",
+        "version": "1.0, 3 July 2026",
+        "pages": "5-7, 15-23",
+        "use": "Three discussion lenses, scoped assurance, disruption scenarios, and explicit trade-offs; no verbatim reproduction or vendor-wide guarantees."
+      },
+      {
+        "title": "New Zealand Sovereign Cloud Field Guide",
+        "pages": "1-2",
+        "use": "Questions about requirement types, data paths, operational access, continuity, and local applicability; not a legal control matrix."
+      }
+    ]
+  },
+  "claims": [
+    {
+      "id": "encryption-boundary",
+      "status": "qualified",
+      "finding": "Server-side customer-managed encryption still has the resource provider perform encryption and decryption. Key ownership alone does not establish provider inability to process plaintext. Client-side encryption has a different boundary and potential functionality limits.",
+      "method": "Microsoft Learn MCP search and full-page fetch",
+      "sources": ["https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models"],
+      "articles": ["sovereignty-control-evidence", "sovereignty-options"]
+    },
+    {
+      "id": "confidential-computing",
+      "status": "qualified",
+      "finding": "Data-in-use protection is scoped to the enabled and properly configured trusted execution environment. The full application's inputs, outputs, dependencies, and configuration still require assessment.",
+      "method": "Microsoft Learn MCP search and full-page fetch",
+      "sources": ["https://learn.microsoft.com/en-us/azure/confidential-computing/overview"],
+      "articles": ["sovereignty-control-evidence"]
+    },
+    {
+      "id": "responsibility-and-assurance",
+      "status": "verified-documentation",
+      "finding": "Responsibilities vary by service model. Customer responsibilities remain; certificates and reports have service-specific scopes and do not establish the customer's compliance.",
+      "limitations": "No gated audit reports or customer configurations were reviewed.",
+      "method": "Microsoft Learn MCP search and full-page fetch",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility",
+        "https://learn.microsoft.com/en-us/azure/compliance/offerings/"
+      ],
+      "articles": ["sovereignty-framework-start", "sovereignty-control-evidence", "sovereignty-options", "sovereignty-decision-record"]
+    },
+    {
+      "id": "nz-north-and-storage-recovery",
+      "status": "verified-documentation",
+      "finding": "The regions list records New Zealand North with three availability zones and no paired region. Zone support varies by service. Storage geo-redundancy uses a secondary determined by the primary region, not a freely selected customer destination.",
+      "limitations": "Does not verify subscription capacity, every service's regional availability, or a particular recovery design.",
+      "method": "Microsoft Learn MCP search and full-page fetch",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/reliability/regions-list",
+        "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy"
+      ],
+      "articles": ["sovereignty-continuity", "sovereignty-options"]
+    },
+    {
+      "id": "azure-local-disconnected",
+      "status": "qualified",
+      "finding": "Disconnected operations use a local control plane and selected supported services; eligibility, support, operational readiness, and hardware requirements apply, including a dedicated management cluster.",
+      "limitations": "No general claim about eligibility, availability to a customer, service parity, node count, or standard connected deployments automatically meeting offline requirements.",
+      "method": "Microsoft Learn MCP search and full-page fetch",
+      "sources": ["https://learn.microsoft.com/en-us/azure/azure-local/manage/disconnected-operations-overview?view=azloc-2610"],
+      "articles": ["sovereignty-continuity", "sovereignty-options"]
+    },
+    {
+      "id": "nz-overseas-disclosure",
+      "status": "qualified",
+      "finding": "IPP 12 has several grounds for overseas disclosure. OPC distinguishes disclosure from a provider acting as an agent for storage or processing; provider use for its own purposes changes the analysis. Applicability needs workload-specific review.",
+      "method": "Direct review of New Zealand legislation and regulator guidance",
+      "sources": [
+        "https://www.privacy.org.nz/privacy-principles/12/",
+        "https://www.privacy.org.nz/responsibilities/disclosing-personal-information-outside-new-zealand/",
+        "https://www.legislation.govt.nz/act/public/2020/0031/latest/LMS23376.html",
+        "https://www.privacy.org.nz/privacy-principles/codes-of-practice/hipc2020/"
+      ],
+      "articles": ["sovereignty-framework-start", "sovereignty-requirements"]
+    },
+    {
+      "id": "maori-data-governance",
+      "status": "qualified",
+      "finding": "Te Mana Raraunga's Charter frames Māori data beyond an individual's personal information and relates it to Māori rights. Proposed engagement questions are editorial recommendations, not claimed endorsement or a complete statement of Te Tiriti obligations.",
+      "method": "Direct review of the Te Mana Raraunga Charter",
+      "sources": ["https://www.temanararaunga.maori.nz/tutohinga"],
+      "articles": ["sovereignty-framework-start", "sovereignty-requirements"]
+    },
+    {
+      "id": "nz-government-assessment-resources",
+      "status": "qualified",
+      "finding": "GCDO Cloud First, cloud assessment, Risk Discovery Tool, jurisdictional risk guidance, and the NZISM manual are linked as scoped assessment resources. Readers must confirm organisational mandate, information classification, location conditions, applicable manual edition and controls, and required agency approvals. Government policy is not presented as a universal rule for all New Zealand organisations.",
+      "limitations": "Direct government-site access returned challenges or HTTP 403. Official indexed excerpts and government links in the fully reviewed Microsoft guidance support resource identification, not a full control-by-control assessment. No exhaustive classification/location rules, current all-agency list, latest-manual claim, or exact mandatory control wording is reproduced. Section numbering and current wording must be checked in the manual used by the organisation.",
+      "method": "Official government indexed excerpts and reference links in Microsoft Learn guidance; direct full-page government review unavailable",
+      "sources": [
+        "https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/cloud-services/cloud-adoption-policy-and-strategy/cabinet-requirement",
+        "https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/cloud-services/assess-the-risks",
+        "https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/cloud-services/assess-the-risks/assessment-process",
+        "https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/cloud-services/assess-the-risks/risk-discovery-tool",
+        "https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/cloud-services/assess-the-risks/cloud-jurisdictional-risk-guidance",
+        "https://nzism.gcsb.govt.nz/ism-document",
+        "https://nzism.gcsb.govt.nz/ism-document/pdf/Section/17393",
+        "https://nzism.gcsb.govt.nz/ism-document/pdf/Section/17478",
+        "https://nzism.gcsb.govt.nz/ism-document/pdf/Section/12460"
+      ],
+      "articles": ["sovereignty-framework-start", "sovereignty-requirements", "sovereignty-control-evidence", "sovereignty-options", "sovereignty-decision-record"]
+    },
+    {
+      "id": "nzism-microsoft-implementation-evidence",
+      "status": "qualified",
+      "finding": "The user-supplied Microsoft NZISM compliance guide is the primary Microsoft implementation reference. It links Azure policy initiatives, Defender for Cloud, and Purview templates. The built-in catalogue explicitly describes New Zealand ISM coverage as a subset of controls. Tool mappings, automated assessments, manual attestations, and improvement-action scores support evidence gathering, not independent certification or an agency accreditation decision.",
+      "limitations": "No customer assignments, licensed plans, template availability, configurations, or evidence were validated. Record actual initiative/template IDs and versions, mapped NZISM edition, resource scope, effects, exclusions, exemptions, manual controls, and gaps. Do not equate the mapping's manual edition with the latest applicable NZISM or interpret the guide's broad compliance language as automatic assurance.",
+      "method": "Microsoft Learn MCP search and full-page fetch for the guide, Azure Policy regulatory-compliance concepts, Defender dashboard, and Purview; built-in catalogue NZISM entries reviewed through MCP search excerpts",
+      "sources": [
+        "https://learn.microsoft.com/en-us/compliance/anz/nzism-guide",
+        "https://learn.microsoft.com/en-us/azure/governance/policy/samples/built-in-initiatives#regulatory-compliance",
+        "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/regulatory-compliance",
+        "https://learn.microsoft.com/en-us/azure/defender-for-cloud/regulatory-compliance-dashboard",
+        "https://learn.microsoft.com/en-us/purview/compliance-manager"
+      ],
+      "articles": ["sovereignty-framework-start", "sovereignty-requirements", "sovereignty-control-evidence", "sovereignty-options", "sovereignty-decision-record"]
+    },
+    {
+      "id": "nz-provider-risk-assessment-responses",
+      "status": "qualified",
+      "finding": "Microsoft's NZ government guidance identifies the Risk Discovery Tool as a due-diligence aid, not a government standard against which providers demonstrate formal compliance. It links Azure, Microsoft 365, and Dynamics 365 response documents as inputs to agency analysis, including certification and accreditation where required. Availability and incident response are among the tool's assessment areas.",
+      "limitations": "The linked response documents themselves were not downloaded or independently reviewed. The landing page labels them v7.2 July 2024; readers must verify the actual document version, covered services, current evidence, and workload-specific gaps. Its named-organisation examples and historical policy summary are not copied as a definitive current mandate list.",
+      "method": "Microsoft Learn MCP search and full-page fetch",
+      "sources": ["https://learn.microsoft.com/en-us/compliance/regulatory/offering-nz-cc-framework-nz"],
+      "articles": ["sovereignty-requirements", "sovereignty-control-evidence", "sovereignty-continuity"]
+    },
+    {
+      "id": "nzism-continuity-reference",
+      "status": "qualified",
+      "finding": "NZISM section 6.4 is linked as a business continuity and disaster recovery entry point. Suggested mapping of applicable controls to plans, backups, restoration tests, incident responsibilities, and dated exercises is editorial evidence practice, not a reproduced mandatory control matrix.",
+      "limitations": "The full section PDF was inaccessible. Confirm the current manual edition, numbering, applicable controls, and normative wording with the assurance owner before approval.",
+      "method": "Official NZISM indexed excerpts; full PDF fetch blocked",
+      "sources": [
+        "https://nzism.gcsb.govt.nz/ism-document",
+        "https://nzism.gcsb.govt.nz/ism-document/pdf/Section/13074"
+      ],
+      "articles": ["sovereignty-continuity", "sovereignty-decision-record"]
+    },
+    {
+      "id": "lawful-access-and-provider-guarantees",
+      "status": "unsupported-omitted",
+      "finding": "Excluded categorical warrant and jurisdiction assertions, legal guarantees from encryption, universal AI/data-use statements, and inferences that historical request statistics establish individual risk.",
+      "method": "Editorial exclusion; not represented as independently validated legal or product conclusions",
+      "sources": [],
+      "articles": ["sovereignty-control-evidence"]
+    }
+  ]
+}

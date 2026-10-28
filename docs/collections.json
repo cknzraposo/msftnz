@@ -81,6 +81,53 @@
       ]
     },
     {
+      "dir": "sovereignty-framework",
+      "title": "Sovereignty Decision Framework",
+      "subtitle": "A discussion aid, not a compliance standard",
+      "description": "Explore control, security, and resilience through evidence, workload-specific questions, and explicit trade-offs. An independent discussion framework, not certification or legal advice.",
+      "icon": "⚖️",
+      "audience": "Decision-makers, risk owners, architects, and governance teams",
+      "section": "primary",
+      "articles": [
+        {
+          "slug": "sovereignty-framework-start",
+          "title": "Start Here: A Sovereignty Discussion Framework",
+          "description": "Use control, security, and resilience as a practical lens without treating the framework as a definitive standard.",
+          "category": "Start Here"
+        },
+        {
+          "slug": "sovereignty-requirements",
+          "title": "Establish Requirements and Decision Rights",
+          "description": "Separate law, policy, contracts, governance commitments, and preferences before choosing controls.",
+          "category": "Work Through the Decision"
+        },
+        {
+          "slug": "sovereignty-control-evidence",
+          "title": "Assess Control and Security Evidence",
+          "description": "Check data flows, access, encryption boundaries, audit scope, and customer responsibilities.",
+          "category": "Work Through the Decision"
+        },
+        {
+          "slug": "sovereignty-continuity",
+          "title": "Plan Continuity Under Disruption",
+          "description": "Define recovery needs, test dependencies, and distinguish regional availability from disconnected operation.",
+          "category": "Work Through the Decision"
+        },
+        {
+          "slug": "sovereignty-options",
+          "title": "Compare Options and Trade-offs",
+          "description": "Compare regional cloud, cross-region recovery, local infrastructure, and hybrid designs without a universal winner.",
+          "category": "Work Through the Decision"
+        },
+        {
+          "slug": "sovereignty-decision-record",
+          "title": "Decision Worksheet and Review Checklist",
+          "description": "Record requirements, evidence, uncertainty, owners, residual risks, and review triggers in a reusable worksheet.",
+          "category": "Put It Into Practice"
+        }
+      ]
+    },
+    {
       "dir": "copilot-learning",
       "title": "Copilot Learning",
       "subtitle": "Getting Started with GitHub Copilot",

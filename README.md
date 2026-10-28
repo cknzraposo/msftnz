@@ -10,6 +10,7 @@ for the [public resource site](https://cknzraposo.github.io/msftnz/).
 | Collection | Content |
 |---|---|
 | [Cloud Resources](docs/cloud/) | Azure New Zealand North, service availability, Azure Local versus Azure cloud, data residency and sovereignty, and cloud decision-making guidance. |
+| [Sovereignty Decision Framework](docs/sovereignty-framework/) | Six linked discussion guides covering requirements, control and security evidence, continuity, architecture trade-offs, and a decision worksheet. Not a compliance standard or certification. |
 | [Copilot Learning](docs/copilot-learning/) | An introduction to GitHub Copilot and AI-assisted development. |
 | [Azure App Services](docs/azure-app-services/) | Getting started with Azure App Service, including hosting, networking, pricing, and New Zealand considerations. |
 
@@ -29,6 +30,7 @@ points rather than active articles.
 | `eleventy.config.js` | Static build configuration and asset copying. |
 | `package.json`, `package-lock.json` | Build commands and pinned development dependencies. |
 | `_site/` | Generated static HTML and assets; ignored by Git and recreated by the build. |
+| `_sources/` | Local reference material, excluded from Git and generated output; not a public download library. |
 
 ## Site architecture
 
@@ -108,6 +110,24 @@ keyword detection is only a guardrail, not a legal classification.
 To add a collection, create its content directory and add a collection entry to
 the registry with an audience and a section matching `site.sections`. Shared
 templates generate its landing page; no hand-written per-collection HTML is needed.
+
+### Sovereignty framework evidence
+
+`site/sovereignty-evidence.json` records the framework's claim checks, source links,
+qualifications, and omissions. Microsoft product statements were checked against
+official Microsoft Learn documentation through MCP; New Zealand privacy and Māori
+data governance statements use relevant primary sources. Verification dates record
+source review, not legal approval or validation of a customer's configuration.
+
+Maintain the evidence register and article dates when revising factual claims.
+The framework links GCDO Cloud First and risk-assessment resources, the NZISM
+manual, and Microsoft's NZISM implementation guide across requirements, evidence,
+continuity, option selection, and the decision worksheet. The evidence register
+distinguishes full Microsoft Learn MCP reviews from government references checked
+through official indexed excerpts where direct access was challenged.
+It does not reproduce an exhaustive government control matrix, certify compliance,
+or provide blanket lawful-access assurances or platform-wide guarantees.
+Original reference PDFs are not published or linked for download.
 
 ## CI and hosting cutover
 
